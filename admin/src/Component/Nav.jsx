@@ -1,10 +1,13 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
 export default function Nav() {
   return (
-    <div>
-      
-    </div>
+    <nav>
+      <Link to='/' >Home</Link>
+      <Link to='/Register' >Register</Link>
+      <Link to='/Login' >Login</Link>
+
+    </nav>
   )
 }
 
