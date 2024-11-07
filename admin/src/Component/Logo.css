@@ -1,13 +1,16 @@
 .logo {
-    position: absolute;
+    position: relative;
     width: 117px;
     height: 147px;
     object-fit: contain;
-    
+    align-items: center;
+    justify-content: center;
+    background-blend-mode: color;
 }
 .logo-container{
-    display: inline-block;
-    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 .logo-container.small .logo {
     width: 50px;

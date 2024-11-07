@@ -1,6 +1,6 @@
 import './Logo.css';
 import PropType from 'prop-types';
-import logoImage from './image/juniper_park.png';
+import logoImage from './image/juniper park.png';
 
 
 export default function Logo({ size = 'small'}) {
@@ -13,3 +13,4 @@ export default function Logo({ size = 'small'}) {
 Logo.propTypes = {
   size: PropType.oneOf(['small', 'medium', 'large']),
 };
+
