@@ -1,0 +1,117 @@
+
+.reg-container{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+    width: 500px;
+    border-radius: 2rem;
+    background-color:wheat;
+    margin-top:3rem;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    align-items: center;
+   form{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 80%;
+        
+        input{
+            border: none;
+            outline: none;
+            display:flex;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+        label{
+            display: flex;
+            text-align: left;
+        }
+    }
+    button{
+        padding: 1rem;
+        font-size:larger;
+        transition: ease-in-out;
+        border-radius: 2rem;
+        background-color: var(--button);
+        border: none;
+        cursor:pointer;
+        width: 50%;
+        justify-content: center;
+        align-items: center;       
+        color: black;
+        margin: 20px 85px;
+
+        &:hover {
+            animation: 6s ease-in linear infinite;
+            background-color: var(--hover) ;
+             color:white;
+        }
+    }
+
+} 
+
+.log-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+    width: 400px;
+    border-radius: 2rem;
+    background-color: wheat;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 80%;
+
+        input {
+            border: none;
+            outline: none;
+            display: flex;
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+
+        label {
+            display: flex;
+            text-align: left;
+        }
+    }
+
+    button {
+        padding: 1rem;
+        font-size: larger;
+        transition: ease-in-out;
+        border-radius: 2rem;
+        background-color: var(--button);
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        margin: 20px 85px;
+
+        &:hover {
+            animation: 6s ease-in linear infinite;
+            background-color: var(--hover);
+            color: white;
+        }
+    }
+
+}
+.link{
+    &:hover{
+        color: #cf2929;
+    }
+    &:visited{
+        color: blueviolet;
+    }
+}
