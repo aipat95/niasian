@@ -49,6 +49,9 @@
              color:white;
         }
     }
+    p{
+        text-align: center;
+    }
 
 } 
 
@@ -104,6 +107,9 @@
             background-color: var(--hover);
             color: white;
         }
+    }
+    p{
+        text-align: center;
     }
 
 }
