@@ -1,21 +1,24 @@
 import { useState } from "react";
 import './Pages.css';
-
-
-import {Link,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
+import { UserRegister } from "../api/data.js";
 
 export default function Register() {
-  const navigate = useNavigate();
   const [data, setData] = useState({
     role: '', email: '', password: '',
   })
-  //store in locally
-  const registerUser = async(e) => {
-     e.preventDefault();
-    navigate('/login');
-//not yet connect with backend/api
-   }
+
+  const registerUser = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await UserRegister(data);
+      console.log("Resgister successful", res);
+    } catch (error) {
+      alert(error);
+    }
+
+  }
   const inputChange = (e) => {
     const { name, value } = e.target;
     setData((data) => ({
@@ -29,13 +32,13 @@ export default function Register() {
       <h1>REGISTRATION</h1>
       <form onSubmit={registerUser}>
         <label>Role</label>
-          <input name="role" type="text" placeholder="Enter Role..." value={data.role} onChange={inputChange} required/>
+        <input name="role" type="text" placeholder="Enter Role..." value={data.role} onChange={inputChange} required />
         <label>Email</label>
-        <input type="email" name="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required/>
+        <input type="email" name="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required />
         <label>Password</label>
-        <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required/>
+        <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
         <button type="submit">Register</button>
-        <p>If you already have account? 
+        <p>If you already have account?
           <Link to={'/login'} className="link"> Login</Link>
         </p>
 
