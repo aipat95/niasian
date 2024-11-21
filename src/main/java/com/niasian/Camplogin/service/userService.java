@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+
+
 @Service
 public class userService {
     @Autowired
@@ -21,16 +24,37 @@ public class userService {
         return userrepo.save(user);
     }
 
-    public Boolean loginUser(loginRequest loginrequest) {
+    public String loginUser(loginRequest loginrequest) {
         Optional<User> userOptional = userrepo.findByEmail(loginrequest.getEmail());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return user.getPassword().equals(loginrequest.getPassword());
+            if (user.getPassword().equals(loginrequest.getPassword())){
+                if (user.getUserRole().equals(UserRole.ADMIN)) {
+                    user.setIsLoggedIn(true);
+                    userrepo.save(user);
+                    return "Login successful for Admin!";
 
+
+                } else if (user.getUserRole().equals(UserRole.RECEPTION)) {
+
+                    user.setIsLoggedIn(true);
+                    userrepo.save(user);
+                    return "Login successful for Reception!";
+                }
+
+
+            return "Unauthorized role!";
         }
 
-        return false;
+
+        return "Invalid password!";
+    }
+        return "Invalid email!";
+
+
     }
 
+
 }
+
