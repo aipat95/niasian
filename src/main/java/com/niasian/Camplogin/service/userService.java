@@ -22,20 +22,12 @@ public class userService {
     }
 
     public Boolean loginUser(loginRequest loginrequest) {
-        if (loginrequest == null || loginrequest.getEmail() == null || loginrequest.getPassword() == null) {
-            // Basic validation for null values
-            return false;
-        }
-
-        String email = loginrequest.getEmail().trim();
-        String password = loginrequest.getPassword().trim();
-        Optional<User> userOptional = userrepo.findByEmail(email);
+        Optional<User> userOptional = userrepo.findByEmail(loginrequest.getEmail());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            if (user.getPassword().equals(password)) {
-                return true;
-            }
+            return user.getPassword().equals(loginrequest.getPassword());
+
         }
 
         return false;
