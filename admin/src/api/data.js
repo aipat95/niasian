@@ -7,6 +7,7 @@ export const UserRegister = async (data) => {
             password: data.password,
             role: data.role,
         });
+        console.log("data sent");
         return res;
     } catch (error) {
         alert(error);
@@ -23,5 +24,17 @@ export const UserLogin = async (data) => {
 
     } catch (error) {
       alert(error);
+    }
+}
+export const getAllUser = async (data) => {
+    try {
+        const response = await api.get('/user',
+            {
+                email: data.email,
+                password: data.password
+            });
+            return response;
+    } catch (error) {
+        alert(error)
     }
 }

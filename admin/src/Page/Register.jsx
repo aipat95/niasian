@@ -25,6 +25,7 @@ export default function Register() {
       ...data,
       [name]: value,
     }));
+    
   }
   return (
     <div className="reg-container">
