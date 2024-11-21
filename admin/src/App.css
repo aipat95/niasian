@@ -42,4 +42,23 @@
 
 .read-the-docs {
   color: #888;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: antiquewhite;
+
+}
+.app-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
