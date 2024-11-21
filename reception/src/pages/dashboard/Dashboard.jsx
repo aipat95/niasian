@@ -32,32 +32,49 @@ const Dashboard =() => {
 
     return (
         <>
+            <div className="flex flex-col space-y-1 md:space-y-0 md:flex-row justify-between">
+                <div className="mr-6">
+                    <h1 className="text-4xl font-semibold mb-2">Overview</h1>
+                </div>
+                <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
+                    <Link to="/dashboard/check-in"
+                          className="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
+                        Check in
+                    </Link>
+                    <Link to="/dashboard/check-out"
+                          className=" inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
+                        Check Out
+                    </Link>
+                </div>
+            </div>
             <h2 className="text-gray-600 ml-0.5">Tents Available</h2>
             <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
-                        <span className="block text-gray-500">S tents</span>
-                        <span className="block text-2xl font-bold">{data?.totalBooks}</span>
-                        <span className="block text-2xl ">20$/day</span>
+                        <span className="block text-gray-500">S-size tents</span>
+                        <span className="block text-2xl font-bold">0/30{data?.totalBooks}</span>
+                        <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
-                        <span className="block text-2xl font-bold">${data?.totalSales}</span>
-                        <span className="block text-gray-500">Total Sales</span>
+                        <span className="block text-gray-500">M-size tents</span>
+                        <span className="block text-2xl font-bold">0/30{data?.totalSales}</span>
+                        <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
-                        <span className="inline-block text-2xl font-bold">{data?.trendingBooks}</span>
-                        <span className="inline-block text-xl text-gray-500 font-semibold">(13%)</span>
-                        <span className="block text-gray-500">Trending Books in This Month</span>
+                        <span className="block text-gray-500">XL-size tents</span>
+                        <span className="inline-block text-2xl font-bold">0/20{data?.trendingBooks}</span>
+                        <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
-                        <span className="block text-2xl font-bold">{data?.totalOrders}</span>
-                        <span className="block text-gray-500">Total Orders</span>
+                        <span className="block text-gray-500">Family-size tents</span>
+                        <span className="block text-2xl font-bold">0/20{data?.totalOrders}</span>
+                        <span className="block text-l">20$/day</span>
                     </div>
                 </div>
             </section>
@@ -77,28 +94,10 @@ const Dashboard =() => {
                     <div className="overflow-y-auto" style={{maxHeight: '24rem'}}>
                         <ul className="p-6 space-y-6">
                             <li className="flex items-center">
-                                <span className="mr-auto font-semibold">9.3</span>
+                                <span className="mr-auto font-semibold">name</span>
                             </li>
                             <li className="flex items-center">
-                                <span className="ml-auto font-semibold">8.9</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">8.7</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">8.2</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">8.2</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">8.1</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">7.9</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="ml-auto font-semibold">7.7</span>
+                                <span className="mr-auto font-semibold">name</span>
                             </li>
                         </ul>
                     </div>
