@@ -25,3 +25,15 @@ export const UserLogin = async (data) => {
       alert(error);
     }
 }
+export const getAllUser = async (data) => {
+    try {
+        const response = await api.get('/user',
+            {
+                email: data.email,
+                password: data.password
+            });
+        return response;
+    } catch (error) {
+        alert(error)
+    }
+}
