@@ -7,11 +7,12 @@ export default function Home() {
   return (
     <div className='container'>
       <Logo size='large'></Logo>
-      Which role are you operating?
-      <button onClick={()=> navigate("./Admin/Dashboard")}>
+      <p>Which role are you operating?</p>
+      {/* still not working */}
+      <button onClick={() => navigate("./Admin/dashboard")}>
         Admin
       </button>
-      <button onClick={() => navigate('./Reception/Dashboard')}>
+      <button onClick={() => navigate("./Reception/team")}>
         Reception
       </button>
     </div>

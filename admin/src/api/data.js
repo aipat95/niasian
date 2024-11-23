@@ -2,7 +2,7 @@ import api from './mainapi';
 
 export const UserRegister = async (data) => {
     try {
-        const res = await api.post("/signup", {
+        const res = await api.post("/signUp", {
             email: data.email,
             password: data.password,
             role: data.role,
