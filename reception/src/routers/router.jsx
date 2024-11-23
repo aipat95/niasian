@@ -5,6 +5,8 @@ import Home from "../pages/home/Home.jsx";
 import DashboardLayout from "../pages/dashboard/DashboardLayout.jsx";
 import CheckOut from "../pages/dashboard/CheckOut.jsx";
 import CheckIn from "../pages/dashboard/AddCustomers/CheckIn.jsx";
+import Activities from "../pages/dashboard/Activities.jsx";
+import Customers from "../pages/dashboard/Customers.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,18 +32,17 @@ const router = createBrowserRouter([
                 path: "check-in",
                 element: <CheckIn/>
             },
-
             {
                 path: "check-out",
                 element: <CheckOut/>
             },
             {
-                path: "edit-customer",
-                element: <></>
+                path: "customers",
+                element: <Customers/>
             },
             {
                 path: "activity",
-                element: <></>
+                element: <Activities/>
             }
         ]
     }
