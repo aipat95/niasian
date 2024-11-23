@@ -5,7 +5,7 @@ export const UserRegister = async (data) => {
         const res = await api.post("/signUp", {
             email: data.email,
             password: data.password,
-            role: data.role,
+            userRole: data.role,
         });
         return res;
     } catch (error) {
@@ -22,7 +22,7 @@ export const UserLogin = async (data) => {
         return resp;
 
     } catch (error) {
-      alert(error);
+        alert(error);
     }
 }
 export const getAllUser = async (data) => {
