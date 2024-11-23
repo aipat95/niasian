@@ -4,8 +4,7 @@ import './Pages.css';
 import { Link } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
 import { UserRegister } from "../api/data.js";
-// import { UserRegister } from "../api/data.js";
-// import axios from "axios";
+
 
 export default function Register() {
   const [data, setData] = useState({
@@ -15,7 +14,7 @@ export default function Register() {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await UserRegister(data);
+      const res = await UserRegister(data);//if need be change this line to the whole 7 line
       console.log("Resgister successful", res);
       navigator("/login");
     } catch (error) {
