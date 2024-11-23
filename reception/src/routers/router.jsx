@@ -7,6 +7,7 @@ import CheckOut from "../pages/dashboard/CheckOut.jsx";
 import CheckIn from "../pages/dashboard/AddCustomers/CheckIn.jsx";
 import Activities from "../pages/dashboard/Activities.jsx";
 import Customers from "../pages/dashboard/Customers.jsx";
+import Inventory from "../pages/dashboard/Inventory.jsx";
 
 const router = createBrowserRouter([
     {
@@ -43,7 +44,12 @@ const router = createBrowserRouter([
             {
                 path: "activity",
                 element: <Activities/>
+            },
+            {
+                path: "inventory",
+                element: <Inventory/>
             }
+
         ]
     }
 ]);
