@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Pages.css';
 import Logo from '../Component/Logo';
 import { Link, useNavigate } from "react-router-dom";
-// import { UserLogin } from "../api/data";
+import { UserLogin } from "../api/data";
 import { MdEmail, MdOutlinePassword } from "react-icons/md";
 
 
@@ -15,24 +15,9 @@ export default function Login() {
   async function loginUser(e) {
     e.preventDefault();
     try {
-      const res = await fetch("http://172.22.56.121:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-      });
-      navigator("/");
-      if (!res.ok) {
-        throw new Error("Fail" + res.status);
-
-      }
-      const reData = await res.json();
-
-      console.log("Login successful", reData);
+      const res = await UserLogin(data);
+      console.log('Login succesfull', res);      
+      navigator('/');
     } catch (error) {
       alert(error);
     }

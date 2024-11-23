@@ -2,12 +2,23 @@ import api from './mainapi';
 
 export const UserRegister = async (data) => {
     try {
-        const res = await api.post("/signUp", {
-            email: data.email,
-            password: data.password,
-            userRole: data.role,
+        const res = await fetch("http://172.22.56.121:8080/signUp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userRole: data.role,
+                email: data.email,
+                password: data.password,
+            }),
         });
-        return res;
+        if (!res.ok) {
+            throw new Error("Fail" + res.status);
+
+        }
+        const reData = await res.json();
+        console.log("Resgister successful", reData);
     } catch (error) {
         alert(error);
     }
@@ -15,11 +26,27 @@ export const UserRegister = async (data) => {
 
 export const UserLogin = async (data) => {
     try {
-        const resp = await api.post('/login', {
-            email: data.email,
-            password: data.password
+        const res = await fetch("http://172.22.56.121:8080/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: data.email,
+                password: data.password,
+            }),
         });
-        return resp;
+        if (!res.ok) {
+            throw new Error(`Fail ${res.status}`);
+        }
+        const contType = res.headers.get("content-type");
+        let resData;
+        if (contType && contType.includes("application/json")) {
+            resData = await res.json();
+        } else {
+            resData = await res.text();
+        }
+        console.log("login successful", resData);
 
     } catch (error) {
         alert(error);
