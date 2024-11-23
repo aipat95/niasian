@@ -1,4 +1,5 @@
-import { useState } from "react";
+import  { useState } from "react";
+import {MdEmail, MdOutlinePassword, MdPeople} from "react-icons/md";
 import './Pages.css';
 import { Link } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
@@ -32,11 +33,19 @@ export default function Register() {
       <h1>REGISTRATION</h1>
       <form onSubmit={registerUser}>
         <label>Role</label>
-        <input name="role" type="text" placeholder="Enter Role..." value={data.role} onChange={inputChange} required />
+       <div className="input-icon">
+        <MdPeople className="input-in" />
+        <input name="role" type="text" placeholder="Enter Role..." value={data.role} onChange={inputChange} required /></div>
         <label>Email</label>
-        <input type="email" name="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required />
+        <div className="input-icon">  
+        <MdEmail className="input-in" />
+          <input type="email" name="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required />
+        </div>
         <label>Password</label>
-        <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
+        <div className="input-icon">
+          <MdOutlinePassword className="input-in" />
+          <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
+          </div>
         <button type="submit">Register</button>
         <p>If you already have account?
           <Link to={'/login'} className="link"> Login</Link>

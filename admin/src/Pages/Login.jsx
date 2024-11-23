@@ -3,6 +3,7 @@ import './Pages.css';
 import Logo from '../Component/Logo';
 import { Link, useNavigate } from "react-router-dom";
 import { UserLogin } from "../api/data";
+import {MdEmail, MdOutlinePassword} from "react-icons/md";
 
 
 
@@ -16,10 +17,10 @@ export default function Login() {
     try {
       const res = await UserLogin(data);
       console.log("Login successful", res);
-      if (res.data.message == "Email not exists") {
+      if (res.data.message === "Email not exists") {
         alert("Email not exists");
       }
-      else if (res.data.message == "Login Success") { navigator("/") }
+      else if (res.data.message === "Login Success") { navigator("/") }
       else {
         alert("Incorrect Email and Password not match");
       }
@@ -43,10 +44,17 @@ export default function Login() {
       <h1>LOGIN</h1>
       <form onSubmit={loginUser} >
         <label>Email</label>
-        <input name="email" type="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required />
+        <div className="input-icon">
+          <MdEmail className="input-in" />
+          <input type="email" name="email" placeholder="Enter Email..." value={data.email} onChange={inputChange} required />
+        </div>
         <label>Password</label>
-        <input name="password" type="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
+        <div className="input-icon">
+          <MdOutlinePassword className="input-in" />
+          <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
+        </div>
         <button type="submit">Login</button>
+
       </form>
       <p>Don&apos;t have account? <Link className="link" to={'/register'}>Register</Link></p>
 
