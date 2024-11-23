@@ -2,8 +2,8 @@ import { useState } from "react";
 import './Pages.css';
 import Logo from '../Component/Logo';
 import { Link, useNavigate } from "react-router-dom";
-import { UserLogin } from "../api/data";
-import {MdEmail, MdOutlinePassword} from "react-icons/md";
+// import { UserLogin } from "../api/data";
+import { MdEmail, MdOutlinePassword } from "react-icons/md";
 
 
 
@@ -15,20 +15,27 @@ export default function Login() {
   async function loginUser(e) {
     e.preventDefault();
     try {
-      const res = await UserLogin(data);
-      console.log("Login successful", res);
-      if (res.data.message === "Email not exists") {
-        alert("Email not exists");
-      }
-      else if (res.data.message === "Login Success") { navigator("/") }
-      else {
-        alert("Incorrect Email and Password not match");
-      }
+      const res = await fetch("http://172.22.56.121:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+      navigator("/");
+      if (!res.ok) {
+        throw new Error("Fail" + res.status);
 
+      }
+      const reData = await res.json();
+
+      console.log("Login successful", reData);
     } catch (error) {
       alert(error);
     }
-
   }
   //handle all input data
   const inputChange = (e) => {
