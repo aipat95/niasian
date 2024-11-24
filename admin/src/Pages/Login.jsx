@@ -45,7 +45,7 @@ export default function Login() {
           <MdOutlinePassword className="input-in" />
           <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
         </div>
-        <button type="submit">Login</button>
+        <button className="button" type="submit">Login</button>
 
       </form>
       <p>Don&apos;t have account? <Link className="link" to={'/register'}>Register</Link></p>

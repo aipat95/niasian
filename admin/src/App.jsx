@@ -4,9 +4,8 @@ import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
 import Service from './Pages/Admin/Service.jsx';
 import Inventory from './Pages/Admin/Inventory.jsx';
-import Tent from './Pages/Admin/Tent.jsx';
 import Dashboard from './Pages/Admin/Dashboard.jsx'
-// import Team from './Pages/Reception/team.jsx';
+import Tent from './Pages/Admin/Tent.jsx';
 
 function App() {
 

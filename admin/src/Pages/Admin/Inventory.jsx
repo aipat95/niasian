@@ -1,28 +1,32 @@
-import { useState } from "react"
+import { useState } from "react";
+import Sidebar from '../../Component/Sidebar';
+
+
 
 
 export default function Inventory() {
   const [price, setPrice] = useState(0);
   const [quan, setQuant] = useState(0);
   const [total, setTotal] = useState(0);
-  // const [used, setUsed] = useState();
+  const [used, setUsed] = useState();
   const [users, setUsers] = useState([]);
   const [name, setName] = useState();
   const [sum, setSum] = useState();
-  // const [type, setType] = useState();
+  const [type, setType] = useState();
 
   function Calculation() {
-    users.push({ name, quan, price, sum });
-    const total = users.reduce((total, user) => {
-      total += Number(user.sum)
-      return total
-    }, 0);
-    setTotal(total);
+    const newUser = { name, quan, price, sum,used, type };
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+    const newTotal = users.reduce((total, user) => {
+      return total + Number(user.sum);
+    })
+    setTotal(newTotal);
     //clear input
     setName('');
     setQuant('');
     setPrice('');
     setSum('');
+    setUsed(""); setType("");
 
   }
   //to change price
@@ -47,13 +51,12 @@ export default function Inventory() {
     setSum(newTotal);
   };
   //able to refresh page
-    function refreshPage()
-    {
-      window.location.reload();
-  }
+    function refreshPage(){ window.location.reload();  }
   
   return (
     <div className="inv-container">
+    <Sidebar />
+    <div className="inventory">
       <h1>Inventory</h1>
       <div className="row">
         <div className="col-8">
@@ -61,8 +64,10 @@ export default function Inventory() {
             <h3>Add Product</h3>
             <tr>
               <th>Product Name</th>
+              <th>Type</th>
               <th>Price</th>
               <th>Qty</th>
+              <th>Used</th>  
               <th>Amount</th>
               <th>Option</th>
             </tr>
@@ -71,27 +76,41 @@ export default function Inventory() {
                 <input type="text" className="form-control" placeholder="Item Name" value={name} onChange={(event) => {
                   setName(event.target.value);
                 }}/>
-              </td>
+                </td>
+                <td>
+                  <input type="text" className="form-control" placeholder="Type of Equipment" value={type} onChange={(e) => {
+                    setType(e.target.value);
+                  }} />
+                </td>
+                
                 <td>
                 <input type="text" className="form-control" placeholder="Enter price" value={price} onChange={handleChange} />
               </td>
               <td>
-                <input type="text" className="form-control" placeholder="Enter qty" value={quan} onChange={handleQuantity} />
-              </td>
+                <input type="text" className="form-control" placeholder="Enter quantity" value={quan} onChange={handleQuantity} />
+                </td>
+                <td>
+                  <input type="text" className="form-control" placeholder="Amount Have Used"
+                    value={used} onChange={(e) => {
+                      setUsed(e.target.value);
+                    }}/>
+                </td>
               <td>
                 <input type="text" className="form-control" placeholder="Enter Total" value={sum} id="total" name="total_cost" disabled />
               </td>
               <td>
-                <button className="btn btn-succes" type="submit" onClick={Calculation}>Add</button>
+                <button className="btn btn-success" type="submit" onClick={Calculation}>Add</button>
               </td>
             </tr>
           </table>
           <h3>Products</h3>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead>
-              <th>Item Name</th>
+              <th scope="row">Item Name</th>
               <th>Price</th>
+              <th>Type</th>  
               <th>Quantity</th>
+              <th>Used</th>  
               <th>Amount</th>
         
             </thead>
@@ -100,8 +119,10 @@ export default function Inventory() {
                 users.map((row, index) => {
                   <tr key={index}>
                     <td>{row.name}</td>
+                    <td>{row.type}</td>
                     <td>{row.price}</td>
                     <td>{row.quan}</td>
+                    <td>{row.used}</td>
                     <td>{row.sum}</td>
                   </tr>
             
@@ -122,6 +143,7 @@ export default function Inventory() {
         </div>
       </div>
 
+      </div>
     </div>
   )
 }

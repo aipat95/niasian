@@ -1,8 +1,10 @@
+import SideBar from "../../Component/Sidebar"
 
 function Service() {
   return (
     <div>
-      Service
+      <SideBar />
+      <h1>Service</h1>
     </div>
   )
 }

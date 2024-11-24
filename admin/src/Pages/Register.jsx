@@ -59,7 +59,7 @@ export default function Register() {
           <MdOutlinePassword className="input-in" />
           <input type="password" name="password" placeholder="Enter Password..." value={data.password} onChange={inputChange} required />
         </div>
-        <button type="submit">Register</button>
+        <button className="button" type="submit">Register</button>
         <p>If you already have account?
           <Link to={'/login'} className="link"> Login</Link>
         </p>

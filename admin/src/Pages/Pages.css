@@ -1,31 +1,33 @@
-
-.reg-container{
+.reg-container {
     display: flex;
     flex-direction: column;
     padding: 1rem;
     height: 90vh;
     width: 400px;
     border-radius: 2rem;
-    background-color:wheat;
-    margin-top:3rem;
+    background-color: wheat;
+    margin-top: 3rem;
     margin-bottom: 3rem;
     font-size: 1rem;
     align-items: center;
-   form{
+
+    form {
         display: flex;
         flex-direction: column;
         gap: 5px;
         width: 80%;
-        label{
+
+        label {
             display: flex;
             text-align: left;
         }
     }
-    p{
+
+    p {
         text-align: center;
     }
 
-} 
+}
 
 .log-container {
     display: flex;
@@ -52,17 +54,19 @@
         }
     }
 
-  
-    p{
+
+    p {
         text-align: center;
     }
 
 }
-.link{
-    &:hover{
+
+.link {
+    &:hover {
         color: #cf2929;
     }
-    &:visited{
+
+    &:visited {
         color: blueviolet;
     }
 }
@@ -70,56 +74,67 @@
 .input-icon {
     display: flex;
     padding: 5px;
-   border: none;
-   border-radius: 5px;
-   align-items: center;
-   border: 1px solid #ccc;
-   border-radius: 1rem;
-   background-color: white;
-   width: 100%;
-   height: 5vh;
-   .input-in{
-    margin: 1rem;
-    font-size: 1.2rem;
-    color: #666;
-   }
-   input{
     border: none;
-    outline: none;
-    font-size: 1rem;
-    
-   }
+    border-radius: 5px;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    background-color: white;
+    width: 100%;
+    height: 5vh;
 
-}
-
-@media  screen and (max-width: 800px) {
-    .form{
-        width: 100%;
-        padding:1.5rem;
+    .input-in {
+        margin: 1rem;
+        font-size: 1.2rem;
+        color: #666;
     }
-    
-}
-    button {
-      padding: 1rem;
-      font-size: larger;
-      transition: ease-in-out;
-      border-radius: 2rem;
-      background-color: var(--button);
-      border: none;
-      cursor: pointer;
-      width: 50%;
-      justify-content: center;
-      align-items: center;
-      color: black;
-      margin: 20px 85px;
 
-      &:hover {
-          animation: 6s ease-in linear infinite;
-          background-color: var(--hover);
-          color: white;
-      }
-  }
-.container{
+    input {
+        border: none;
+        outline: none;
+        font-size: 1rem;
+
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+    .form {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .inventory {
+        margin-left: 150px;
+    }
+
+}
+
+.button {
+    padding: 1rem;
+    font-size: larger;
+    transition: ease-in-out;
+    border-radius: 2rem;
+    background-color: var(--button);
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 20px 85px;
+
+    &:hover {
+        animation: 6s ease-in linear infinite;
+        background-color: var(--hover);
+        color: white;
+    }
+}
+
+.container {
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -131,21 +146,43 @@
     margin-bottom: 2rem;
     font-size: 1rem;
     align-items: center;
-    button{
+
+    button {
         margin: 1rem;
-        padding: 1rem;   
+        padding: 1rem;
     }
 }
-.role{
+
+.role {
     margin: 0;
     flex-direction: row;
-    input[type='radio']{
+
+    input[type='radio'] {
         flex-direction: row;
     }
-    label{
+
+    label {
         display: flex;
         align-items: left;
         gap: 10px;
-        cursor:  pointer;
+        cursor: pointer;
     }
+}
+
+.inv-container {
+    height: 100vh;
+    margin-left: 150px;
+    padding: 1rem;
+    margin-right: 50px;
+    border-radius: 1rem;
+    overflow: auto;
+    width: 100%;
+
+    .inventory {
+        margin: 2rem;
+        padding: 2rem;
+
+    }
+
+
 }
