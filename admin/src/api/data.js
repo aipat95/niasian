@@ -1,4 +1,3 @@
-import api from './mainapi';
 
 export const UserRegister = async (data) => {
     try {
@@ -52,15 +51,28 @@ export const UserLogin = async (data) => {
         alert(error);
     }
 }
-export const getAllUser = async (data) => {
+export const LogoutUser = async () => {
     try {
-        const response = await api.get('/user',
-            {
-                email: data.email,
-                password: data.password
-            });
-        return response;
+        const res = await fetch("http://172.22.56.121:8080/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        if (!res.ok) {
+            throw new Error(`Fail ${res.status}`);
+        }
+        const contType = res.headers.get("content-type");
+        let resData;
+        if (contType && contType.includes("application/json")) {
+            resData = await res.json();
+        } else {
+            resData = await res.text();
+        }
+        console.log("Logout successful", resData);
+        alert("Logout successful!")
+
     } catch (error) {
-        alert(error)
+        alert(error);
     }
 }
