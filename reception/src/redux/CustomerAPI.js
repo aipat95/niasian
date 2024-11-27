@@ -2,20 +2,19 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import getBaseURL from "../utils/baseURL.js";
 
 const baseQuery = fetchBaseQuery({
-    baseURL: `${getBaseURL()/*api OF INVENTORY from backend*/}`,
+    baseURL: `${getBaseURL()/* /api/customers for example api OF INVENTORY from backend*/}`,
     credentials: 'include',
-    prepareHeaders: (Headers) => {
-        const token = localStorage.getItem('token');
-        if(token) {
-            Headers.set('Authorization', `Bearer $(token)`);
-        }
-        return Headers
-    }
+    // prepareHeaders: (Headers) => {
+    //     const token = localStorage.getItem('token');
+    //     if(token) {
+    //         Headers.set('Authorization', `Bearer $(token)`);
+    //     }
+    //     return Headers
+    // }
 })
 const  customerApi = createApi({
     reducerPath: 'customerApi',
-    baseQuery,
-    tagTypes: ['Customers'],
+    baseQuery, tagTypes: ['Customers'],
     endpoints: (builder) =>({
         fetchAllCustomers: builder.query({
             query: () => '/', //root path
@@ -23,13 +22,13 @@ const  customerApi = createApi({
         }),
         fetchCustomerById: builder.query({
             query: (id) => `/${id}`,
-            providesTags: (result, error, id) => [{type: "Books", id}],
+            providesTags: (result, error, id) => [{type: "Customers", id}],
         }),
         addCustomer: builder.mutation({
-            query: (newBook) => ({
-                url: `/create-customer`,
+            query: (newCustomer) => ({
+                url: `/create-customer`, //route url
                 method: "POST",
-                body: newBook
+                body: newCustomer
             }),
             invalidatesTags: ["Customers"]
         }),

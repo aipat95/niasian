@@ -2,12 +2,12 @@ import React from "react";
 import InputField from "./InputField.jsx";
 import SelectField from "./SelectField.jsx";
 import { useForm } from 'react-hook-form';
-//import {useAddCustomerMutation} from "../../../redux/CustomerAPI.js";
+import {useAddCustomerMutation} from "../../../redux/CustomerAPI.js";
 import Swal from 'sweetalert2';
 
 const CheckIn = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    //const [addCustomer, {isLoading, isError}] = useAddCustomerMutation()
+    const [addCustomer, {isLoading, isError}] = useAddCustomerMutation()
     const onSubmit = async (data) => {
 
         const newCustomerData = {
@@ -43,21 +43,16 @@ const CheckIn = () => {
             <form onSubmit={handleSubmit(onSubmit)} className=''>
                 {/* Reusable Input Field for name */}
                 <InputField
-                    label="First Name"
-                    name="firstname"
+                    label="Name"
+                    name="name"
                     //placeholder="Enter name"
                     register={register}
                 />
 
-                <InputField
-                    label="Last Name"
-                    name="lastname"
-                    register={register}
-                />
 
                 <InputField
                     label="ID / Passport Number"
-                    name="id"
+                    name="id_number"
                     type="textarea"
                     register={register}
 
@@ -92,31 +87,17 @@ const CheckIn = () => {
                 />
 
 
-                <div className='grid md:grid-cols-2 xl:grid-cols-2 xl:grid-rows-2 xl:grid-flow-col gap-x-2'>
+                <div className='grid md:grid-cols-2 xl:grid-cols-2 xl:grid-rows-1 xl:grid-flow-col gap-x-2'>
                     <InputField
-                        label="Pillow"
+                        label="Sleeping Bag"
                         name="pillow"
                         type="number"
                         register={register}
 
                     />
                     <InputField
-                        label="Blanket"
+                        label="Camping Stove"
                         name="blanket"
-                        type="number"
-                        register={register}
-
-                    />
-                    <InputField
-                        label="Mattress"
-                        name="mattress"
-                        type="number"
-                        register={register}
-
-                    />
-                    <InputField
-                        label="Bicycle"
-                        name="bicycle"
                         type="number"
                         register={register}
 
@@ -142,9 +123,8 @@ const CheckIn = () => {
 
                 {/* Submit Button */}
                 <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md">
-                    ok
                     {
-                        // isLoading ? <span className="">Adding.. </span> : <span>Add Book</span>
+                        isLoading ? <span className="">Adding.. </span> : <span>Submit</span>
                     }
                 </button>
             </form>
