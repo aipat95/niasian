@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Pages.css';
 import Logo from '../Component/Logo';
 import { Link, useNavigate } from "react-router-dom";
-import { UserLogin } from "../api/data";
+import { UserLogin } from "../api/auth";
 import { MdEmail, MdOutlinePassword } from "react-icons/md";
 
 
@@ -15,9 +15,16 @@ export default function Login() {
   async function loginUser(e) {
     e.preventDefault();
     try {
-      const res = await UserLogin(data);//if need change here
-      console.log('Login succesfull', res);      
-      navigator('/');
+      const res = await UserLogin(data);//if you need change here
+      console.log('Login successful', res);
+      alert("You are now login!");
+      const { userRole } = res;
+      if (userRole === 'ADMIN') {
+        navigator('/Admin');
+      }
+      else if (userRole==='RECEPTION')
+      { navigator('/reception'); }
+      else { alert('Invalid Role!')}
     } catch (error) {
       alert(error);
     }

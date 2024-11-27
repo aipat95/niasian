@@ -3,7 +3,7 @@ import { MdEmail, MdOutlinePassword, MdPeople } from "react-icons/md";
 import './Pages.css';
 import { Link } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
-import { UserRegister } from "../api/data.js";
+import { UserRegister } from "../api/auth.js";
 
 
 export default function Register() {
@@ -16,12 +16,12 @@ export default function Register() {
     try {
       const res = await UserRegister(data);//if need be change this line to the whole 7 line
       console.log("Resgister successful", res);
-      navigator("/login");
+      navigator("/");
     } catch (error) {
       alert(error);
     }
-
   }
+
   const inputChange = (e) => {
     const { name, value } = e.target;
     setData((data) => ({
@@ -44,7 +44,7 @@ export default function Register() {
           </label>
           <label>
             <MdPeople className="input-in" />
-            <input name="role" type="radio" value="RECEPTION" checked={data.role === "ADMIN"} onChange={inputChange} required />
+            <input name="role" type="radio" value="RECEPTION" checked={data.role === "RECEPTION"} onChange={inputChange} required />
             Reception
           </label>
         </div>
@@ -61,7 +61,7 @@ export default function Register() {
         </div>
         <button className="button" type="submit">Register</button>
         <p>If you already have account?
-          <Link to={'/login'} className="link"> Login</Link>
+          <Link to={'/'} className="link"> Login</Link>
         </p>
 
       </form>

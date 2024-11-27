@@ -1,4 +1,5 @@
-import api from "./mainapi"
+import api from "./MainApi";
+
 
 const API_url = `${api}/inventory`;
 //create new inventory item
@@ -9,15 +10,16 @@ const createNew = async (itemData) => {
 
 //get all inventory item
 const getItems = async()=> {
-    const response = await api.get(API_url);
-    return response;
+    let res;
+    res = await api.get(API_url);
+    return res;
 }
 //delete item
 const deleteItems = async (id) => {
     const response = await api.delete(API_url+id);
     return response.data
 }
-//get a iteam
+//get a item
 const getItem = async (id) => {
     const response = await api.delete(API_url + id);
     return response.data;
