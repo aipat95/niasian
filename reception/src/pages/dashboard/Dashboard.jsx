@@ -7,29 +7,29 @@ import RoomStatus from "./RoomStatus.jsx";
 
 
 const Dashboard =() => {
-    const [loading, setLoading] =useState(true);
-    const [data, setData] = useState({});
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const response = await axios.get(`${getBaseURL()}`,{
-                    headers: {
-                        //'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                        'Content-type': 'application/json',
-                    },
-                })
-                setData(response.data);
-                setLoading(false);
-            }catch (error){
-                console.error('Error',error);
-            }
-        }
-
-        fetchData();
-
-    }, []);
-
-    if(loading) return <Loading/>
+    // const [loading, setLoading] =useState(true);
+    // const [data, setData] = useState({});
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try{
+    //             const response = await axios.get(`${getBaseURL()}`,{
+    //                 headers: {
+    //                     //'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //                     'Content-type': 'application/json',
+    //                 },
+    //             })
+    //             setData(response.data);
+    //             setLoading(false);
+    //         }catch (error){
+    //             console.error('Error',error);
+    //         }
+    //     }
+    //
+    //     fetchData();
+    //
+    // }, []);
+    //
+    // if(loading) return <Loading/>
 
     return (
         <>
@@ -53,28 +53,29 @@ const Dashboard =() => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">S-size tents</span>
-                        <span className="block text-2xl font-bold">0/30(need data of the taken/total){data?.totalBooks}</span>
+                        <span className="block text-2xl font-bold">0/30(need data of the taken/total)</span>
                         <span className="block text-l ">20 (data of the price) $/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">M-size tents</span>
-                        <span className="block text-2xl font-bold">0/30{data?.totalSales}</span>
+                        <span className="block text-2xl font-bold">0/30</span>
+                        {/*{data?.totalSales}*/}
                         <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">XL-size tents</span>
-                        <span className="inline-block text-2xl font-bold">0/20{data?.trendingBooks}</span>
+                        <span className="inline-block text-2xl font-bold">0/20</span>
                         <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">Family-size tents</span>
-                        <span className="block text-2xl font-bold">0/20{data?.totalOrders}</span>
+                        <span className="block text-2xl font-bold">0/20</span>
                         <span className="block text-l">20$/day</span>
                     </div>
                 </div>

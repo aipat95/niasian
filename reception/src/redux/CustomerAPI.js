@@ -1,8 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import getBaseURL from "../utils/baseURL.js";
+import baseURL from "../utils/baseURL.js";
 
 const baseQuery = fetchBaseQuery({
-    baseURL: `${getBaseURL()/* /api/customers for example api OF INVENTORY from backend*/}`,
+    baseURL: `${getBaseURL()}/reception`,
     credentials: 'include',
     // prepareHeaders: (Headers) => {
     //     const token = localStorage.getItem('token');
@@ -26,7 +27,7 @@ const  customerApi = createApi({
         }),
         addCustomer: builder.mutation({
             query: (newCustomer) => ({
-                url: `/create-customer`, //route url
+                url: `/checkin`, //route url
                 method: "POST",
                 body: newCustomer
             }),

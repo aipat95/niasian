@@ -14,15 +14,15 @@ const CheckIn = () => {
             ...data,
         }
         try {
+            //await fetch(addCustomer(newCustomerData).unwrap());
             await addCustomer(newCustomerData).unwrap();
             Swal.fire({
                 title: "Check in",
-                text: "Done",
                 icon: "success",
-                showCancelButton: true,
+                //showCancelButton: true,
                 confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, It's Okay!"
+                //cancelButtonColor: "#d33",
+                confirmButtonText: "Done"
             });
             reset();
         } catch (error) {
@@ -32,9 +32,9 @@ const CheckIn = () => {
 
     }
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-    }
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    // }
     return (
         <div className="max-w-lg   mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
@@ -48,7 +48,6 @@ const CheckIn = () => {
                     //placeholder="Enter name"
                     register={register}
                 />
-
 
                 <InputField
                     label="ID / Passport Number"
@@ -72,54 +71,53 @@ const CheckIn = () => {
                 </div>*/}
 
                 {/* Reusable Select Field for Category */}
-                <SelectField
-                    label="Tent"
-                    name="tent"
-                    options={[
-                        {value: 'no-rent', label: 'none'},
-                        {value: 'sizeS', label: 'size S (1 adult)'},
-                        {value: 'sizeM', label: 'size M (2 adults)'},
-                        {value: 'sizeXL', label: 'size XL (4 adults)'},
-                        {value: 'sizeFamily', label: 'Family (2 adults, 1-2 children)'},
-                        // Add more options as needed
-                    ]}
-                    register={register}
-                />
+                {/*<SelectField*/}
+                {/*    label="Tent"*/}
+                {/*    name="tent"*/}
+                {/*    options={[*/}
+                {/*        {value: 'no-rent', label: 'none'},*/}
+                {/*        {value: 'sizeS', label: 'size S (1 adult)'},*/}
+                {/*        {value: 'sizeM', label: 'size M (2 adults)'},*/}
+                {/*        {value: 'sizeXL', label: 'size XL (4 adults)'},*/}
+                {/*        {value: 'sizeFamily', label: 'Family (2 adults, 1-2 children)'}*/}
+                {/*    ]}*/}
+                {/*    register={register}*/}
+                {/*/>*/}
 
 
-                <div className='grid md:grid-cols-2 xl:grid-cols-2 xl:grid-rows-1 xl:grid-flow-col gap-x-2'>
-                    <InputField
-                        label="Sleeping Bag"
-                        name="pillow"
-                        type="number"
-                        register={register}
+                {/*<div className='grid md:grid-cols-2 xl:grid-cols-2 xl:grid-rows-1 xl:grid-flow-col gap-x-2'>*/}
+                {/*    <InputField*/}
+                {/*        label="Sleeping Bag"*/}
+                {/*        name="pillow"*/}
+                {/*        type="number"*/}
+                {/*        register={register}*/}
 
-                    />
-                    <InputField
-                        label="Camping Stove"
-                        name="blanket"
-                        type="number"
-                        register={register}
+                {/*    />*/}
+                {/*    <InputField*/}
+                {/*        label="Camping Stove"*/}
+                {/*        name="blanket"*/}
+                {/*        type="number"*/}
+                {/*        register={register}*/}
 
-                    />
+                {/*    />*/}
 
-                </div>
+                {/*</div>*/}
 
-                <InputField
-                    label="Check-In date"
-                    name="checkindate"
-                    type="date"
-                    register={register}
+                {/*<InputField*/}
+                {/*    label="Check-In date"*/}
+                {/*    name="checkindate"*/}
+                {/*    type="date"*/}
+                {/*    register={register}*/}
 
-                />
+                {/*/>*/}
 
-                <InputField
-                    label="Check-Out Date"
-                    name="checkoutdate"
-                    type="date"
-                    register={register}
+                {/*<InputField*/}
+                {/*    label="Check-Out Date"*/}
+                {/*    name="checkoutdate"*/}
+                {/*    type="date"*/}
+                {/*    register={register}*/}
 
-                />
+                {/*/>*/}
 
                 {/* Submit Button */}
                 <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md">
