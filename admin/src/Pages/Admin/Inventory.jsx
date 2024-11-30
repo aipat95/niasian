@@ -1,149 +1,155 @@
-import { useState } from "react";
-import Sidebar from '../../Component/Sidebar';
-
-
-
+import { useState, useEffect } from "react";
+import Sidebar from "../../Component/Sidebar";
+import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead } from "@mui/material";
+import InventoryService from "../../api/InvApi";
 
 export default function Inventory() {
-  const [price, setPrice] = useState(0);
-  const [quan, setQuant] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [used, setUsed] = useState();
-  const [users, setUsers] = useState([]);
-  const [name, setName] = useState();
-  const [sum, setSum] = useState();
-  const [type, setType] = useState();
+  const [users, setUsers] = useState([]); // To store the inventory items
+  const [name, setName] = useState(""); // Product name
+  const [type, setType] = useState(""); // Product type
+  const [price, setPrice] = useState(0); // Product price
+  const [quan, setQuant] = useState(0); // Product quantity
+  const [used, setUsed] = useState(0); // Amount used
+  const [sum, setSum] = useState(0); // Total amount (price * quantity)
 
-  function Calculation() {
-    const newUser = { name, quan, price, sum,used, type };
-    setUsers((prevUsers) => [...prevUsers, newUser]);
-    const newTotal = users.reduce((total, user) => {
-      return total + Number(user.sum);
-    })
-    setTotal(newTotal);
-    //clear input
-    setName('');
-    setQuant('');
-    setPrice('');
-    setSum('');
-    setUsed(""); setType("");
+  // Fetch inventory items on component mount
+  useEffect(() => {
+    const fetchInventory = async () => {
+      try {
+        const data = await InventoryService.getInventory();
+        setUsers(data); // Set fetched inventory data to state
+      } catch (error) {
+        console.error("Error fetching inventory:", error);
+      }
+    };
+    fetchInventory();
+  }, []); // Empty dependency array to only fetch data once
 
-  }
-  //to change price
-  const handleChange = (e) => {
-    const newPrice = parseFloat(e.target.value);
-    if (!isNaN(newPrice)) {
-      setPrice(newPrice);
-      calculateTotal(newPrice, quan);
+  // Handle adding a new product
+  const handleAddProduct = async (event) => {
+    event.preventDefault(); 
+    const newProduct = {
+      itemName: name,
+      type: type,
+      price: price,
+      quantity: quan,
+      used: used,
+      amount: price * quan,
+      sum: price * quan - used,
+    };
+
+    try {
+      // Add product to the backend
+      const addedProduct = await InventoryService.addInventory(newProduct);
+      setUsers((prevUsers) => [...prevUsers, addedProduct]);
+      resetForm(); 
+    } catch (error) {
+      console.error("Error adding product:", error);
     }
   };
-  // to change quantity
-  const handleQuantity = (e) => {
-    const newQuantity = parseFloat(e.target.value);
-    if (!isNaN(newQuantity)) {
-      setPrice(newQuantity);
-      calculateTotal(price, newQuantity);
+
+  // Handle deleting a product
+  const handleDeleteProduct = async (id) => {
+    try {
+      // Delete product from backend
+      await InventoryService.deleteInventory(id);
+     
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error("Error deleting product:", error);
     }
   };
-  //calculate amount in total
-  const calculateTotal = (price, quan) => {
-    const newTotal = price * quan;
-    setSum(newTotal);
+
+  const resetForm = () => {
+    setName("");
+    setType("");
+    setPrice(0);
+    setQuant(0);
+    setUsed(0);
+    setSum(0);
   };
-  //able to refresh page
-    function refreshPage(){ window.location.reload();  }
-  
+
   return (
     <div className="inv-container">
-    <Sidebar />
-    <div className="inventory">
-      <h1>Inventory</h1>
-      <div className="row">
-        <div className="col-8">
-          <table className="table">
+      <Sidebar />
+      <div className="inventory">
+        <h1>Inventory</h1>
+        <div className="row">
+          <div>
             <h3>Add Product</h3>
-            <tr>
-              <th>Product Name</th>
-              <th>Type</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Used</th>  
-              <th>Amount</th>
-              <th>Option</th>
-            </tr>
-            <tr>
-              <td>
-                <input type="text" className="form-control" placeholder="Item Name" value={name} onChange={(event) => {
-                  setName(event.target.value);
-                }}/>
-                </td>
-                <td>
-                  <input type="text" className="form-control" placeholder="Type of Equipment" value={type} onChange={(e) => {
-                    setType(e.target.value);
-                  }} />
-                </td>
-                
-                <td>
-                <input type="text" className="form-control" placeholder="Enter price" value={price} onChange={handleChange} />
-              </td>
-              <td>
-                <input type="text" className="form-control" placeholder="Enter quantity" value={quan} onChange={handleQuantity} />
-                </td>
-                <td>
-                  <input type="text" className="form-control" placeholder="Amount Have Used"
-                    value={used} onChange={(e) => {
-                      setUsed(e.target.value);
-                    }}/>
-                </td>
-              <td>
-                <input type="text" className="form-control" placeholder="Enter Total" value={sum} id="total" name="total_cost" disabled />
-              </td>
-              <td>
-                <button className="btn btn-success" type="submit" onClick={Calculation}>Add</button>
-              </td>
-            </tr>
-          </table>
-          <h3>Products</h3>
-          <table className="table table-hover">
-            <thead>
-              <th scope="row">Item Name</th>
-              <th>Price</th>
-              <th>Type</th>  
-              <th>Quantity</th>
-              <th>Used</th>  
-              <th>Amount</th>
-        
-            </thead>
-            <tbody>
-              {
-                users.map((row, index) => {
-                  <tr key={index}>
-                    <td>{row.name}</td>
-                    <td>{row.type}</td>
-                    <td>{row.price}</td>
-                    <td>{row.quan}</td>
-                    <td>{row.used}</td>
-                    <td>{row.sum}</td>
-                  </tr>
-            
-                })
-              }
-            </tbody>
-          </table>
-        </div>
-        <div className="col-4">
-          <div className="form-group">
-            <h3>Total</h3>
-            <input type="text" className="form-control" placeholder="Enter Total..." required disabled value={total}/>
-            <button type="button" className="btn btn-success" onClick={refreshPage}>
-            <span>Complete</span>
-            </button>
-            
+            <div>
+              <input
+                type="text"
+                placeholder="Product Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Type"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Quantity"
+                value={quan}
+                onChange={(e) => setQuant(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Amount Used"
+                value={used}
+                onChange={(e) => setUsed(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Total"
+                value={sum}
+                disabled
+              />
+              <button onClick={handleAddProduct}>Add</button>
+            </div>
           </div>
-        </div>
-      </div>
 
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 750 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Item Name</TableCell>
+                  <TableCell align="center">Type</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="center">Amount</TableCell>
+                  <TableCell align="center">Status</TableCell>
+                  <TableCell align="center">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {users.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell component="th" scope="row">{row.itemName}</TableCell>
+                    <TableCell align="center">{row.type}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">{row.amount}</TableCell>
+                    <TableCell align="center" style={{ color: row.used > 0 ? 'red' : 'green' }}>
+                      {row.used > 0 ? 'Out of Stock' : 'In Stock'}
+                    </TableCell>
+                    <TableCell align="center">
+                      <button onClick={() => handleDeleteProduct(row.id)}>Delete</button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </div>
     </div>
-  )
+  );
 }

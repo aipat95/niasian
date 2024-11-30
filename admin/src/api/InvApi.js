@@ -1,36 +1,37 @@
-import api from "./MainApi";
+import axios from "axios";
 
-
-const API_url = `${api}/inventory`;
+const API_URL = "http://localhost:8081/inventory";
 //create new inventory item
-const createNew = async (itemData) => {
-    const response = await api.post(API_url, itemData);
-    return response.data
-}
-
-//get all inventory item
-const getItems = async()=> {
-    let res;
-    res = await api.get(API_url);
-    return res;
-}
-//delete item
-const deleteItems = async (id) => {
-    const response = await api.delete(API_url+id);
-    return response.data
-}
-//get a item
-const getItem = async (id) => {
-    const response = await api.delete(API_url + id);
-    return response.data;
-}
-//update inventory
-const updateInv = async (id, itemData)=>{
-    const response = await api.patch(`${API_url}${id}`, itemData);
-    return response.data;
-}
-
-const inventoryService = {
-    createNew, getItem, getItems, updateInv, deleteItems,
+const getInventory = async () => {
+    try {
+        const response = await axios.get(API_URL);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching inventory:', error);
+        throw error;
+    }
 };
-export default inventoryService;
+
+const addInventory = async (inventoryData) => {
+    try {
+        const response = await axios.post(API_URL, inventoryData);
+        return response.data;
+    } catch (error) {
+        console.error('Error adding inventory:', error);
+        throw error;
+    }
+};
+const deleteInventory = async (id) => {
+    try {
+        await axios.delete(`${API_URL}/${id}`);
+    } catch (error) {
+        console.error('Error deleting inventory:', error);
+        throw error;
+    }
+};
+
+const InventoryService ={
+    getInventory, addInventory, deleteInventory,
+};
+
+export default InventoryService;

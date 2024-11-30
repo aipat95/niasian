@@ -13,3 +13,13 @@
     font-weight: bold;
     background-color: rgb(155, 221, 223);
 }
+.addTable{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 30vh;
+    margin: 0;
+    padding: 0;
+    border: solid black 2px;
+
+}

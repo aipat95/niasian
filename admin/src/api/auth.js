@@ -1,11 +1,7 @@
-import api from "./MainApi";
 
 export const UserRegister = async (data) => {
     try {
-        // const res = awaid api.post('/signUp',data);
-        //return res.data
-//delete 11 lines
-        const res = await fetch("http://172.22.56.121:8080/signUp", {
+        const res = await fetch("http://localhost:8081/signUp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,33 +22,15 @@ export const UserRegister = async (data) => {
         alert(error);
     }
 }
-//for shorter ver
-export const UserReg = async (data) => {
-    try {
-        const res = await api.post('/signUp',data);
-        if (!res.ok) {
-            throw new Error("Fail" + res.status);
-        }
-         return res.data;
-    } catch (error) {
-        alert(error);
-    }
-}
 
 export const UserLogin = async (data) => {
     try {
-        // const res = awaid api.post('/login',data);
-        //return res.data;
-//delete 8 lines
-        const res = await fetch("http://172.22.56.121:8080/login", {
+        const res = await fetch("http://localhost:8081/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password,
-            }),
+            body: JSON.stringify(data),
         });
         if (!res.ok) {
             throw new Error(`Fail ${res.status}`);
@@ -65,7 +43,6 @@ export const UserLogin = async (data) => {
             resData = await res.text();
         }
         console.log("login successful", resData);
-
     } catch (error) {
         alert(error);
     }
@@ -73,10 +50,7 @@ export const UserLogin = async (data) => {
 
 export const LogoutUser = async () => {
     try {
-        // const res = awaid api.post('/logout');
-        //return res;
-        //DELETE 4 lines
-        const res = await fetch("http://172.22.56.121:8080/logout", {
+        const res = await fetch("http://localhost:8081/logout?email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
