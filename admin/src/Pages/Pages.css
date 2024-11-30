@@ -107,7 +107,13 @@
 }
 
 @media screen and (max-width: 600px) {
-    .inventory {
+    /* .inventory {
+        margin-left: 150px;
+    } */
+    .activity{
+        margin-left: 150px;
+    }
+    .tent{
         margin-left: 150px;
     }
 
@@ -183,6 +189,55 @@
         padding: 2rem;
 
     }
+    
+    h3{
+        margin: 1rem 0;
+    }
+   
 
+}
+.tent-container{
+    height: 100vh;
+    margin-left: 150px;
+    padding: 1rem;
+    margin-right: 50px;
+    border-radius: 1rem;
+    overflow: auto;
+    width: 100%;
+    .tent {
+            margin: 2rem;
+            padding: 2rem;
+    
+        }
+}
+.activity-container{
+    height: 100vh;
+    margin-left: 150px;
+    padding: 1rem;
+    margin-right: 50px;
+    border-radius: 1rem;
+    overflow: auto;
+    width: 100%;
+    .activity {
+            margin: 2rem;
+            padding: 2rem;
+    
+        }
+}
 
+.add-btn{
+    margin: 1rem;
+    margin-left: 0;
+}
+
+h1{
+    font-size: bold;
+    text-align: center;
+}
+.name-bar{
+    background-color: rgb(252, 181, 89);   
+}
+.back-row{
+    background-color: #54d9f0;
+    
 }

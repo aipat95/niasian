@@ -1,18 +1,4 @@
-.tent-container{
-    z-index: 1200;
-    display: flex;
-    top:0;
-    h1{
-        margin: 2rem;
-    }
-}
-.cell{
-    align-items: center;
-    justify-content: center;
-    color: rgb(75, 149, 53);
-    font-weight: bold;
-    background-color: rgb(155, 221, 223);
-}
+
 .addTable{
     display: flex;
     flex-direction: column;

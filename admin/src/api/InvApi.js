@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8081/inventory";
+
 //create new inventory item
 const getInventory = async () => {
     try {
@@ -11,7 +12,7 @@ const getInventory = async () => {
         throw error;
     }
 };
-
+//add new Inventory
 const addInventory = async (inventoryData) => {
     try {
         const response = await axios.post(API_URL, inventoryData);
@@ -21,6 +22,7 @@ const addInventory = async (inventoryData) => {
         throw error;
     }
 };
+//delete inventory
 const deleteInventory = async (id) => {
     try {
         await axios.delete(`${API_URL}/${id}`);
@@ -29,7 +31,7 @@ const deleteInventory = async (id) => {
         throw error;
     }
 };
-
+//compile to on service
 const InventoryService ={
     getInventory, addInventory, deleteInventory,
 };

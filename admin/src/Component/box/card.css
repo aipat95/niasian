@@ -1,6 +1,61 @@
-.pie-container{
+.dashboard-container {
+    position: relative;;
+}
+
+.dashboard {
+    margin: 1rem;
+    display: flexbox;
+}
+
+.metrics-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background-color: #f79494;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
     text-align: center;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+    flex:1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.chart {
+    width: 45%;
+    text-align: center;
+}
+
+.suggestions-container {
+    margin-top: 20px;
+    background-color: #f4d265;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ul{
+    list-style: dot;
+}
+
+@media (max-width: 750px) {
+    .charts-container{
+        flex-direction: column;
+    }
+    .metrics-container{
+        flex-direction: column;
+    }
+    
+    
 }

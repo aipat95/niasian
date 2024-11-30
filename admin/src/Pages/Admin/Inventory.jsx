@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../../Component/Sidebar";
-import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead } from "@mui/material";
+import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead, Button, Input } from "@mui/material";
 import InventoryService from "../../api/InvApi";
-
 export default function Inventory() {
   const [users, setUsers] = useState([]); // To store the inventory items
   const [name, setName] = useState(""); // Product name
@@ -10,7 +9,7 @@ export default function Inventory() {
   const [price, setPrice] = useState(0); // Product price
   const [quan, setQuant] = useState(0); // Product quantity
   const [used, setUsed] = useState(0); // Amount used
-  const [sum, setSum] = useState(0); // Total amount (price * quantity)
+  const [showForm, setShowForm] = useState(false);//toggle button
 
   // Fetch inventory items on component mount
   useEffect(() => {
@@ -35,7 +34,6 @@ export default function Inventory() {
       quantity: quan,
       used: used,
       amount: price * quan,
-      sum: price * quan - used,
     };
 
     try {
@@ -63,10 +61,9 @@ export default function Inventory() {
   const resetForm = () => {
     setName("");
     setType("");
-    setPrice(0);
-    setQuant(0);
-    setUsed(0);
-    setSum(0);
+    setPrice("");
+    setQuant("");
+    setUsed("");
   };
 
   return (
@@ -74,74 +71,91 @@ export default function Inventory() {
       <Sidebar />
       <div className="inventory">
         <h1>Inventory</h1>
-        <div className="row">
+        <div className="add-btn">
+        {/* Button to add new */}
+        <Button
+          variant="contained"
+          onClick={() => setShowForm(!showForm)} // Toggle form visibility
+        >
+          {showForm ? "Cancel" : "Add New Product"}
+        </Button>
+        {/* Form add new product */}
+        {showForm && (
           <div>
             <h3>Add Product</h3>
-            <div>
-              <input
+            <div className="add-inv-form">
+              <Input
                 type="text"
                 placeholder="Product Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                sx={{margin:"10px"}} 
               />
-              <input
+              <Input
                 type="text"
                 placeholder="Type"
                 value={type}
-                onChange={(e) => setType(e.target.value)}
+                  onChange={(e) => setType(e.target.value)}
+                  sx={{ margin: "10px" }} 
+
               />
-              <input
+              <Input
                 type="number"
                 placeholder="Price"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => setPrice(e.target.value)}
+                  sx={{ margin: "10px" }} 
+
               />
-              <input
+              <Input
                 type="number"
                 placeholder="Quantity"
                 value={quan}
-                onChange={(e) => setQuant(e.target.value)}
+                  onChange={(e) => setQuant(e.target.value)}
+                  sx={{ margin: "10px" }} 
+
               />
-              <input
+              <Input
                 type="number"
                 placeholder="Amount Used"
                 value={used}
-                onChange={(e) => setUsed(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Total"
-                value={sum}
-                disabled
-              />
-              <button onClick={handleAddProduct}>Add</button>
+                  onChange={(e) => setUsed(e.target.value)}
+                  sx={{ margin: "10px" }} 
+
+              />         
+              <Button onClick={handleAddProduct}>Add</Button>
             </div>
           </div>
-
+        )}
+        </div>
+        {/* Inventory table */}
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 750 }} aria-label="simple table">
-              <TableHead>
+              <TableHead className="name-bar">
                 <TableRow>
-                  <TableCell align="center">Item Name</TableCell>
-                  <TableCell align="center">Type</TableCell>
-                  <TableCell align="center">Quantity</TableCell>
-                  <TableCell align="center">Amount</TableCell>
-                  <TableCell align="center">Status</TableCell>
-                  <TableCell align="center">Actions</TableCell>
+                <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}
+                >Item Name</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Type</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Price</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Quantity</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Used</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Status</TableCell>
+                  <TableCell align="center" sx={{color:"black",fontWeight:"bold" }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody className="back-row">
                 {users.map((row, index) => (
                   <TableRow key={index}>
-                    <TableCell component="th" scope="row">{row.itemName}</TableCell>
-                    <TableCell align="center">{row.type}</TableCell>
-                    <TableCell align="center">{row.quantity}</TableCell>
-                    <TableCell align="center">{row.amount}</TableCell>
-                    <TableCell align="center" style={{ color: row.used > 0 ? 'red' : 'green' }}>
-                      {row.used > 0 ? 'Out of Stock' : 'In Stock'}
+                    <TableCell component="th" scope="row" align="center" sx={{ color: "black", fontSize:"1rem" }}>{row.itemName}</TableCell>
+                    <TableCell align="center" sx={{color:"black" }}>{row.type}</TableCell>
+                    <TableCell align="center" sx={{color:"black" }}>{row.price}</TableCell>
+                    <TableCell align="center" sx={{color:"black" }}>{row.quantity}</TableCell>
+                    <TableCell align="center" sx={{color:"black"}}>{ row.used}</TableCell>
+                    <TableCell align="center" sx={{color:"black" }} style={{ color:row.quantity - row.used <= 0 ? 'red' : 'green' }}>
+                      {row.quantity - row.used <= 0 ? 'Out of Stock' : 'In Stock'}
                     </TableCell>
-                    <TableCell align="center">
-                      <button onClick={() => handleDeleteProduct(row.id)}>Delete</button>
+                    <TableCell align="center" sx={{color:"black" }}>
+                      <Button onClick={() => handleDeleteProduct(row.id)}>Delete</Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -150,6 +164,5 @@ export default function Inventory() {
           </TableContainer>
         </div>
       </div>
-    </div>
   );
 }

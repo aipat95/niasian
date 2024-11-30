@@ -1,14 +1,14 @@
-import Chart from "../../Component/box/Chart";
+import Card from "../../Component/box/Card";
 import SideBar from "../../Component/Sidebar";
-import Table from "../../Component/box/Table"
 
-export default function Dashboard() { 
+
+export default function Dashboard() {
+
     return (
         <div>
-        <SideBar></SideBar>
+            <SideBar />
             <h1>Dashboard</h1>
-            <Chart></Chart>
-            <Table></Table>
+            <Card/>
         </div>
     )
 }

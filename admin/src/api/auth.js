@@ -1,4 +1,4 @@
-
+//for register call
 export const UserRegister = async (data) => {
     try {
         const res = await fetch("http://localhost:8081/signUp", {
@@ -22,7 +22,7 @@ export const UserRegister = async (data) => {
         alert(error);
     }
 }
-
+//login call
 export const UserLogin = async (data) => {
     try {
         const res = await fetch("http://localhost:8081/login", {
@@ -47,7 +47,7 @@ export const UserLogin = async (data) => {
         alert(error);
     }
 }
-
+//logout call
 export const LogoutUser = async () => {
     try {
         const res = await fetch("http://localhost:8081/logout?email", {
