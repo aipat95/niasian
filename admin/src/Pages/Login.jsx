@@ -5,8 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserLogin } from "../api/auth";
 import { MdEmail, MdOutlinePassword } from "react-icons/md";
 
-
-
 export default function Login() {
   const navigator = useNavigate();
   const [data, setData] = useState({
@@ -15,16 +13,19 @@ export default function Login() {
   async function loginUser(e) {
     e.preventDefault();
     try {
-      const res = await UserLogin(data);//if you need change here
-      console.log('Login successful', res);
-      alert("You are now login!");
-      const { userRole } = res;
-      if (userRole === 'ADMIN') {
-        navigator('/Admin');
+      const res = await UserLogin(data);
+      if (!res || !res.userRole) {
+        alert("Invalid login credentials!");
+        return;
       }
-      else if (userRole==='RECEPTION')
-      { navigator('/reception'); }
-      else { alert('Invalid Role!')}
+      const { role } = res;
+      if (role === "ADMIN") {
+        navigator("/Admin/Dashboard");
+      } else if (role === "RECEPTION") {
+        navigator("/reception");
+      } else {
+        alert("Invalid role!");
+      }
     } catch (error) {
       alert(error);
     }

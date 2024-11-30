@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
 import { UserRegister } from "../api/auth.js";
 
-
 export default function Register() {
   const [data, setData] = useState({
     role: '', email: '', password: '',
@@ -14,9 +13,8 @@ export default function Register() {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await UserRegister(data);//if need be change this line to the whole 7 line
+      const res = await UserRegister(data);
       console.log("Resgister successful", res);
-      navigator("/");
     } catch (error) {
       alert(error);
     }
@@ -63,9 +61,7 @@ export default function Register() {
         <p>If you already have account?
           <Link to={'/'} className="link"> Login</Link>
         </p>
-
       </form>
-
     </div>
   )
 }
