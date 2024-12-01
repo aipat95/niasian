@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/activity";
+const API_URL = "http://localhost:8080/activities";
 
 // Get all activities
 const getActivities = async () => {
@@ -23,26 +23,14 @@ const addActivity = async (activityData) => {
         throw error;
     }
 };
-
-// Update an existing activity
-const updateActivity = async (id, updatedActivity) => {
-    try {
-        const response = await axios.put(`${API_URL}/${id}`, updatedActivity);
-        return response.data;
-    } catch (error) {
-        console.error("Error updating activity:", error);
-        throw error;
-    }
-};
-
 // Delete an activity
-const deleteActivity = async (id) => {
+const deleteActivity = async (type) => {
     try {
-        await axios.delete(`${API_URL}/${id}`);
+        await axios.delete(`${API_URL}/${type}`);
     } catch (error) {
         console.error("Error deleting activity:", error);
         throw error;
     }
 };
 
-export { getActivities, addActivity, updateActivity, deleteActivity };
+export { getActivities, addActivity, deleteActivity };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/inventory";
+const API_URL = "http://localhost:8080/inventory";
 
 //create new inventory item
 const getInventory = async () => {

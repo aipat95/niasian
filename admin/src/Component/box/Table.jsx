@@ -1,74 +1,34 @@
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { useEffect, useState } from "react";
+import "./card.css";
 
-function createData(name, trackingId, date, status) {
-    return { name, trackingId, date, status };
-}
+export default function Table() {
+    const [monthlySales, setMonthlySales] = useState([]);
 
-const rows = [
-    createData("Lasania Chiken Fri", 18908424, "2 March 2022", "Approved"),
-    createData("Big Baza Bang ", 18908424, "2 March 2022", "Pending"),
-    createData("Mouth Freshner", 18908424, "2 March 2022", "Approved"),
-    createData("Cupcake", 18908421, "2 March 2022", "Delivered"),
-];
+    useEffect(() => {
+        // Fetch monthly sales data (dummy data here)
+        const salesData = [
+            { month: "January", sales: 500 },
+            { month: "February", sales: 400 },
+            { month: "March", sales: 600 },
+            { month: "April", sales: 700 },
+            { month: "May", sales: 650 },
+            { month: "June", sales: 500 },
+        ];
+        setMonthlySales(salesData);
+    }, []);
 
-
-const makeStyle = (status) => {
-    if (status === 'Approved') {
-        return {
-            background: 'rgb(145 254 159 / 47%)',
-            color: 'green',
-        }
-    }
-    else if (status === 'Pending') {
-        return {
-            background: '#ffadad8f',
-            color: 'red',
-        }
-    }
-    else {
-        return {
-            background: '#59bfff',
-            color: 'white',
-        }
-    }
-}
-
-export default function Basictable() {
     return (
-        <div className="table">
-            <h3>Recent Orders</h3>
-            <table
-                className="table-bordered"
-                style={{ boxShadow: "10px 13px 20px 0px #80808029" }}
-            >
-                <table  aria-label="simple table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th align="left">Tracking ID</th>
-                            <th align="left">Date</th>
-                            <th align="left">Status</th>
-                            <th align="left"></th>
-                        </tr>
-                    </thead>
-                    <tbody style={{ color: "gray" }}>
-                        {rows.map((row) => (
-                            <tr
-                                key={row.name}
-                            >
-                                <th scope="row">
-                                    {row.name}
-                                </th>
-                                <th align="left">{row.trackingId}</th>
-                                <th align="left">{row.date}</th>
-                                <th align="left">
-                                    <span className="status" style={makeStyle(row.status)}>{row.status}</span>
-                                </th>
-                                <th align="left" className="Details">Details</th>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </table>
+        <div className="chart-container">
+            <h3>Monthly Sales</h3>
+            <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={monthlySales}>
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="sales" fill="#3f51b5" />
+                </BarChart>
+            </ResponsiveContainer>
         </div>
     );
 }

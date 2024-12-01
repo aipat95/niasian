@@ -3,26 +3,33 @@ import Sidebar from "../../Component/Sidebar";
 import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead, Button, Input } from "@mui/material";
 import InventoryService from "../../api/InvApi";
 export default function Inventory() {
-  const [users, setUsers] = useState([]); // To store the inventory items
-  const [name, setName] = useState(""); // Product name
-  const [type, setType] = useState(""); // Product type
-  const [price, setPrice] = useState(0); // Product price
-  const [quan, setQuant] = useState(0); // Product quantity
-  const [used, setUsed] = useState(0); // Amount used
+  const [users, setUsers] = useState([]); 
+  const [name, setName] = useState(""); 
+  const [type, setType] = useState(""); 
+  const [price, setPrice] = useState(0);
+  const [quan, setQuant] = useState(0); 
+  const [used, setUsed] = useState(0); 
   const [showForm, setShowForm] = useState(false);//toggle button
 
-  // Fetch inventory items on component mount
   useEffect(() => {
     const fetchInventory = async () => {
       try {
         const data = await InventoryService.getInventory();
-        setUsers(data); // Set fetched inventory data to state
+        setUsers(data); 
+        localStorage.setItem("inventoryData", JSON.stringify(data));
       } catch (error) {
         console.error("Error fetching inventory:", error);
-      }
+        const cachedData = localStorage.getItem("inventoryData");
+        if (cachedData) {
+          setUsers(JSON.parse(cachedData));
+        } else {
+          setUsers([]);
+          console.error("No data found");
+        } 
+      } 
     };
     fetchInventory();
-  }, []); // Empty dependency array to only fetch data once
+  }, []); 
 
   // Handle adding a new product
   const handleAddProduct = async (event) => {
@@ -37,24 +44,31 @@ export default function Inventory() {
     };
 
     try {
-      // Add product to the backend
       const addedProduct = await InventoryService.addInventory(newProduct);
-      setUsers((prevUsers) => [...prevUsers, addedProduct]);
+      const updatedUsers = [...users, addedProduct];
+      setUsers(updatedUsers);
+      localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
       resetForm(); 
     } catch (error) {
       console.error("Error adding product:", error);
+      const updatedUsers = [...users, newProduct];
+      setUsers(updatedUsers);
+      localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
     }
   };
 
   // Handle deleting a product
   const handleDeleteProduct = async (id) => {
     try {
-      // Delete product from backend
       await InventoryService.deleteInventory(id);
-     
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+      const updatedUsers = users.filter((user) => user.id !== id);
+      setUsers(updatedUsers);
+      localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
     } catch (error) {
       console.error("Error deleting product:", error);
+      const updatedUsers = users.filter((user) => user.id !== id);
+      setUsers(updatedUsers);
+      localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
     }
   };
 
