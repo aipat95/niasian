@@ -1,6 +1,5 @@
 package com.niasian.Admin.controller;
 
-
 import com.niasian.Admin.entity.Employee;
 import com.niasian.Admin.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public Employee addEmployee (@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 
