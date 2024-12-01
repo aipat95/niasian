@@ -54,7 +54,7 @@ export const LogoutUser = async () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-            }
+         }
         });
         if (!res.ok) {
             throw new Error(`Fail ${res.status}`);

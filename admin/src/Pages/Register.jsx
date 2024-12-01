@@ -61,7 +61,7 @@ export default function Register() {
         <p>If you already have account?
           <Link to={'/'} className="link"> Login</Link>
         </p>
-      </form>
+    </form>
     </div>
   )
 }

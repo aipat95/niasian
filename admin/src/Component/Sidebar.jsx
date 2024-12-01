@@ -1,14 +1,15 @@
 import Logo from './Logo';
-import { MdOutlineDashboardCustomize, MdOutlineInventory2 } from "react-icons/md";
+import { MdOutlineDashboardCustomize, MdOutlineInventory2, MdOutlinePeopleAlt } from "react-icons/md";
 import { TbHotelService, TbLogout } from "react-icons/tb";
-import { PiTentDuotone } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutUser } from '../api/auth';
-// import { useState } from 'react';
-// import { FaBars } from "react-icons/fa6";
+import { useState } from 'react';
+import { FaBars } from "react-icons/fa6";
+import Button from "@mui/material";
 
 const SideBar = () => {
     const navigation = useNavigate();
+    const [expand, setExpand] = useState(true);
     const handleLogout = async () => {
         try {
             await LogoutUser();
@@ -21,42 +22,40 @@ const SideBar = () => {
     const Menus = [
         { title: "Dashboard", src: "/Admin/dashboard", icon: <MdOutlineDashboardCustomize /> },
         { title: "Inventory", src: "/Admin/inventory", icon: <MdOutlineInventory2 /> },
-        { title: "Tent", src: '/Admin/tent', icon: <PiTentDuotone /> },
+        { title: "Employee", src: '/Admin/employee', icon: <MdOutlinePeopleAlt /> },
         { title: "Service", src: '/Admin/service', icon: <TbHotelService /> }];
-    // const [expand, setExpand] = useState(false);
 
     return (
         <>
-             {/* Hamburger icon */}
-            {/* <div className='bars' onClick={() => setExpand(!expand)}>
-                <FaBars/>
-            </div> */}
-            {/* Logout */} 
-            {/* <div className={`bar-container ${expand ? 'expand' : 'small'}`}> */}
+        <div className={`container ${expand ? "expand" : "small"}`}>        
+            <div className='bars'>
+                        <Button className="toggle-btn" onClick={() => setExpand(!expand)}>
+                            <FaBars/>        
+                    </Button>
+            </div>
             <div className='bar-container'>
-                <div className='logo'>
-                    <Logo size='large' ></Logo>
-                </div>
-           <ul>
-                    {Menus.map((Menu, index) => (
-                    <Link to={Menu.src} key={index}>
-                    <li >
-                        
-                            {Menu.icon}
-                            <span>{Menu.title}</span>
-                        </li>
-                    </Link>
-                    ))}
-            </ul>   
+                    <div className='logo'>
+                        <Logo size={expand ? "large":"medium"}></Logo>
+                    </div>
+                    <ul>
+                        {Menus.map((Menu, index) => (
+                            <Link to={Menu.src} key={index}>
+                                <li >            
+                                    {Menu.icon}
+                                    {expand &&<span>{Menu.title}</span>}
+                                </li>
+                            </Link>
+                        ))}
+                    </ul>
             </div>
             <div className='UserLog'>
-                <div className='logo'>
-                    <Logo size='small' ></Logo>
-                </div>
                 <span>Admin </span>
-                <TbLogout className='icon' onClick={handleLogout} />
-            </div>  
-    </> )
-}
+                    <TbLogout className='icon' onClick={handleLogout} />
+                        
+            </div>
+        </div>
+        </>
+    );
+};
 
 export default SideBar;

@@ -23,7 +23,7 @@ function App() {
           <Route path='*' element={<div>Page Not Found</div>}  ></Route>
            
       </Routes>
-    </div>
+      </div>
     </>
 
   );
