@@ -38,11 +38,11 @@ const Dashboard =() => {
                     <h1 className="text-4xl font-semibold mb-2">Overview</h1>
                 </div>
                 <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
-                    <Link to="/dashboard/check-in"
+                    <Link to="/dashboard/checkin"
                           className="inline-flex px-5 py-3 text-green-800 hover:text-green-800 focus:text-green-500 hover:bg-green-600 focus:bg-green-100 border border-green-800 rounded-md mb-3">
                         Check in
                     </Link>
-                    <Link to="/dashboard/check-out"
+                    <Link to="/dashboard/checkout"
                           className=" inline-flex px-5 py-3 text-white bg-green-800 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3">
                         Check Out
                     </Link>

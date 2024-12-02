@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from'sweetalert2';
-import {useAddCustomerMutation} from "../../redux/CustomerAPI.js";
+import {useAddCustomerMutation} from "../../redux/customersApi.js";
 
 const Activities = () => {
     const {

@@ -2,13 +2,14 @@ import React from "react";
 import InputField from "./InputField.jsx";
 import SelectField from "./SelectField.jsx";
 import { useForm } from 'react-hook-form';
-import {useAddCustomerMutation} from "../../../redux/CustomerAPI.js";
+import {useAddCustomerMutation} from "../../../redux/customersApi.js";
 import Swal from 'sweetalert2';
 
 const CheckIn = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [addCustomer, {isLoading, isError}] = useAddCustomerMutation()
     const onSubmit = async (data) => {
+
 
         const newCustomerData = {
             ...data,
@@ -42,6 +43,14 @@ const CheckIn = () => {
             {/* Form starts here */}
             <form onSubmit={handleSubmit(onSubmit)} className=''>
                 {/* Reusable Input Field for name */}
+
+                <InputField
+                    label="ID / Passport Number"
+                    name="passportNumber"
+                    type="textarea"
+                    register={register}
+                />
+
                 <InputField
                     label="Name"
                     name="name"
@@ -49,13 +58,6 @@ const CheckIn = () => {
                     register={register}
                 />
 
-                <InputField
-                    label="ID / Passport Number"
-                    name="id_number"
-                    type="textarea"
-                    register={register}
-
-                />
 
                 {/* Trending Checkbox */}
 
@@ -103,21 +105,58 @@ const CheckIn = () => {
 
                 {/*</div>*/}
 
-                {/*<InputField*/}
-                {/*    label="Check-In date"*/}
-                {/*    name="checkindate"*/}
-                {/*    type="date"*/}
-                {/*    register={register}*/}
+                <InputField
+                    label="Check-In date"
+                    name="checkInDate"
+                    type="date"
+                    register={register}
 
-                {/*/>*/}
+                />
 
-                {/*<InputField*/}
-                {/*    label="Check-Out Date"*/}
-                {/*    name="checkoutdate"*/}
-                {/*    type="date"*/}
-                {/*    register={register}*/}
+                <InputField
+                    label="Check-Out Date"
+                    name="checkOutDate"
+                    type="date"
+                    register={register}
 
-                {/*/>*/}
+                />
+                <InputField
+                    label="Parking fees"
+                    name="campsiteFees"
+                    type="textarea"
+                    register={register}
+                />
+
+                <InputField
+                    label="Parking fees"
+                    name="carParkFees"
+                    type="textarea"
+                    register={register}
+                />
+
+                <SelectField
+                    label="Equipment"
+                    name="equipmentRented"
+                    options={[
+                        {value: 'no-rent', label: 'none'},
+                        {value: 'pillow', label: 'pillow'},
+                        {value: 'campingStove', label: 'camping stove'},
+                        {value: 'sleepingBag', label: 'sleeping bag'},
+                    ]}
+                    register={register}
+                />
+
+                <SelectField
+                    label="Service"
+                    name="additionalServices"
+                    options={[
+                        {value: 'none', label: 'none'},
+                        {value: 'biking', label: 'biking'},
+                        {value: 'hiking', label: 'hiking'},
+                    ]}
+                    register={register}
+                />
+
 
                 {/* Submit Button */}
                 <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md">

@@ -8,6 +8,7 @@ import CheckIn from "../pages/dashboard/AddCustomers/CheckIn.jsx";
 import Activities from "../pages/dashboard/Activities.jsx";
 import Customers from "../pages/dashboard/Customers.jsx";
 import Inventory from "../pages/dashboard/Inventory.jsx";
+import CheckInN from "../pages/dashboard/AddCustomers/CheckInN.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,11 +31,11 @@ const router = createBrowserRouter([
                 element: <Dashboard/>
             },
             {
-                path: "check-in",
+                path: "checkin",
                 element: <CheckIn/>
             },
             {
-                path: "check-out",
+                path: "checkout",
                 element: <CheckOut/>
             },
             {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: "inventory",
                 element: <Inventory/>
+            },
+            {
+                path: "test",
+                element: <CheckInN/>
             }
 
         ]

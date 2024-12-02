@@ -1,20 +1,12 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import getBaseURL from "../utils/baseURL.js";
-import baseURL from "../utils/baseURL.js";
 
 const baseQuery = fetchBaseQuery({
     baseURL: `${getBaseURL()}/reception`,
-    credentials: 'include',
-    // prepareHeaders: (Headers) => {
-    //     const token = localStorage.getItem('token');
-    //     if(token) {
-    //         Headers.set('Authorization', `Bearer $(token)`);
-    //     }
-    //     return Headers
-    // }
+    //credentials: 'include'
 })
-const  customerApi = createApi({
-    reducerPath: 'customerApi',
+const  customersApi = createApi({
+    reducerPath: 'customersApi',
     baseQuery, tagTypes: ['Customers'],
     endpoints: (builder) =>({
         fetchAllCustomers: builder.query({
@@ -56,5 +48,5 @@ const  customerApi = createApi({
 
 export const {useFetchAllCustomersQuery, useFetchCustomerByIdQuery,
     useAddCustomerMutation, useUpdateCustomerMutation,
-    useDeleteCustomerMutation} = customerApi;
-export default customerApi;
+    useDeleteCustomerMutation} = customersApi;
+export default customersApi;

@@ -1,6 +1,6 @@
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useDeleteCustomerMutation, useFetchAllCustomersQuery} from "../../redux/CustomerAPI.js";
+import {useDeleteCustomerMutation, useFetchAllCustomersQuery} from "../../redux/customersApi.js";
 
 const Customers = () => {
     const navigate = useNavigate();
