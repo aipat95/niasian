@@ -5,14 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogoutUser } from '../api/auth';
 import { useState } from 'react';
 import { FaBars } from "react-icons/fa6";
-import Button from "@mui/material";
+import { Button } from "@mui/material";
 
 const SideBar = () => {
     const navigation = useNavigate();
     const [expand, setExpand] = useState(true);
-    const handleLogout = async () => {
+    const handleLogout = async (email) => {
         try {
-            await LogoutUser();
+            await LogoutUser(email);
             alert("You have been logged out successfully!");
             navigation("/");
         } catch (error) {
@@ -27,33 +27,33 @@ const SideBar = () => {
 
     return (
         <>
-        <div className={`container ${expand ? "expand" : "small"}`}>        
-            <div className='bars'>
-                        <Button className="toggle-btn" onClick={() => setExpand(!expand)}>
-                            <FaBars/>        
+            <div className={`container ${expand ? "expand" : "small"}`}>
+                <div className='bars'>
+                    <Button className="toggle-btn" onClick={() => setExpand(!expand)}>
+                        <FaBars />
                     </Button>
-            </div>
-            <div className='bar-container'>
+                </div>
+                <div className='bar-container'>
                     <div className='logo'>
-                        <Logo size={expand ? "large":"medium"}></Logo>
+                        <Logo size={expand ? "large" : "medium"}></Logo>
                     </div>
                     <ul>
                         {Menus.map((Menu, index) => (
                             <Link to={Menu.src} key={index}>
-                                <li >            
+                                <li >
                                     {Menu.icon}
-                                    {expand &&<span>{Menu.title}</span>}
+                                    {expand && <span>{Menu.title}</span>}
                                 </li>
                             </Link>
                         ))}
                     </ul>
-            </div>
-            <div className='UserLog'>
-                <span>Admin </span>
+                </div>
+                <div className='UserLog'>
+                    <span>Admin </span>
                     <TbLogout className='icon' onClick={handleLogout} />
-                        
+
+                </div>
             </div>
-        </div>
         </>
     );
 };

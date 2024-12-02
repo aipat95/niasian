@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdEmail, MdOutlinePassword, MdPeople } from "react-icons/md";
 import './Pages.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Component/Logo.jsx";
 import { UserRegister } from "../api/auth.js";
 
@@ -9,12 +9,13 @@ export default function Register() {
   const [data, setData] = useState({
     role: '', email: '', password: '',
   })
-  
+  const navigator = useNavigate();
   const registerUser = async (e) => {
     e.preventDefault();
     try {
       const res = await UserRegister(data);
       console.log("Resgister successful", res);
+      navigator('/');
     } catch (error) {
       alert(error);
     }

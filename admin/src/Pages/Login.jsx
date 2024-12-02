@@ -14,18 +14,11 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await UserLogin(data);
-      if (!res || !res.userRole) {
-        alert("Invalid login credentials!");
-        return;
-      }
-      const { role } = res;
-      if (role === "ADMIN") {
+      if (res.role=="ADMIN") {
         navigator("/Admin/Dashboard");
-      } else if (role === "RECEPTION") {
+      } else if (res.role ==="RECEPTION" ) {
         navigator("/reception");
-      } else {
-        alert("Invalid role!");
-      }
+      } 
     } catch (error) {
       alert(error);
     }

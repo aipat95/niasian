@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useEffect, useState } from "react";
-import InventoryService from "../../api/InvApi";
+// import InventoryService from "../../api/InvApi";
 import "./card.css";
 
 export default function Chart() {
@@ -9,10 +9,20 @@ export default function Chart() {
   useEffect(() => {
     const fetchInventory = async () => {
       try {
-        const data = await InventoryService.getInventory();
+        // const data = await InventoryService.getInventory();
 
-        const itemsOutOfStock = data.filter((item) => item.used >= item.quantity).length;
-        const inStock = data.length - itemsOutOfStock;
+        // const itemsOutOfStock = data.filter((item) => item.used >= item.quantity).length;
+        // const inStock = data.length - itemsOutOfStock;
+        const mockInventoryData = [
+          { name: "Item 1", quantity: 10, used: 5 },
+          { name: "Item 2", quantity: 20, used: 15 },
+          { name: "Item 3", quantity: 5, used: 1 },
+          { name: "Item 4", quantity: 8, used: 8 },
+        ];
+
+        // Calculate In Stock and Out of Stock based on the mock data
+        const itemsOutOfStock = mockInventoryData.filter((item) => item.used >= item.quantity).length;
+        const inStock = mockInventoryData.length - itemsOutOfStock;
 
         setPieData([
           { name: "In Stock", value: inStock },
