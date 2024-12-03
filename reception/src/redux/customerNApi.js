@@ -1,45 +1,82 @@
-import axios from 'axios';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {addUser} from "./customerSlice.js";
 
-const API_URL = 'http://localhost:8080/reception/checkin';
-//get all employee
-const getCustomers = async () => {
-    try {
-        const response = await axios.get(API_URL);
-        return response.data;  // Return the list of employees
-    } catch (error) {
-        console.log('Error fetching employees:', error);
-        throw error;
+function Adduser()
+{
+    const dispatch= useDispatch();
+    const navigate= useNavigate();
+
+    const { isSuccess } = useSelector( (state)=> state.user);
+    const[inputValue, setInputValue]= useState({username:'', email:'', phone:'',address:''});
+
+    const handleInput= (e)=>{
+        setInputValue({...inputValue, [e.target.name]: e.target.value});
     }
-};
-//add new employee
-const addCustomer = async (data) => {
-    try {
-        const response = await axios.post(API_URL,data);
-        return response.data;  // Return the added employee
-    } catch (error) {
-        console.log('Error checking in:', error);
-        throw error;
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        dispatch(addUser(inputValue))
+        //console.log(inputValue);
+
+        setTimeout( ()=>{
+            navigate("/checkin");
+        },2000);
+
     }
-};
-// //edit or update employee
-// const updateemployee = async (id, employeeData) => {
-//     try {
-//         const response = await axios.put(`${API_URL}/${id}`, employeeData);
-//         return response.data;  // Return the updated employee
-//     } catch (error) {
-//         console.error('Error updating employee:', error);
-//         throw error;
-//     }
-// };
-//delete employee
-// const deleteEmployee = async (email) => {
-//     try {
-//         await axios.delete(`${API_URL}/${email}`);
-//     } catch (error) {
-//         console.error('Error deleting employee:', error);
-//         throw error;
-//     }
-// };
-//compile the service
-const customerService = { getCustomers, addCustomer };
-export default customerService;
+
+    return(
+        <React.Fragment>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
+                        <h3 className="mt-3">Add New User</h3>
+                        {
+                            isSuccess!=='' && <p className="text-primary"> { isSuccess.success} </p>
+                        }
+                        <form onSubmit={ handleSubmit}>
+                            <div className="row mb-3">
+                                <lable  className="col-sm-3 col-form-lable">Username</lable>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control" name="username" placeholder="Enter Username" value={inputValue.username} onChange={ handleInput}/>
+                                </div>
+                            </div>
+
+                            <div className="row mb-3">
+                                <lable  className="col-sm-3 col-form-lable">Email</lable>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control" name="email" placeholder="Enter Email"  value={inputValue.email} onChange={ handleInput}/>
+                                </div>
+                            </div>
+
+                            <div className="row mb-3">
+                                <lable className="col-sm-3 col-form-lable">Phone No</lable>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control" name="phone" placeholder="Enter Phone" value={inputValue.phone} onChange={ handleInput}/>
+                                </div>
+                            </div>
+
+                            <div className="row mb-3">
+                                <lable  className="col-sm-3 col-form-lable">Address</lable>
+                                <div className="col-md-8">
+                                    <input type="text" className="form-control" name="address" placeholder="Enter Address" value={inputValue.address} onChange={ handleInput}/>
+                                </div>
+                            </div>
+
+                            <div className="row mb-3">
+                                <lable  className="col-sm-3 col-form-lable"></lable>
+                                <div className="col-md-1">
+                                    <button type="submit" className="btn btn-info bnt-lg">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+}
+export default Adduser;

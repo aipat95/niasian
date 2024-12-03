@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import InputField from "./InputField.jsx";
 import SelectField from "./SelectField.jsx";
 import { useForm } from 'react-hook-form';
+import {useAddCustomerMutation} from "../../../redux/CustomerAPI.js";
 import Swal from 'sweetalert2';
 import {Button} from "@mui/material";
 import customerService from "../../../redux/customerNApi.js";
@@ -66,6 +67,7 @@ const CheckIn = () => {
             localStorage.setItem("customerData", JSON.stringify(data));
             resetForm();
         }
+
     }
 
     const resetForm = () => {
@@ -86,7 +88,6 @@ const CheckIn = () => {
             {/* Form starts here */}
             {/*<form onSubmit={handleSubmit(onSubmit)} className=''>*/}
                 {/* Reusable Input Field for name */}
-
                 <InputField
                     label="Name"
                     value={name}
@@ -95,9 +96,11 @@ const CheckIn = () => {
                 />
 
                 <InputField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    label="ID / Passport Number"
+                    name="id_number"
+                    type="textarea"
+                    register={register}
+
                 />
 
 
@@ -164,6 +167,11 @@ const CheckIn = () => {
                     type="textarea"
                 />
 
+                {/*<InputField*/}
+                {/*    label="Check-Out Date"*/}
+                {/*    name="checkoutdate"*/}
+                {/*    type="date"*/}
+                {/*    register={register}*/}
 
                 <SelectField
                     label="Equipment Rented"
