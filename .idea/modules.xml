@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/niasian.iml" filepath="$PROJECT_DIR$/.idea/niasian.iml" />
-=======
       <module fileurl="file://$PROJECT_DIR$/.idea/Backup.iml" filepath="$PROJECT_DIR$/.idea/Backup.iml" />
->>>>>>> fd779e0ec27ae6ab17388d5e35363927e68f51bd
     </modules>
   </component>
 </project>
