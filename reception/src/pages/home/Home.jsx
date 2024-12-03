@@ -1,5 +1,4 @@
-import React from "react";
-import Inventory from "../dashboard/Inventory.jsx";
+import Inventory from "./Inventory";
 
 const Home = () => {
     return(

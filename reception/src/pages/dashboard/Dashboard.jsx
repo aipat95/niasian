@@ -7,29 +7,29 @@ import RoomStatus from "./RoomStatus.jsx";
 
 
 const Dashboard =() => {
-    const [loading, setLoading] =useState(true);
-    const [data, setData] = useState({});
-    useEffect(() => {
-        const fetchData = async () => {
-            try{
-                const response = await axios.get(`${getBaseURL()}`,{
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                        'Content-type': 'application/json',
-                    },
-                })
-                setData(response.data);
-                setLoading(false);
-            }catch (error){
-                console.error('Error',error);
-            }
-        }
-
-        fetchData();
-
-    }, []);
-
-    if(loading) return <Loading/>
+    // const [loading, setLoading] =useState(true);
+    // const [data, setData] = useState({});
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try{
+    //             const response = await axios.get(`${getBaseURL()}`,{
+    //                 headers: {
+    //                     //'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //                     'Content-type': 'application/json',
+    //                 },
+    //             })
+    //             setData(response.data);
+    //             setLoading(false);
+    //         }catch (error){
+    //             console.error('Error',error);
+    //         }
+    //     }
+    //
+    //     fetchData();
+    //
+    // }, []);
+    //
+    // if(loading) return <Loading/>
 
     return (
         <>
@@ -38,11 +38,11 @@ const Dashboard =() => {
                     <h1 className="text-4xl font-semibold mb-2">Overview</h1>
                 </div>
                 <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
-                    <Link to="/dashboard/check-in"
+                    <Link to="/dashboard/test"
                           className="inline-flex px-5 py-3 text-green-800 hover:text-green-800 focus:text-green-500 hover:bg-green-600 focus:bg-green-100 border border-green-800 rounded-md mb-3">
                         Check in
                     </Link>
-                    <Link to="/dashboard/check-out"
+                    <Link to="/dashboard/test"
                           className=" inline-flex px-5 py-3 text-white bg-green-800 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3">
                         Check Out
                     </Link>
@@ -53,28 +53,29 @@ const Dashboard =() => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">S-size tents</span>
-                        <span className="block text-2xl font-bold">0/30(need data of the taken/total){data?.totalBooks}</span>
+                        <span className="block text-2xl font-bold">0/30(need data of the taken/total)</span>
                         <span className="block text-l ">20 (data of the price) $/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">M-size tents</span>
-                        <span className="block text-2xl font-bold">0/30{data?.totalSales}</span>
+                        <span className="block text-2xl font-bold">0/30</span>
+                        {/*{data?.totalSales}*/}
                         <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">XL-size tents</span>
-                        <span className="inline-block text-2xl font-bold">0/20{data?.trendingBooks}</span>
+                        <span className="inline-block text-2xl font-bold">0/20</span>
                         <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">Family-size tents</span>
-                        <span className="block text-2xl font-bold">0/20{data?.totalOrders}</span>
+                        <span className="block text-2xl font-bold">0/20</span>
                         <span className="block text-l">20$/day</span>
                     </div>
                 </div>

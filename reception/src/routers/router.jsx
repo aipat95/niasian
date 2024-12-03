@@ -4,9 +4,10 @@ import App from "../App.jsx";
 import Home from "../pages/home/Home.jsx";
 import DashboardLayout from "../pages/dashboard/DashboardLayout.jsx";
 import CheckOut from "../pages/dashboard/CheckOut.jsx";
-import CheckIn from "../pages/dashboard/AddCustomers/CheckIn.jsx";
 import Activities from "../pages/dashboard/Activities.jsx";
 import Customers from "../pages/dashboard/Customers.jsx";
+import Inventory from "../pages/dashboard/Inventory.jsx";
+import CheckInN from "../pages/dashboard/AddCustomers/CheckInN.jsx";
 
 const router = createBrowserRouter([
     {
@@ -29,11 +30,7 @@ const router = createBrowserRouter([
                 element: <Dashboard/>
             },
             {
-                path: "check-in",
-                element: <CheckIn/>
-            },
-            {
-                path: "check-out",
+                path: "checkout",
                 element: <CheckOut/>
             },
             {
@@ -43,7 +40,16 @@ const router = createBrowserRouter([
             {
                 path: "activity",
                 element: <Activities/>
+            },
+            {
+                path: "inventory",
+                element: <Inventory/>
+            },
+            {
+                path: "test",
+                element: <CheckInN/>
             }
+
         ]
     }
 ]);

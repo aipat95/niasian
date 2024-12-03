@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@mui/x-date-pickers": "^7.23.0"
+  }
+}
