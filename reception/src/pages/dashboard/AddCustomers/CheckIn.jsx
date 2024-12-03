@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import InputField from "./InputField.jsx";
 import SelectField from "./SelectField.jsx";
 import { useForm } from 'react-hook-form';
-import {useAddCustomerMutation} from "../../../redux/customersApi.js";
+import {useAddCustomerMutation} from "../../../redux/CustomerAPI.js";
 import Swal from 'sweetalert2';
 import {Button} from "@mui/material";
 import customerService from "../../../redux/customerNApi.js";
