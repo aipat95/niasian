@@ -1,106 +1,132 @@
-import React from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {useDeleteCustomerMutation, useFetchAllCustomersQuery} from "../../redux/customersApi.js";
+import React, { useState, useEffect } from "react";
+import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import customerService from "../../redux/customerNApi.js";
 
-const Customers = () => {
-    const navigate = useNavigate();
 
-    const {data: customers, refetch} = useFetchAllCustomersQuery()
+const CustomerCheckin = () => {
+    const [customer, setCustomer] = useState([]);
+    const [passportNumber, setPassportNumber] = useState();
+    const [name, setName] = useState("");
+    const [checkInDate, setCheckInDate] = useState();
+    const [checkOutDate, setCheckOutDate] = useState();
+    const [campsiteFees, setCampsiteFees] = useState();
+    const [carParkFees, setCarParkFees] = useState();
+    const [equipmentRented, setEquipmentRented] = useState();
+    const [additionalServices, setAdditionalServices] = useState();
+    const [showForm, setShowForm] = useState(false); //toggle add Tent
+    // Fetch all employees when the component mounts
+    useEffect(() => {
+        const loadCustomer = async () => {
+            try {
+                const data = await customerService.getCustomers();
+                setCustomer(data);
+                localStorage.setItem("customerData", JSON.stringify(data));
+            } catch (error) {
+                console.log(error);
+                const cachedData = localStorage.getItem("customerData");
+                if (cachedData) {
+                    setCustomer(JSON.parse(cachedData));
+                } else {
+                    setCustomer([]);
+                    console.log(error);
+                }
+            }
+        };
+        loadCustomer();
+    }, []);
 
-    const [deleteBook] = useDeleteCustomerMutation()
-
-    // Handle deleting
-    const handleDeleteCustomer = async (id) => {
+    // Handle adding a new customers
+    const handleAddCustomer = async (e) => {
+        e.preventDefault();
+        const newCustomer = {
+            passportNumber,
+            name,
+            checkInDate,
+            checkOutDate,
+            campsiteFees,
+            carParkFees,
+            equipmentRented,
+            additionalServices
+        };
         try {
-            await deleteCustomer(id).unwrap();
-            refetch();
-
+            const data = await customerService.addCustomer(newCustomer);
+            const updateCustomer =  [...customer, data]
+            setCustomer(updateCustomer);
+            localStorage.setItem("customerData", JSON.stringify(updateCustomer));
+            resetForm();
         } catch (error) {
-            console.error('Failed to delete: ', error.message);
-            alert('Failed to delete. Please try again.');
+            console.log(error);
+            const data = [...customer, newCustomer];
+            setCustomer(data);
+            localStorage.setItem("customerData", JSON.stringify(data));
+            resetForm();
         }
+    }
+
+    // Handle deleting an customers    // const handleDeleteEmployee = async(email) => {
+    //     try {
+    //         await employeeService.deleteEmployee(email);
+    //         const updateEmployee = employees.filter((emp) => emp.email !== email);
+    //         setEmployees(updateEmployee);
+    //         localStorage.setItem("employeeData", JSON.stringify(updateEmployee));
+    //     } catch (error) {
+    //         console.error(error);
+    //         const localActivity = employees.filter((employee) => employee.email != email);
+    //         setEmployees(localActivity);
+    //         localStorage.setItem("employeeData", JSON.stringify(localActivity));
+    //     }
+    //
+    // };
+
+    // Reset form
+    const resetForm = () => {
+        setPassportNumber("");
+        setName("");
+        setCheckInDate();
+        setCheckOutDate();
+        setCampsiteFees();
+        setCarParkFees();
+        setEquipmentRented();
+        setAdditionalServices();
     };
 
-    // Handle navigating to Edit
-    const handleEditClick = (id) => {
-        navigate(`dashboard/edit-customer/${id}`);
-    };
     return (
-        <section className="py-1 bg-blueGray-50">
-            <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                    <div className="rounded-t mb-0 px-4 py-3 border-0">
-                        <div className="flex flex-wrap items-center">
-                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                                <h3 className="font-semibold text-base text-blueGray-700">Customers</h3>
-                            </div>
-                            <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                <button className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">See all</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="block w-full overflow-x-auto">
-                        <table className="items-center bg-transparent w-full border-collapse ">
-                            <thead>
-                            <tr>
-                                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    #ID
-                                </th>
-                                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Name
-                                </th>
-                                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Passport/ID number
-                                </th>
-                                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Rent
-                                </th>
-                                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Actions
-                                </th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            {
-                                customers && customers.map((customer, index) => (
-                                    <tr key={index}>
-                                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                            {index + 1}
-                                        </th>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                            {customer.name}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {customer.id_number}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-
-                                            ${customer.tent}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 space-x-4">
-
-                                            <Link to={`/dashboard/edit-customer/${customer}`} className="font-medium text-indigo-600 hover:text-indigo-700 mr-2 hover:underline underline-offset-2">
-                                                Edit
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDeleteCustomer(customer)}
-                                                className="font-medium bg-red-500 py-1 px-4 rounded-full text-white mr-2">Delete</button>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
+        <div className="emp-container">
+            <div className="emp">
+                <h2>Customer List</h2>
+                <TableContainer component={Paper}>
+                    <Table sx={{minWidth:750 }} aria-label="simple table" >
+                        <TableHead className="name-bar">
+                            <TableRow>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Passport Number</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Check-in Date</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Check-out Date</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Fees</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Service</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Equipment</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody className="back-row">
+                            {customer.map((cus) => (
+                                <TableRow key={cus.passportNumber}>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.passportNumber}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.name}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.checkInDate}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.checkOutDate}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.carParkFees}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.additionalServices}</TableCell>
+                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.equipmentRented}</TableCell>
+                                    <TableCell>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
+        </div>
+    );
+};
 
-        </section>
-    )
-}
-
-export default Customers
+export default CustomerCheckin;

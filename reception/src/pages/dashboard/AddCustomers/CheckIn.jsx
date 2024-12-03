@@ -1,76 +1,105 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import InputField from "./InputField.jsx";
 import SelectField from "./SelectField.jsx";
 import { useForm } from 'react-hook-form';
-import {useAddCustomerMutation} from "../../../redux/customersApi.js";
 import Swal from 'sweetalert2';
+import {Button} from "@mui/material";
+import customerService from "../../../redux/customerNApi.js";
 
 const CheckIn = () => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const [addCustomer, {isLoading, isError}] = useAddCustomerMutation()
-    const onSubmit = async (data) => {
+    const [customer, setCustomer] = useState([]);
+    const [passportNumber, setPassportNumber] = useState();
+    const [name, setName] = useState("");
+    const [checkInDate, setCheckInDate] = useState();
+    const [checkOutDate, setCheckOutDate] = useState();
+    const [campsiteFees, setCampsiteFees] = useState();
+    const [carParkFees, setCarParkFees] = useState();
+    const [equipmentRented, setEquipmentRented] = useState();
+    const [additionalServices, setAdditionalServices] = useState();
+    const [showForm, setShowForm] = useState(false); //toggle add Tent
 
 
-        const newCustomerData = {
-            ...data,
-        }
+
+    // Fetch all employees when the component mounts
+    useEffect(() => {
+        const loadCustomer = async () => {
+            try {
+                const data = await customerService.getCustomers();
+                setCustomer(data);
+                localStorage.setItem("customerData", JSON.stringify(data));
+            } catch (error) {
+                console.log(error);
+                const cachedData = localStorage.getItem("customerData");
+                if (cachedData) {
+                    setCustomer(JSON.parse(cachedData));
+                } else {
+                    setCustomer([]);
+                    console.log(error);
+                }
+            }
+        };
+        loadCustomer();
+    }, []);
+
+    const handleAddCustomer = async (e) => {
+        e.preventDefault();
+        const newCustomer = {
+            passportNumber,
+            name,
+            checkInDate,
+            checkOutDate,
+            campsiteFees,
+            carParkFees,
+            equipmentRented,
+            additionalServices
+        };
         try {
-            //await fetch(addCustomer(newCustomerData).unwrap());
-            await addCustomer(newCustomerData).unwrap();
-            Swal.fire({
-                title: "Check in",
-                icon: "success",
-                //showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                //cancelButtonColor: "#d33",
-                confirmButtonText: "Done"
-            });
-            reset();
+            const data = await customerService.addCustomer(newCustomer);
+            const updateCustomer =  [...customer, data]
+            setCustomer(updateCustomer);
+            localStorage.setItem("customerData", JSON.stringify(updateCustomer));
+            resetForm();
         } catch (error) {
-            console.error(error);
-            alert("Failed to check in. Please try again.")
+            console.log(error);
+            const data = [...customer, newCustomer];
+            setCustomer(data);
+            localStorage.setItem("customerData", JSON.stringify(data));
+            resetForm();
         }
-
     }
 
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    // }
+    const resetForm = () => {
+        setPassportNumber("");
+        setName("");
+        setCheckInDate();
+        setCheckOutDate();
+        setCampsiteFees();
+        setCarParkFees();
+        setEquipmentRented();
+        setAdditionalServices();
+    };
+
     return (
         <div className="max-w-lg   mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
 
             {/* Form starts here */}
-            <form onSubmit={handleSubmit(onSubmit)} className=''>
+            {/*<form onSubmit={handleSubmit(onSubmit)} className=''>*/}
                 {/* Reusable Input Field for name */}
 
                 <InputField
-                    label="ID / Passport Number"
-                    name="passportNumber"
+                    label="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     type="textarea"
-                    register={register}
                 />
 
                 <InputField
                     label="Name"
-                    name="name"
-                    //placeholder="Enter name"
-                    register={register}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
 
-
-                {/* Trending Checkbox */}
-
-                {/*<div className="mb-4">
-                    <label className="inline-flex items-center">
-                        <input
-                            type="checkbox"
-                            {...register('trending')}
-                            className="rounded text-blue-600 focus:ring focus:ring-offset-2 focus:ring-blue-500"
-                        />
-                        <span className="ml-2 text-sm font-semibold text-gray-700">Rental</span>
-                    </label>
-                </div>*/}
 
                 {/* Reusable Select Field for Category */}
                 {/*<SelectField*/}
@@ -107,64 +136,64 @@ const CheckIn = () => {
 
                 <InputField
                     label="Check-In date"
-                    name="checkInDate"
                     type="date"
-                    register={register}
+                    value={checkInDate}
+                    onChange={(e) => setcheckInDate(e.target.value)}
 
                 />
 
                 <InputField
-                    label="Check-Out Date"
-                    name="checkOutDate"
+                    label="Check-out date"
                     type="date"
-                    register={register}
+                    value={checkOutDate}
+                    onChange={(e) => setcheckOutDate(e.target.value)}
 
-                />
-                <InputField
-                    label="Parking fees"
-                    name="campsiteFees"
-                    type="textarea"
-                    register={register}
                 />
 
                 <InputField
-                    label="Parking fees"
-                    name="carParkFees"
+                    label="Campsite Fees"
+                    value={campsiteFees}
+                    onChange={(e) => setCampsiteFees(e.target.value)}
                     type="textarea"
-                    register={register}
                 />
+
+                <InputField
+                    label="Car Park Fees"
+                    value={carParkFees}
+                    onChange={(e) => setCarParkFees(e.target.value)}
+                    type="textarea"
+                />
+
 
                 <SelectField
-                    label="Equipment"
-                    name="equipmentRented"
+                    label="Equipment Rented"
+                    value={equipmentRented}
                     options={[
                         {value: 'no-rent', label: 'none'},
                         {value: 'pillow', label: 'pillow'},
                         {value: 'campingStove', label: 'camping stove'},
                         {value: 'sleepingBag', label: 'sleeping bag'},
                     ]}
-                    register={register}
+                    onChange={(e) => setEquipmentRented(e.target.value)}
                 />
 
                 <SelectField
                     label="Service"
-                    name="additionalServices"
+                    value={additionalServices}
                     options={[
                         {value: 'none', label: 'none'},
                         {value: 'biking', label: 'biking'},
                         {value: 'hiking', label: 'hiking'},
                     ]}
-                    register={register}
+                    onChange={(e) => setAdditionalServices(e.target.value)}
                 />
 
 
                 {/* Submit Button */}
                 <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md">
-                    {
-                        isLoading ? <span className="">Adding.. </span> : <span>Submit</span>
-                    }
+                    <Button  onClick={handleAddCustomer}>check in</Button>
                 </button>
-            </form>
+            {/*</form>*/}
         </div>
     )
 }

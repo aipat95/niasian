@@ -1,193 +1,217 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import customerService from "../../../redux/customerNApi.js";
+import InputField from "./InputField.jsx";
+import SelectField from "./SelectField.jsx";
+import customers from "../Customers.jsx";
 
-const Employee = () => {
-    const [passportNumber, setEmployees] = useState([]);
+
+const CustomerCheckin = () => {
+    const [customer, setCustomer] = useState([]);
+    const [passportNumber, setPassportNumber] = useState();
     const [name, setName] = useState("");
-    const [checkInDate, setName] = useState("");
-    const [checkOutDate, setBirthDate] = useState("");
-    const [campsiteFees, setPhone] = useState("");
-    const [carParkFees, set] = useState("");
-    const [equipmentRented, setEquipmentRented] = useState("");
-    const [additionalServices, setAdditionalServices] = useState(false); //toggle add Tent
+    const [checkInDate, setCheckInDate] = useState();
+    const [checkOutDate, setCheckOutDate] = useState();
+    const [campsiteFees, setCampsiteFees] = useState();
+    const [carParkFees, setCarParkFees] = useState();
+    const [equipmentRented, setEquipmentRented] = useState();
+    const [additionalServices, setAdditionalServices] = useState();
+    const [showForm, setShowForm] = useState(false); //toggle add Tent
 
-    passportNumber: values.passportNumber,
-        name: values.name,
-        checkInDate: values.checkInDate,
-        checkOutDate: values.checkOutDate,
-        campsiteFees: values.campsiteFees,
-        carParkFees: values.carParkFees,
-        equipmentRented: values.equipmentRented,
-        additionalServices: values.additionalServices
 
 
     // Fetch all employees when the component mounts
     useEffect(() => {
-        const loadEmployee = async () => {
+        const loadCustomer = async () => {
             try {
-                const data = await employeeService.getEmployees();
-                setEmployees(data);
-                localStorage.setItem("employeeData", JSON.stringify(data));
+                const data = await customerService.getCustomers();
+                setCustomer(data);
+                localStorage.setItem("customerData", JSON.stringify(data));
             } catch (error) {
-                console.error(error);
-                const cachedData = localStorage.getItem("employeeData");
+                console.log(error);
+                const cachedData = localStorage.getItem("customerData");
                 if (cachedData) {
-                    setEmployees(JSON.parse(cachedData));
+                    setCustomer(JSON.parse(cachedData));
                 } else {
-                    setEmployees([]);
-                    console.error(error);
+                    setCustomer([]);
+                    console.log(error);
                 }
             }
         };
-        loadEmployee();
+        loadCustomer();
     }, []);
 
-    // Handle adding a new employee
-    const handleAddEmployee = async (e) => {
+    // Handle adding a new customers
+    const handleAddCustomer = async (e) => {
         e.preventDefault();
-        const newEmployee = {
-            email,
+        const newCustomer = {
+            passportNumber,
             name,
-            birthDate,
-            phone,
-            position,
-            salary,
+            checkInDate,
+            checkOutDate,
+            campsiteFees,
+            carParkFees,
+            equipmentRented,
+            additionalServices
         };
         try {
-            const data = await employeeService.addEmployee(newEmployee);
-            const updateEmployee =  [...employees, data]
-            setEmployees(updateEmployee);
-            localStorage.setItem("employeeData", JSON.stringify(updateEmployee));
+            const data = await customerService.addCustomer(newCustomer);
+            const updateCustomer =  [...customer, data]
+            setCustomer(updateCustomer);
+            localStorage.setItem("customerData", JSON.stringify(updateCustomer));
             resetForm();
         } catch (error) {
-            console.error(error);
-            const data = [...employees, newEmployee];
-            setEmployees(data);
-            localStorage.setItem("EmployeeData", JSON.stringify(data));
+            console.log(error);
+            const data = [...customer, newCustomer];
+            setCustomer(data);
+            localStorage.setItem("customerData", JSON.stringify(data));
             resetForm();
         }
     }
 
-    // Handle deleting an employee
-    const handleDeleteEmployee = async(email) => {
-        try {
-            await employeeService.deleteEmployee(email);
-            const updateEmployee = employees.filter((emp) => emp.email !== email);
-            setEmployees(updateEmployee);
-            localStorage.setItem("employeeData", JSON.stringify(updateEmployee));
-        } catch (error) {
-            console.error(error);
-            const localActivity = employees.filter((employee) => employee.email != email);
-            setEmployees(localActivity);
-            localStorage.setItem("employeeData", JSON.stringify(localActivity));
-        }
-
-    };
+    // Handle deleting an customers    // const handleDeleteEmployee = async(email) => {
+    //     try {
+    //         await employeeService.deleteEmployee(email);
+    //         const updateEmployee = employees.filter((emp) => emp.email !== email);
+    //         setEmployees(updateEmployee);
+    //         localStorage.setItem("employeeData", JSON.stringify(updateEmployee));
+    //     } catch (error) {
+    //         console.error(error);
+    //         const localActivity = employees.filter((employee) => employee.email != email);
+    //         setEmployees(localActivity);
+    //         localStorage.setItem("employeeData", JSON.stringify(localActivity));
+    //     }
+    //
+    // };
 
     // Reset form
     const resetForm = () => {
-        setEmail("");
+        setPassportNumber("");
         setName("");
-        setBirthDate("");
-        setPhone("");
-        setPosition("");
-        setSalary("");
+        setCheckInDate();
+        setCheckOutDate();
+        setCampsiteFees();
+        setCarParkFees();
+        setEquipmentRented();
+        setAdditionalServices();
     };
 
     return (
         <div className="emp-container">
-            <SideBar></SideBar>
-            <div className="emp">
-                <h1>Employee Management</h1>
+            <div className="max-w-lg   mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
                 <div className="add-btn">
-                    {/* Button to add new */}
-                    <Button
-                        variant="contained"
-                        sx={{ background: "linear-gradient(90deg, rgba(55,154,55,1) 0%, rgba(3,255,113,1) 29%, rgba(99,236,12,1) 100%)", color: "black" }}
-
-                        onClick={() => setShowForm(!showForm)} // Toggle form visibility
-                    >
+                    <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md"
+                            onClick={() => setShowForm(!showForm)}>
                         {showForm ? "Cancel" : "Add New Employee"}
-                    </Button>
-                    {/* Add New Tent Form */}
+                    </button>
+
                     {showForm && (
                         <div className="form-box">
-                            <h2>Add Employee</h2>
                             <div className="add-activity-form">
-                                <TextField
-                                    label="Email"
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
-                                <TextField
-                                    label="Name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
-                                <TextField
-                                    label="Birth Date"
-                                    value={birthDate}
-                                    onChange={(e) => setBirthDate(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
-                                <TextField
-                                    label="Phone"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
-                                <TextField
-                                    label="Position"
-                                    value={position}
-                                    onChange={(e) => setPosition(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
-                                <TextField
-                                    label="Salary"
-                                    value={salary}
-                                    onChange={(e) => setSalary(e.target.value)}
-                                    sx={{ margin: "10px" }}
-                                />
+                                <div>
+                                    <InputField
+                                        label="Passport Number"
+                                        value={passportNumber}
+                                        onChange={(e) => setPassportNumber(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+                                    <TextField
+                                        label="Name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+                                    <TextField
+                                        label="Check-In date"
+                                        type="date"
+                                        value={checkInDate}
+                                        onChange={(e) => setcheckInDate(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
 
-                                <Button variant="contained" onClick={handleAddEmployee}>Add Employee</Button>
+                                    <TextField
+                                        label="Check-out date"
+                                        type="date"
+                                        value={checkOutDate}
+                                        onChange={(e) => setcheckOutDate(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+
+                                    <TextField
+                                        label="Campsite Fees"
+                                        value={campsiteFees}
+                                        onChange={(e) => setCampsiteFees(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+                                    <TextField
+                                        label="Car Park Fees"
+                                        value={carParkFees}
+                                        onChange={(e) => setCarParkFees(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+                                    <TextField
+                                        label="Equipment Rented"
+                                        value={equipmentRented}
+                                        onChange={(e) => setEquipmentRented(e.target.value)}
+                                        sx={{margin: "10px"}}
+                                    />
+                                </div>
+
+                                <Button onClick={handleAddCustomer}>check in</Button>
+                                <button type="submit"
+                                        className="w-full py-2 bg-green-500 text-white font-bold rounded-md"
+                                        onClick={() => handleAddCustomer}>
+                                    check in
+
+                                </button>
+
                             </div>
                         </div>
                     )}
                 </div>
-                <h2>Employee List</h2>
+                <h2>Customer List</h2>
                 <TableContainer component={Paper}>
-                    <Table sx={{minWidth:750 }} aria-label="simple table" >
+                    <Table sx={{minWidth: 750}} aria-label="simple table">
                         <TableHead className="name-bar">
                             <TableRow>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Birth Date</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Phone</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Position</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Salary</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Actions</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Email</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Name</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Birth
+                                    Date</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Phone</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Position</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Salary</TableCell>
+                                <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="back-row">
-                            {employees.map((employee) => (
-                                <TableRow key={employee.email}>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.email}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.name}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.birthDate}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.phone}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.position}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.salary}</TableCell>
+                            {customer.map((cus) => (
+                                <TableRow key={cus.passportNumber}>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.passportNumber}</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.name}</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.checkInDate}</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.checkOutDate}</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.carParkFees}</TableCell>
+                                    <TableCell align="center" sx={{
+                                        color: "black",
+                                        fontSize: "1rem"
+                                    }}>{cus.additionalServices}</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontSize: "1rem"}}>{cus.equipmentRented}</TableCell>
                                     <TableCell>
-                                        <Button
-                                            variant="outlined"
-                                            color="error"
-                                            onClick={() => handleDeleteEmployee(employee.email)}
-                                        >
-                                            Delete
-                                        </Button>
+                                        {/*<Button*/}
+                                        {/*    variant="outlined"*/}
+                                        {/*    color="error"*/}
+                                        {/*    onClick={() => handleDeleteEmployee(employee.email)}*/}
+                                        {/*>*/}
+                                        {/*    Delete*/}
+                                        {/*</Button>*/}
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -199,4 +223,4 @@ const Employee = () => {
     );
 };
 
-export default Employee;
+export default CustomerCheckin;
