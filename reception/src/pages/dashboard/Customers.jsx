@@ -1,6 +1,6 @@
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useDeleteCustomerMutation, useFetchAllCustomersQuery} from "../../redux/customersApi.js";
+import {useDeleteCustomerMutation, useFetchAllCustomersQuery} from "../../redux/CustomerAPI.js";
 
 const Customers = () => {
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ const Customers = () => {
     const handleEditClick = (id) => {
         navigate(`dashboard/edit-customer/${id}`);
     };
+
     return (
         <section className="py-1 bg-blueGray-50">
             <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
