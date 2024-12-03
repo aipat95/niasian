@@ -4,7 +4,6 @@ import App from "../App.jsx";
 import Home from "../pages/home/Home.jsx";
 import DashboardLayout from "../pages/dashboard/DashboardLayout.jsx";
 import CheckOut from "../pages/dashboard/CheckOut.jsx";
-import CheckIn from "../pages/dashboard/AddCustomers/CheckIn.jsx";
 import Activities from "../pages/dashboard/Activities.jsx";
 import Customers from "../pages/dashboard/Customers.jsx";
 import Inventory from "../pages/dashboard/Inventory.jsx";
@@ -29,10 +28,6 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Dashboard/>
-            },
-            {
-                path: "checkin",
-                element: <CheckIn/>
             },
             {
                 path: "checkout",
