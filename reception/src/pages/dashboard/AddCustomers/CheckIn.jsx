@@ -10,7 +10,7 @@ import {
     Paper,
     Input, MenuItem,
 } from "@mui/material";
-import customerService from "../../../redux/customerNApi.js";
+import customerService from "../../../redux/customerApi.js";
 import dayjs from "dayjs";
 
 
