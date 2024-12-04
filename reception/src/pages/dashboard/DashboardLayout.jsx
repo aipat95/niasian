@@ -1,4 +1,3 @@
-import react, {useEffect, useState} from "react"
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdPeople } from "react-icons/md";
@@ -7,10 +6,8 @@ import { MdLocalActivity } from "react-icons/md";
 import Logo from "../../components/image/juniper-park.png"
 
 const DashboardLayout =() => {
-
     const navigate = useNavigate()
     const handleLogout = () => {
-        //localStorage.removeItem('token');
         navigate("/")
     }
 
@@ -35,11 +32,6 @@ const DashboardLayout =() => {
                               className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
                             <MdInventory className="h-6 w-6"/>
                             <span className="">Inventory</span>
-                        </Link>
-                        <Link to="/dashboard/activity"
-                              className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                            <MdLocalActivity className="h-6 w-6"/>
-                            <span className="">Activities</span>
                         </Link>
                     </nav>
                 </div>

@@ -3,33 +3,10 @@ import axios from "axios";
 import getBaseURL from "../../utils/baseURL.js";
 import Loading from "../../components/Loading.jsx";
 import {Link} from "react-router-dom";
-import RoomStatus from "./RoomStatus.jsx";
+import InvStatus from "./InvStatus.jsx";
 
 
 const Dashboard =() => {
-    // const [loading, setLoading] =useState(true);
-    // const [data, setData] = useState({});
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try{
-    //             const response = await axios.get(`${getBaseURL()}`,{
-    //                 headers: {
-    //                     //'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    //                     'Content-type': 'application/json',
-    //                 },
-    //             })
-    //             setData(response.data);
-    //             setLoading(false);
-    //         }catch (error){
-    //             console.error('Error',error);
-    //         }
-    //     }
-    //
-    //     fetchData();
-    //
-    // }, []);
-    //
-    // if(loading) return <Loading/>
 
     return (
         <>
@@ -42,7 +19,7 @@ const Dashboard =() => {
                           className="inline-flex px-5 py-3 text-green-800 hover:text-green-800 focus:text-green-500 hover:bg-green-600 focus:bg-green-100 border border-green-800 rounded-md mb-3">
                         Check in
                     </Link>
-                    <Link to="/dashboard/test"
+                    <Link to="/dashboard/checkout"
                           className=" inline-flex px-5 py-3 text-white bg-green-800 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3">
                         Check Out
                     </Link>
@@ -84,7 +61,7 @@ const Dashboard =() => {
                 <div className="flex flex-col md:col-span-3 md:row-span-3 bg-white shadow rounded-lg">
                     <div className="px-6 py-5 font-semibold border-b border-gray-100">Room Status</div>
                     <div className="p-4 flex-grow">
-                        <RoomStatus/>
+                        <InvStatus/>
                     </div>
                 </div>
 

@@ -11,35 +11,38 @@ const getCustomers = async () => {
         throw error;
     }
 };
-//add new employee
+
 const addCustomer = async (data) => {
     try {
         const response = await axios.post(API_URL,data);
         return response.data;  // Return the added employee
     } catch (error) {
-        console.log('Error checking in:', error);
+        console.error('Error checking in:', error);
         throw error;
     }
 };
+
 // //edit or update employee
-// const updateemployee = async (id, employeeData) => {
-//     try {
-//         const response = await axios.put(`${API_URL}/${id}`, employeeData);
-//         return response.data;  // Return the updated employee
-//     } catch (error) {
-//         console.error('Error updating employee:', error);
-//         throw error;
-//     }
-// };
-//delete employee
-// const deleteEmployee = async (email) => {
-//     try {
-//         await axios.delete(`${API_URL}/${email}`);
-//     } catch (error) {
-//         console.error('Error deleting employee:', error);
-//         throw error;
-//     }
-// };
-//compile the service
-const customerService = { getCustomers, addCustomer };
+const updateCustomer = async (id, customerData) => {
+    try {
+        const response = await axios.put(`${API_URL}/${id}`, customerData);
+        return response.data;  // Return the updated employee
+    } catch (error) {
+        console.error('Error updating :', error);
+        throw error;
+    }
+};
+
+//delete
+const deleteCustomer = async (email) => {
+    try {
+        await axios.log(`${API_URL}/${id}`);
+    } catch (error) {
+        console.error('Error deleting:', error);
+        throw error;
+    }
+};
+
+
+const customerService = { getCustomers, addCustomer,deleteCustomer };
 export default customerService;
