@@ -22,6 +22,16 @@ const addInventory = async (inventoryData) => {
         throw error;
     }
 };
+// //edit or update employee
+const updateInventory = async (id, employeeData) => {
+    try {
+        const response = await axios.put(`${API_URL}/${id}`, employeeData);
+        return response.data;  // Return the updated employee
+    } catch (error) {
+        console.log('Error updating employee:', error);
+        throw error;
+    }
+};
 //delete inventory
 const deleteInventory = async (id) => {
     try {
@@ -30,10 +40,10 @@ const deleteInventory = async (id) => {
         console.log('Error deleting inventory:', error);
         throw error;
     }
-};
+}; 
 //compile to on service
 const InventoryService ={
-    getInventory, addInventory, deleteInventory,
+    getInventory, addInventory,updateInventory, deleteInventory,
 };
 
 export default InventoryService;

@@ -8,7 +8,7 @@ const getActivities = async () => {
         const response = await axios.get(API_URL);
         return response.data;
     } catch (error) {
-        console.error("Error fetching activities:", error);
+        console.log("Error fetching activities:", error);
         throw error;
     }
 };
@@ -19,18 +19,26 @@ const addActivity = async (activityData) => {
         const response = await axios.post(API_URL, activityData);
         return response.data;
     } catch (error) {
-        console.error("Error adding activity:", error);
+        console.log("Error adding activity:", error);
         throw error;
-    }
+    } 
 };
+//update an activity
+const updateActivity = async (id, activityData) => {
+    try {
+        const response = await axios.put(`${API_URL}/${id}`, activityData);
+    } catch (error) {
+        console.log(error);
+    }
+}
 // Delete an activity
 const deleteActivity = async (type) => {
     try {
         await axios.delete(`${API_URL}/${type}`);
     } catch (error) {
-        console.error("Error deleting activity:", error);
+        console.log("Error deleting activity:", error);
         throw error;
     }
 };
 
-export { getActivities, addActivity, deleteActivity };
+export { getActivities, addActivity,updateActivity, deleteActivity };

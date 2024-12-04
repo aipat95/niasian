@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { getActivities, addActivity, deleteActivity } from "../../../api/ServApi";
+import { getActivities, addActivity, deleteActivity } from "../../api/ServApi";
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField } from "@mui/material";
-import SideBar from "../../../Component/Sidebar";
+import SideBar from "../../Component/Sidebar";
 
 const Service = () => {
   const [activities, setActivities] = useState([]);

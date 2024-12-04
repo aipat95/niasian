@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
             Headers.set('Authorization', `Bearer $(token)`);
         }
         return Headers
-    }
+    } 
 })
 const  inventoryAPI = createApi({
     reducerPath: 'inventoryApi',

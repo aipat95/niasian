@@ -20,10 +20,10 @@ const SideBar = () => {
         }
     }
     const Menus = [
-        { title: "Dashboard", src: "/Admin/dashboard", icon: <MdOutlineDashboardCustomize /> },
-        { title: "Inventory", src: "/Admin/inventory", icon: <MdOutlineInventory2 /> },
-        { title: "Employee", src: '/Admin/employee', icon: <MdOutlinePeopleAlt /> },
-        { title: "Service", src: '/Admin/service', icon: <TbHotelService /> }];
+        { title: "Dashboard", src: "/admin/dashboard", icon: <MdOutlineDashboardCustomize /> },
+        { title: "Inventory", src: "/admin/inventory", icon: <MdOutlineInventory2 /> },
+        { title: "Employee", src: '/admin/employee', icon: <MdOutlinePeopleAlt /> },
+        { title: "Service", src: '/admin/service', icon: <TbHotelService /> }];
 
     return (
         <>

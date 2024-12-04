@@ -9,7 +9,7 @@ const PaymentService = {
             const response = await axios.get(BASE_URL);
             return response.data;
         } catch (error) {
-            console.error("Error fetching payments:", error);
+            console.log("Error fetching payments:", error);
             throw error;
         }
     },
@@ -20,7 +20,7 @@ const PaymentService = {
             const response = await axios.post(BASE_URL, payment);
             return response.data;
         } catch (error) {
-            console.error("Error adding payment:", error);
+            console.log("Error adding payment:", error);
             throw error;
         }
     },
@@ -30,7 +30,7 @@ const PaymentService = {
         try {
             await axios.delete(`${BASE_URL}/${id}`);
         } catch (error) {
-            console.error("Error deleting payment:", error);
+            console.log("Error deleting payment:", error);
             throw error;
         }
     },

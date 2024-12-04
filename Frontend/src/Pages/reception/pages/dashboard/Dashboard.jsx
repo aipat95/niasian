@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import getBaseURL from "../../utils/baseURL.js";
-import Loading from "../../../../Component/Loading.jsx";
 import {Link} from "react-router-dom";
 import RoomStatus from "./RoomStatus.jsx";
 
@@ -30,7 +29,6 @@ const Dashboard =() => {
 
     }, []);
 
-    if(loading) return <Loading/>
 
     return (
         <>

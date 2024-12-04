@@ -1,35 +1,61 @@
-import React from 'react';
-import { GiCampingTent } from "react-icons/gi";
+import Logo from './Logo';
+import { MdOutlineDashboardCustomize, MdOutlineInventory2, MdOutlinePeopleAlt } from "react-icons/md";
+import { TbHotelService, TbLogout } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
+import { LogoutUser } from '../api/auth';
+import { useState } from 'react';
+import { FaBars } from "react-icons/fa6";
+import { Button } from "@mui/material";
 
 const Navbar = () => {
+    const navigation = useNavigate();
+    const [expand, setExpand] = useState(true);
+    const handleLogout = async () => {
+        try {
+            await LogoutUser();
+            alert("You have been logged out successfully!");
+            navigation("/");
+        } catch (error) {
+            console.error("Error", error);
+        }
+    }
     const Menus = [
-        { title: "Overview", src: "Overview" },
-        { title: "Inventory", src: "Inventory" },
-        { title: "Customers", src: "Customers" },
-        { title: "Activities", src: "Activities"}];
+        { title: "Dashboard", src: "/reception/dashboard", icon: <MdOutlineDashboardCustomize /> },
+        { title: "Inventory", src: "/reception/inventory", icon: <MdOutlineInventory2 /> },
+        { title: "Employee", src: '/reception/employee', icon: <MdOutlinePeopleAlt /> },
+        { title: "Service", src: '/rec/service', icon: <TbHotelService /> }];
+
     return (
-        <div className="flex">
-            <div className="bg-red-600 h-screen p-16 pt-8">
-                <div className="flex gap-x-4 items-center">
-                    <h1 className={`text-white origin-left font-medium text-xl`}>
-                        Logo Camp
-                        <GiCampingTent />
-                    </h1>
+        <>
+            <div className={`container ${expand ? "expand" : "small"}`}>
+                <div className='bars'>
+                    <Button className="toggle-btn" onClick={() => setExpand(!expand)}>
+                        <FaBars />
+                    </Button>
                 </div>
-                <ul className="pt-6">
-                    {Menus.map((Menu, index) => (
-                <li key={index} className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
- ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"} `}>
-                <span className={`origin-left duration-200`}>
-                    {Menu.title}
-                </span>
-                 </li>))}
-                </ul>
+                <div className='bar-container'>
+                    <div className='logo'>
+                        <Logo size={expand ? "large" : "medium"}></Logo>
+                    </div>
+                    <ul>
+                        {Menus.map((Menu, index) => (
+                            <Link to={Menu.src} key={index}>
+                                <li className={location.pathname === Menu.src ? "active" : ""}>
+                                    {Menu.icon}
+                                    {expand && <span>{Menu.title}</span>}
+                                </li>
+                            </Link>
+                        ))}
+                    </ul>
+                </div>
+                <div className='UserLog'>
+                    <span>Admin </span>
+                    <TbLogout className='icon' onClick={handleLogout} />
+
+                </div>
             </div>
-        </div>
+        </>
+    );
+};
 
-
-)
-}
-
-export default Navbar
+export default Navbar;

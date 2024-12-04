@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Sidebar from "../../../Component/Sidebar";
+import Sidebar from "../../Component/Sidebar";
 import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead, Button, Input } from "@mui/material";
-import InventoryService from "../../../api/InvApi";
+import InventoryService from "../../api/InvApi";
 export default function Inventory() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
