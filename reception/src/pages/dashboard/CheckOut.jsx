@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-import customerService from "../../redux/customerNApi.js";
+import customerService from "../../redux/customerApi.js";
 import axios from "axios";
 
 const API_URL = 'http://localhost:8080/reception/checkout';
