@@ -1,23 +1,30 @@
-import React, {useEffect, useState} from "react";
-import InputField from "./InputField.jsx";
-import SelectField from "./SelectField.jsx";
-import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
-import {Button} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+    TextField,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Input, MenuItem,
+} from "@mui/material";
 import customerService from "../../../redux/customerNApi.js";
+import dayjs from "dayjs";
 
-const CheckIn = () => {
+
+
+const CustomerCheckin = () => {
     const [customer, setCustomer] = useState([]);
-    const [passportNumber, setPassportNumber] = useState();
+    const [passportNumber, setPassportNumber] = useState("");
     const [name, setName] = useState("");
-    const [checkInDate, setCheckInDate] = useState();
-    const [checkOutDate, setCheckOutDate] = useState();
+    const [checkInDate, setCheckInDate] = useState("");
+    const [checkOutDate, setCheckOutDate] = useState("");
     const [campsiteFees, setCampsiteFees] = useState();
     const [carParkFees, setCarParkFees] = useState();
-    const [equipmentRented, setEquipmentRented] = useState();
-    const [additionalServices, setAdditionalServices] = useState();
-    const [showForm, setShowForm] = useState(false); //toggle add Tent
-
+    const [equipmentRented, setEquipmentRented] = useState([]);
+    const [additionalServices, setAdditionalServices] = useState([]);
 
 
     // Fetch all employees when the component mounts
@@ -41,17 +48,18 @@ const CheckIn = () => {
         loadCustomer();
     }, []);
 
+    // Handle adding a new customers
     const handleAddCustomer = async (e) => {
         e.preventDefault();
         const newCustomer = {
-            passportNumber,
-            name,
-            checkInDate,
-            checkOutDate,
-            campsiteFees,
-            carParkFees,
-            equipmentRented,
-            additionalServices
+            passportNumber:passportNumber,
+            name:name,
+            checkInDate:checkInDate,
+            checkOutDate:checkOutDate,
+            campsiteFees:campsiteFees,
+            carParkFees:carParkFees,
+            equipmentRented:equipmentRented,
+            additionalServices:additionalServices
         };
         try {
             const data = await customerService.addCustomer(newCustomer);
@@ -60,149 +68,169 @@ const CheckIn = () => {
             localStorage.setItem("customerData", JSON.stringify(updateCustomer));
             resetForm();
         } catch (error) {
-            console.log(error);
+            console.error(error);
             const data = [...customer, newCustomer];
             setCustomer(data);
             localStorage.setItem("customerData", JSON.stringify(data));
             resetForm();
         }
-
     }
 
     const resetForm = () => {
         setPassportNumber("");
         setName("");
-        setCheckInDate();
-        setCheckOutDate();
-        setCampsiteFees();
-        setCarParkFees();
-        setEquipmentRented();
-        setAdditionalServices();
+        setCheckInDate("");
+        setCheckOutDate("");
+        setCampsiteFees("");
+        setCarParkFees("");
+        setEquipmentRented("");
+        setAdditionalServices("");
     };
 
+
     return (
-        <div className="max-w-lg   mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
+        <div className="mb-4">
+            <div className="max-w-lg mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
+                <div className="form-box">
 
-            {/* Form starts here */}
-            {/*<form onSubmit={handleSubmit(onSubmit)} className=''>*/}
-                {/* Reusable Input Field for name */}
-                <InputField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    type="textarea"
-                />
+                    <div>
+                        <label className="block text-sm font-semibold text-gray-700">Passport Number</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            label="Passport Number"
+                            value={passportNumber}
+                            onChange={(e) => setPassportNumber(e.target.value)}
+                        />
 
-                <InputField
-                    label="ID / Passport Number"
-                    name="id_number"
-                    type="textarea"
-                    register={register}
+                        <label className="block text-sm font-semibold text-gray-700">Name</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
 
-                />
-
-
-                {/* Reusable Select Field for Category */}
-                {/*<SelectField*/}
-                {/*    label="Tent"*/}
-                {/*    name="tent"*/}
-                {/*    options={[*/}
-                {/*        {value: 'no-rent', label: 'none'},*/}
-                {/*        {value: 'sizeS', label: 'size S (1 adult)'},*/}
-                {/*        {value: 'sizeM', label: 'size M (2 adults)'},*/}
-                {/*        {value: 'sizeXL', label: 'size XL (4 adults)'},*/}
-                {/*        {value: 'sizeFamily', label: 'Family (2 adults, 1-2 children)'}*/}
-                {/*    ]}*/}
-                {/*    register={register}*/}
-                {/*/>*/}
-
-
-                {/*<div className='grid md:grid-cols-2 xl:grid-cols-2 xl:grid-rows-1 xl:grid-flow-col gap-x-2'>*/}
-                {/*    <InputField*/}
-                {/*        label="Sleeping Bag"*/}
-                {/*        name="pillow"*/}
-                {/*        type="number"*/}
-                {/*        register={register}*/}
-
-                {/*    />*/}
-                {/*    <InputField*/}
-                {/*        label="Camping Stove"*/}
-                {/*        name="blanket"*/}
-                {/*        type="number"*/}
-                {/*        register={register}*/}
-
-                {/*    />*/}
-
-                {/*</div>*/}
-
-                <InputField
-                    label="Check-In date"
-                    type="date"
-                    value={checkInDate}
-                    onChange={(e) => setcheckInDate(e.target.value)}
-
-                />
-
-                <InputField
-                    label="Check-out date"
-                    type="date"
-                    value={checkOutDate}
-                    onChange={(e) => setcheckOutDate(e.target.value)}
-
-                />
-
-                <InputField
-                    label="Campsite Fees"
-                    value={campsiteFees}
-                    onChange={(e) => setCampsiteFees(e.target.value)}
-                    type="textarea"
-                />
-
-                <InputField
-                    label="Car Park Fees"
-                    value={carParkFees}
-                    onChange={(e) => setCarParkFees(e.target.value)}
-                    type="textarea"
-                />
-
-                {/*<InputField*/}
-                {/*    label="Check-Out Date"*/}
-                {/*    name="checkoutdate"*/}
-                {/*    type="date"*/}
-                {/*    register={register}*/}
-
-                <SelectField
-                    label="Equipment Rented"
-                    value={equipmentRented}
-                    options={[
-                        {value: 'no-rent', label: 'none'},
-                        {value: 'pillow', label: 'pillow'},
-                        {value: 'campingStove', label: 'camping stove'},
-                        {value: 'sleepingBag', label: 'sleeping bag'},
-                    ]}
-                    onChange={(e) => setEquipmentRented(e.target.value)}
-                />
-
-                <SelectField
-                    label="Service"
-                    value={additionalServices}
-                    options={[
-                        {value: 'none', label: 'none'},
-                        {value: 'biking', label: 'biking'},
-                        {value: 'hiking', label: 'hiking'},
-                    ]}
-                    onChange={(e) => setAdditionalServices(e.target.value)}
-                />
+                        {/*<label className="block text-sm font-semibold text-gray-700">Check In Date</label>*/}
+                        {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
+                        {/*    <DatePicker defaultValue={dayjs(new Date())}*/}
+                        {/*               format="YYYY-MM-DD"*/}
+                        {/*                minDate={dayjs(new Date())}*/}
+                        {/*               value={checkInDate}*/}
+                        {/*                onChange={(e) => console.log(dayjs(new Date(e.target.value).toString().split('T')))}/>*/}
+                        {/*</LocalizationProvider>*/}
+                        <label className="block text-sm font-semibold text-gray-700">Check-In Date</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={checkInDate}
+                            onChange={(e) => setCheckInDate(e.target.value)}/>
 
 
-                {/* Submit Button */}
-                <button type="submit" className="w-full py-2 bg-green-500 text-white font-bold rounded-md">
-                    <Button  onClick={handleAddCustomer}>check in</Button>
-                </button>
-            {/*</form>*/}
+                        <label className="block text-sm font-semibold text-gray-700">Check-Out Date</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={checkOutDate}
+                            onChange={(e) => setCheckOutDate(e.target.value)}/>
+
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700">Campsite Fees</label>
+                            <Input
+                                className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                                defaultValue={0}
+                                value={campsiteFees}
+                                onChange={(e) => setCampsiteFees(e.target.value)}
+                            />
+
+                            <label className="block text-sm font-semibold text-gray-700">Car Parking Fees</label>
+                            <Input
+                                className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                                defaultValue={0}
+                                value={carParkFees}
+                                onChange={(e) => setCarParkFees(e.target.value)}
+                            />
+                        </div>
+
+                        <label className="block text-sm font-semibold text-gray-700">Equipment</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={equipmentRented}
+                            onChange={(e) => setEquipmentRented(e.target.value)}
+                        />
+
+                        {/*<label className="block text-sm font-semibold text-gray-700">Equipment</label>*/}
+                        {/*<TextField*/}
+                        {/*    select*/}
+                        {/*    defaultValue="none"*/}
+                        {/*    variant="filled"*/}
+                        {/*    onChange={(e) => setEquipmentRented(e.target.value)}*/}
+                        {/*>*/}
+                        {/*    {equipments.map((option) => (*/}
+                        {/*        <MenuItem key={option.value} value={option.value}>*/}
+                        {/*            {option.label}*/}
+                        {/*        </MenuItem>*/}
+                        {/*    ))}*/}
+                        {/*</TextField>*/}
+
+                        <label className="block text-sm font-semibold text-gray-700">Service</label>
+                        <Input
+                            className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={additionalServices}
+                            onChange={(e) => setAdditionalServices(e.target.value)}
+                        />
+
+                    </div>
+                    <div className="p-4"></div>
+
+                    <button type="submit"
+                            className="w-full py-2 bg-green-500 text-white font-bold rounded-md"
+                            onClick={handleAddCustomer}>
+                        Submit
+                    </button>
+
+
+                </div>
+            </div>
+            <TableContainer component={Paper}>
+            <Table sx={{minWidth: 750}} aria-label="simple table">
+                    <TableHead className="name-bar">
+                        <TableRow>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Email</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Name</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Birth Date</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Phone</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Position</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Salary</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody className="back-row">
+                        {customer.map((cus) => (
+                            <TableRow key={cus.passportNumber}>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.passportNumber}</TableCell>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.name}</TableCell>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.checkInDate}</TableCell>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.checkOutDate}</TableCell>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.carParkFees}</TableCell>
+                                <TableCell align="center" sx={{
+                                    color: "black",
+                                    fontSize: "1rem"
+                                }}>{cus.additionalServices}</TableCell>
+                                <TableCell align="center"
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.equipmentRented}</TableCell>
+                                <TableCell>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
-    )
-}
+    );
+};
 
-export default CheckIn
+export default CustomerCheckin;

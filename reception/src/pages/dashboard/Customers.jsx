@@ -14,6 +14,7 @@ const CustomerCheckin = () => {
     const [equipmentRented, setEquipmentRented] = useState();
     const [additionalServices, setAdditionalServices] = useState();
     const [showForm, setShowForm] = useState(false); //toggle add Tent
+
     // Fetch all employees when the component mounts
     useEffect(() => {
         const loadCustomer = async () => {
@@ -92,41 +93,61 @@ const CustomerCheckin = () => {
 
     return (
         <div className="emp-container">
-            <div className="emp">
-                <h2>Customer List</h2>
-                <TableContainer component={Paper}>
-                    <Table sx={{minWidth:750 }} aria-label="simple table" >
-                        <TableHead className="name-bar">
-                            <TableRow>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Passport Number</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Check-in Date</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Check-out Date</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Fees</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Service</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Equipment</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="back-row">
-                            {customer.map((cus) => (
-                                <TableRow key={cus.passportNumber}>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.passportNumber}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.name}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.checkInDate}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.checkOutDate}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.carParkFees}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.additionalServices}</TableCell>
-                                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{cus.equipmentRented}</TableCell>
-                                    <TableCell>
-                                    </TableCell>
+            <h2 className="text-4xl font-semibold mb-2">Customer List</h2>
+                <div className="emp py-6">
+                    <TableContainer component={Paper}>
+                        <Table sx={{minWidth: 750}} aria-label="simple table">
+                            <TableHead className="name-bar">
+                                <TableRow>
+                                    <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Passport
+                                        Number</TableCell>
+                                    <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Name</TableCell>
+                                    <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Check-in
+                                        Date</TableCell>
+                                    <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Check-out
+                                        Date</TableCell>
+                                    <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Fees</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontWeight: "bold"}}>Service</TableCell>
+                                    <TableCell align="center"
+                                               sx={{color: "black", fontWeight: "bold"}}>Equipment</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                            </TableHead>
+                            <TableBody className="back-row">
+                                {customer.map((cus) => (
+                                    <TableRow key={cus.passportNumber}>
+                                        <TableCell align="center" sx={{
+                                            color: "black",
+                                            fontSize: "1rem"
+                                        }}>{cus.passportNumber}</TableCell>
+                                        <TableCell align="center"
+                                                   sx={{color: "black", fontSize: "1rem"}}>{cus.name}</TableCell>
+                                        <TableCell align="center"
+                                                   sx={{color: "black", fontSize: "1rem"}}>{cus.checkInDate}</TableCell>
+                                        <TableCell align="center" sx={{
+                                            color: "black",
+                                            fontSize: "1rem"
+                                        }}>{cus.checkOutDate}</TableCell>
+                                        <TableCell align="center"
+                                                   sx={{color: "black", fontSize: "1rem"}}>{cus.carParkFees}</TableCell>
+                                        <TableCell align="center" sx={{
+                                            color: "black",
+                                            fontSize: "1rem"
+                                        }}>{cus.additionalServices}</TableCell>
+                                        <TableCell align="center" sx={{
+                                            color: "black",
+                                            fontSize: "1rem"
+                                        }}>{cus.equipmentRented}</TableCell>
+                                        <TableCell>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
             </div>
-        </div>
-    );
-};
+            );
+            };
 
-export default CustomerCheckin;
+            export default CustomerCheckin;
