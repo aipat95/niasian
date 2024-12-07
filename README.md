@@ -39,7 +39,7 @@ The **backend (admin)** handles:
 - Managing campsite inventory, bookings, and reports.
 - Providing APIs for the frontend to interact with the database.
 
-Key technologies: **Node.js, MySQL, Maven**
+Key technologies: **SpringBoot, Java, MySQL, Maven**
 ---
 ## Getting Started
 
@@ -49,6 +49,7 @@ Before running the project, ensure the following are installed:
 - [React](https://reactjs.org/) (installed via Node.js)
 - [MySQL](https://www.mysql.com/)
 - [Maven](https://maven.apache.org/)
+- [SpringBoot](https://start.spring.io)
 ---
 ## Installation Steps
 1. Clone the repository:
