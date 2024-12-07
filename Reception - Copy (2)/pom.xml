@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.niasian</groupId>
-	<artifactId>Admin</artifactId>
+	<artifactId>Reception</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Admin</name>
-	<description>Admin page for camp server</description>
+	<name>Reception</name>
+	<description>receptionServer</description>
 	<url/>
 	<licenses>
 		<license/>

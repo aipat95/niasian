@@ -1,10 +1,10 @@
-package com.niasian.Admin;
+package com.niasian.Reception;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AdminApplicationTests {
+class ReceptionApplicationTests {
 
 	@Test
 	void contextLoads() {

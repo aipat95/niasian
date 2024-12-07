@@ -1,13 +1,13 @@
-package com.niasian.Admin;
+package com.niasian.Reception;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AdminApplication {
+public class ReceptionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdminApplication.class, args);
+		SpringApplication.run(ReceptionApplication.class, args);
 	}
 
 }
