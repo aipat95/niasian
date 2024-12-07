@@ -1,12 +1,35 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
-import getBaseURL from "../../utils/baseURL.js";
-import Loading from "../../components/Loading.jsx";
 import {Link} from "react-router-dom";
 import InvStatus from "./InvStatus.jsx";
+import customerService from "../../redux/customerApi.js";
+import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import CheckOutList from "./checkOutList.jsx";
+import React, {useEffect, useState} from "react";
 
 
 const Dashboard =() => {
+    const [customer, setCustomer] = useState([]);
+
+    useEffect(() => {
+        const loadCustomer = async () => {
+            try {
+                const data = await customerService.getCustomers();
+                setCustomer(data);
+                localStorage.setItem("customerData", JSON.stringify(data));
+            } catch (error) {
+                console.log(error);
+                const cachedData = localStorage.getItem("customerData");
+                if (cachedData) {
+                    setCustomer(JSON.parse(cachedData));
+                } else {
+                    setCustomer([]);
+                    console.log(error);
+                }
+            }
+        };
+        loadCustomer();
+    }, []);
+
+
 
     return (
         <>
@@ -30,8 +53,16 @@ const Dashboard =() => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">S-size tents</span>
-                        <span className="block text-2xl font-bold">0/30(need data of the taken/total)</span>
-                        <span className="block text-l ">20 (data of the price) $/day</span>
+                        <span className="block text-2xl font-bold">0/30</span>
+                        <span className="block text-l ">
+                           {customer.filter((cus) => {
+                               return cus.checkOutStatus === false && cus.additionalServices === 'hike'
+                           }).map((cus) => (
+                               <TableRow key={cus.passportNumber}>
+                                   {cus.name}
+                               </TableRow>
+                           ))}
+                        </span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -59,8 +90,8 @@ const Dashboard =() => {
             </section>
             <section className="grid md:grid-cols-4 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <div className="flex flex-col md:col-span-3 md:row-span-3 bg-white shadow rounded-lg">
-                    <div className="px-6 py-5 font-semibold border-b border-gray-100">Room Status</div>
-                    <div className="p-4 flex-grow">
+                    <div className="px-6 py-5 font-semibold border-b border-gray-100">Equipment Status</div>
+                    <div className="flex-grow">
                         <InvStatus/>
                     </div>
                 </div>
@@ -68,18 +99,11 @@ const Dashboard =() => {
                 <div className="row-span-3 bg-white shadow rounded-lg">
                     <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span>Today Check out</span>
+                    </div>
+                    <div>
+                    <CheckOutList/>
+                    </div>
 
-                    </div>
-                    <div className="overflow-y-auto" style={{maxHeight: '24rem'}}>
-                        <ul className="px-6 py-2 space-y-1">
-                            <li className="flex items-center">
-                                <span className="mr-auto ">list of ppl need to check out</span>
-                            </li>
-                            <li className="flex items-center">
-                                <span className="mr-auto ">name</span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </section>
         </>

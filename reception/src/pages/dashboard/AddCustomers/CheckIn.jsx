@@ -25,6 +25,7 @@ const CustomerCheckin = () => {
     const [carParkFees, setCarParkFees] = useState();
     const [equipmentRented, setEquipmentRented] = useState([]);
     const [additionalServices, setAdditionalServices] = useState([]);
+    const [checkOutStatus, setCheckOutStatus] = useState(false);
 
 
     // Fetch all employees when the component mounts
@@ -59,13 +60,15 @@ const CustomerCheckin = () => {
             campsiteFees:campsiteFees,
             carParkFees:carParkFees,
             equipmentRented:equipmentRented,
-            additionalServices:additionalServices
+            additionalServices:additionalServices,
+            checkOutStatus:checkOutStatus
         };
         try {
             const data = await customerService.addCustomer(newCustomer);
             const updateCustomer =  [...customer, data]
             setCustomer(updateCustomer);
             localStorage.setItem("customerData", JSON.stringify(updateCustomer));
+            setCheckOutStatus(false)
             resetForm();
         } catch (error) {
             console.error(error);
@@ -99,6 +102,7 @@ const CustomerCheckin = () => {
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
                             label="Passport Number"
+                            placeholder='Enter Passport Number'
                             value={passportNumber}
                             onChange={(e) => setPassportNumber(e.target.value)}
                         />
@@ -106,6 +110,7 @@ const CustomerCheckin = () => {
                         <label className="block text-sm font-semibold text-gray-700">Name</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder='Enter Full Name'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -121,6 +126,7 @@ const CustomerCheckin = () => {
                         <label className="block text-sm font-semibold text-gray-700">Check-In Date</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder='YYYY-MM-DD'
                             value={checkInDate}
                             onChange={(e) => setCheckInDate(e.target.value)}/>
 
@@ -128,6 +134,7 @@ const CustomerCheckin = () => {
                         <label className="block text-sm font-semibold text-gray-700">Check-Out Date</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder='YYYY-MM-DD'
                             value={checkOutDate}
                             onChange={(e) => setCheckOutDate(e.target.value)}/>
 
@@ -150,7 +157,7 @@ const CustomerCheckin = () => {
                             />
                         </div>
 
-                        <label className="block text-sm font-semibold text-gray-700">Equipment</label>
+                        <label className="block text-sm font-semibold text-gray-700">Equipment Rent</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
                             value={equipmentRented}

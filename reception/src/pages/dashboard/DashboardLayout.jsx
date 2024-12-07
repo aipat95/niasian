@@ -28,11 +28,11 @@ const DashboardLayout =() => {
                             <MdPeople className="h-6 w-6"/>
                             <span className="">Customers</span>
                         </Link>
-                        <Link to="/dashboard/inventory"
-                              className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
-                            <MdInventory className="h-6 w-6"/>
-                            <span className="">Inventory</span>
-                        </Link>
+                        {/*<Link to="/dashboard/inventory"*/}
+                        {/*      className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">*/}
+                        {/*    <MdInventory className="h-6 w-6"/>*/}
+                        {/*    <span className="">Inventory</span>*/}
+                        {/*</Link>*/}
                     </nav>
                 </div>
             </aside>
@@ -42,8 +42,6 @@ const DashboardLayout =() => {
                         <button className="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
                             <span className="sr-only">User Menu</span>
                             <div className="hidden md:flex md:flex-col md:items-end md:leading-tight">
-                                <span className="text-sm text-gray-600">Hello,</span>
-                                <span className="font-semibold">name</span>
                             </div>
                         </button>
                         <div>
