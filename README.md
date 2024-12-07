@@ -15,7 +15,7 @@ Here’s an overview of the main directories and files, along with their purpose
 
 ## Directories
 - CampProject: Contains core project files for campsite management logic.
--frontend: contain two different main page
+- frontend: contain two different main page
     admin: Backend files for administrative operations, including data storage and management.
     reception: Frontend files for handling reception interactions, including UI components and client-side logic.
 - camplogin: Handles authentication and login features for both admin and reception.
