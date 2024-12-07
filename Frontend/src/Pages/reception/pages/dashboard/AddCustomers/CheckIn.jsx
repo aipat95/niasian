@@ -9,7 +9,7 @@ import {
     Paper,
     Input
 } from "@mui/material";
-import customerService from "../../../redux/customerApi.js";
+import customerService from "../../../../../api/CustomerAPI.js";
 
 const CustomerCheckin = () => {
     const [customer, setCustomer] = useState([]);

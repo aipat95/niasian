@@ -1,60 +1,48 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import getBaseURL from "../utils/baseURL.js";
+import axios from 'axios';
 
-const baseQuery = fetchBaseQuery({
-    baseURL: `${getBaseURL()/*api OF INVENTORY from backend*/}`,
-    credentials: 'include',
-    prepareHeaders: (Headers) => {
-        const token = localStorage.getItem('token');
-        if(token) {
-            Headers.set('Authorization', `Bearer $(token)`);
-        }
-        return Headers
+const API_URL = 'http://localhost:8080/reception/checkin';
+//get all employee
+const getCustomers = async () => {
+    try {
+        const response = await axios.get(API_URL);
+        return response.data;  // Return the list of employees
+    } catch (error) {
+        console.log('Error fetching employees:', error);
+        throw error;
     }
-})
-const  customerApi = createApi({
-    reducerPath: 'customerApi',
-    baseQuery,
-    tagTypes: ['Customers'],
-    endpoints: (builder) =>({
-        fetchAllCustomers: builder.query({
-            query: () => '/', //root path
-            providesTags: ['Customers']
-        }),
-        fetchCustomerById: builder.query({
-            query: (id) => `/${id}`,
-            providesTags: (result, error, id) => [{type: "Books", id}],
-        }),
-        addCustomer: builder.mutation({
-            query: (newBook) => ({
-                url: `/create-customer`,
-                method: "POST",
-                body: newBook
-            }),
-            invalidatesTags: ["Customers"]
-        }),
-        updateCustomer: builder.mutation({
-            query: ({id, ...rest}) => ({
-                url: `/edit/${id}`,
-                method: "PUT",
-                body: rest,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }),
-            invalidatesTags: ["Customers"]
-        }),
-        deleteCustomer: builder.mutation({
-            query: (id) => ({
-                url: `/${id}`,
-                method: "DELETE"
-            }),
-            invalidatesTags: ["Customers"]
-        })
-    })
-})
+};
 
-export const {useFetchAllCustomersQuery, useFetchCustomerByIdQuery,
-    useAddCustomerMutation, useUpdateCustomerMutation,
-    useDeleteCustomerMutation} = customerApi;
-export default customerApi;
+const addCustomer = async (data) => {
+    try {
+        const response = await axios.post(API_URL, data);
+        return response.data;  // Return the added employee
+    } catch (error) {
+        console.error('Error checking in:', error);
+        throw error;
+    }
+};
+
+// //edit or update employee
+const updateCustomer = async (id, customerData) => {
+    try {
+        const response = await axios.put(`${API_URL}/${id}`, customerData);
+        return response.data;  // Return the updated employee
+    } catch (error) {
+        console.error('Error updating :', error);
+        throw error;
+    }
+};
+
+//delete
+const deleteCustomer = async (passportNumber) => {
+    try {
+        await axios.log(`${API_URL}/${passportNumber}`);
+    } catch (error) {
+        console.error('Error deleting:', error);
+        throw error;
+    }
+};
+
+
+const customerService = { getCustomers, addCustomer,updateCustomer, deleteCustomer };
+export default customerService;

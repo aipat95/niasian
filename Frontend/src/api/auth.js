@@ -1,7 +1,7 @@
 //for register call
 export const UserRegister = async (data) => {
     try {
-        const res = await fetch("http://localhost:8080/signUp", {
+        const res = await fetch("http://localhost:8081/signUp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const UserRegister = async (data) => {
 //login call
 export const UserLogin = async (data) => {
     try {
-        const res = await fetch("http://localhost:8080/login", {
+        const res = await fetch("http://localhost:8081/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export const UserLogin = async (data) => {
 //logout call
 export const LogoutUser = async () => {
     try {
-        const res = await fetch("http://localhost:8080/logout?email", {
+        const res = await fetch("http://localhost:8081/logout?email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -11,7 +11,6 @@ import Dashboard from "../Pages/reception/pages/dashboard/Dashboard.jsx";
 import CheckIn from "../Pages/reception/pages/dashboard/AddCustomers/CheckIn.jsx";
 import CheckOut from "../Pages/reception/pages/dashboard/CheckOut.jsx";
 import Customers from "../Pages/reception/pages/dashboard/Customers.jsx";
-import Activities from "../Pages/reception/pages/dashboard/Activities.jsx";
 
 
 const mainRoute = createBrowserRouter([
@@ -38,7 +37,6 @@ const mainRoute = createBrowserRouter([
             { path: "check-out", element: <CheckOut /> },
             { path: "inventory", element: <Inventory />},
             { path: "customers", element: <Customers /> },
-            { path: "activity", element: <Activities /> }
         ]
     }
 ]);
