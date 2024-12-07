@@ -1,8 +1,6 @@
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdPeople } from "react-icons/md";
-import { MdInventory } from "react-icons/md";
-import { MdLocalActivity } from "react-icons/md";
 import Logo from "../../components/image/juniper-park.png"
 
 const DashboardLayout =() => {

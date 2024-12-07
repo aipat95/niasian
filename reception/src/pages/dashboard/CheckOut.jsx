@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import customerService from "../../redux/customerApi.js";
-import axios from "axios";
 
 const API_URL = 'http://localhost:8080/reception/checkin';
 
@@ -11,10 +10,6 @@ const CheckOut = () => {
     const [name, setName] = useState("");
     const [checkInDate, setCheckInDate] = useState();
     const [checkOutDate, setCheckOutDate] = useState();
-    const [campsiteFees, setCampsiteFees] = useState();
-    const [carParkFees, setCarParkFees] = useState();
-    const [equipmentRented, setEquipmentRented] = useState();
-    const [additionalServices, setAdditionalServices] = useState();
     const [checkOutStatus, setCheckOutStatus] = useState(false); //toggle add Tent
 
     // Fetch all employees when the component mounts

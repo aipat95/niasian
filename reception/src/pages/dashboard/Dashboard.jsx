@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import InvStatus from "./InvStatus.jsx";
 import customerService from "../../redux/customerApi.js";
-import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {TableRow} from "@mui/material";
 import CheckOutList from "./checkOutList.jsx";
 import React, {useEffect, useState} from "react";
 
