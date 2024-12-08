@@ -2,7 +2,7 @@ import Logo from './Logo';
 import { MdOutlineDashboardCustomize, MdOutlineInventory2, MdOutlinePeopleAlt } from "react-icons/md";
 import { TbHotelService, TbLogout } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
-import { LogoutUser } from '../api/auth';
+// import { LogoutUser } from '../api/auth';
 import { useState } from 'react';
 import { FaBars } from "react-icons/fa6";
 import {Button} from "@mui/material";
@@ -10,14 +10,17 @@ import {Button} from "@mui/material";
 const SideBar = () => {
     const navigation = useNavigate();
     const [expand, setExpand] = useState(true);
-    const handleLogout = async () => {
-        try {
-            await LogoutUser();
-            alert("You have been logged out successfully!");
-            navigation("/");
-        } catch (error) {
-            console.error("Error", error);
-        }
+    // const handleLogout = async () => {
+    //     try {
+    //         await LogoutUser();
+    //         alert("You have been logged out successfully!");
+    //         navigation("/");
+    //     } catch (error) {
+    //         console.error("Error", error);
+    //     }
+    // }
+    const handleLogout = () => {
+        navigation("/")
     }
     const Menus = [
         { title: "Dashboard", src: "/admin/dashboard", icon: <MdOutlineDashboardCustomize /> },

@@ -162,7 +162,7 @@
     margin-right: 50px;
     border-radius: 1rem;
     overflow: auto;
-    width: 100%;
+    width: 80vw;
 
     .inventory {
         margin: 2rem;
@@ -200,7 +200,7 @@
     margin-right: 50px;
     border-radius: 1rem;
     overflow: auto;
-    width: 100%;
+    width: 80vw;
     .activity {
         margin: 2rem;
         padding: 2rem;

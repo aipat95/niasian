@@ -18,13 +18,13 @@ export default function Inventory() {
         setUsers(data);
         localStorage.setItem("inventoryData", JSON.stringify(data));
       } catch (error) {
-        console.error("Error fetching inventory:", error);
+        console.log("Error fetching inventory:", error);
         const cachedData = localStorage.getItem("inventoryData");
         if (cachedData) {
           setUsers(JSON.parse(cachedData));
         } else {
           setUsers([]);
-          console.error("No data found");
+          console.log("No data found");
         }
       }
     };
@@ -50,13 +50,13 @@ export default function Inventory() {
       localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
       resetForm();
     } catch (error) {
-      console.error("Error adding product:", error);
+      console.log("Error adding product:", error);
       const updatedUsers = [...users, newProduct];
       setUsers(updatedUsers);
       localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
     }
   };
-
+ 
   // Handle deleting a product
   const handleDeleteProduct = async (id) => {
     try {
@@ -65,7 +65,7 @@ export default function Inventory() {
       setUsers(updatedUsers);
       localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.log("Error deleting product:", error);
       const updatedUsers = users.filter((user) => user.id !== id);
       setUsers(updatedUsers);
       localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
