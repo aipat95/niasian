@@ -8,13 +8,13 @@ import org.springframework.web.client.RestTemplate;
 public class LogoutIntegrationService {
 
 
-    private RestTemplate restTemplate;
+    private RestTemplate rstTemplate;
 
 
     //http://localhost:8081/reception/logout?email=johndoe@example.com
     public String logout(String email) {
         String LOGOUT_API = "http://localhost:8080/logout";
         String url = LOGOUT_API + "?email=" + email;
-        return restTemplate.postForObject(url, null, String.class);
+        return rstTemplate.postForObject(url, null, String.class);
     }
 }
