@@ -23,25 +23,19 @@ const addCustomer = async (data) => {
 };
 
 // //edit or update
-const updateCustomer = async (passportNumber, customerData) => {
+const updateCustomer = async (passportNumber, checkOutStatus) => {
     try {
-        const response = await axios.put(`${API_URL}/${passportNumber}`, customerData);
+        const response = await axios.put(`${API_URL}/${passportNumber}`, {checkOutStatus},
+            {headers:{
+                "Content-Type": "application/json",
+                },});
         return response.data;  // Return the updated employee
     } catch (error) {
-        console.error('Error updating :', error);
+        console.log('Error updating :', error);
         throw error;
     }
 };
 
-//delete
-// const deleteCustomer = async (email) => {
-//     try {
-//         await axios.log(`${API_URL}/${id}`);
-//     } catch (error) {
-//         console.error('Error deleting:', error);
-//         throw error;
-//     }
-// };
 
 
 const customerService = { getCustomers, addCustomer,updateCustomer };

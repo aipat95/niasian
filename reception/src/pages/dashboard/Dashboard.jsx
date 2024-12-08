@@ -56,7 +56,7 @@ const Dashboard =() => {
                         <span className="block text-2xl font-bold">0/30</span>
                         <span className="block text-l ">
                            {customer.filter((cus) => {
-                               return cus.checkOutStatus === false && cus.additionalServices === 'hike'
+                               return cus.checkOutStatus === false
                            }).map((cus) => (
                                <TableRow key={cus.passportNumber}>
                                    {cus.name}

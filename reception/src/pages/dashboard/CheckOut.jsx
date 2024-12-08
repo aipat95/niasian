@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import customerService from "../../redux/customerApi.js";
+import {useParams} from "react-router-dom";
+import axios from "axios";
 
-const API_URL = 'http://localhost:8080/reception/checkin';
+
 
 const CheckOut = () => {
     const [customer, setCustomer] = useState([]);
-    const [passportNumber, setPassportNumber] = useState();
-    const [name, setName] = useState("");
-    const [checkInDate, setCheckInDate] = useState();
-    const [checkOutDate, setCheckOutDate] = useState();
-    const [checkOutStatus, setCheckOutStatus] = useState(false); //toggle add Tent
+    const [checkOutStatus, setCheckOutStatus] = useState(false);
 
     // Fetch all employees when the component mounts
     useEffect(() => {
@@ -34,26 +32,16 @@ const CheckOut = () => {
     }, []);
 
 
-
-//         const updateCustomer = async (id, customerData) => {
-//     try {
-//         const response = await axios.put(`${API_URL}/${name}`, customerData);
-//         return response.data;  // Return the updated employee
-//     } catch (error) {
-//         console.error('Error updating :', error);
-//         throw error;
-//     }
-// };
-
     const handleUpdateCustomer = async (passportNumber) => {
         try {
-            await customerService.updateCustomer(passportNumber);
-            const updateCustomer = customer.filter((cus) => cus.passportNumber !== passportNumber);
-            setCheckOutStatus(true);
-            localStorage.setItem("customerData", JSON.stringify(updateCustomer));
+            await customerService.updateCustomer(passportNumber,true)
+            const updatedCustomerList = customer.map((cus) => cus.passportNumber !== passportNumber ? {...cus, checkOutStatus: true} : cus);
+            setCustomer(updatedCustomerList);
+            localStorage.setItem("customerData", JSON.stringify(updatedCustomerList));
+
         } catch (error) {
             console.error("Error deleting product:", error);
-            // const updatedUsers = users.filter((user) => user.id !== id);
+            //const updatedCustomer = customer.filter((user) => user.id !== id);
             // setUsers(updatedUsers);
         }
     };
@@ -105,7 +93,8 @@ const CheckOut = () => {
                                     <TableCell align="center"
                                                sx={{color: "black", fontSize: "1rem"}}>{cus.additionalServices}</TableCell>
                                     <TableCell align="center" sx={{color:"black" }}>
-                                        <Button onClick={() => handleUpdateCustomer(checkOutStatus)}>{cus.checkOutStatus}Check Out</Button>
+                                        <Button
+                                            onClick={()=>handleUpdateCustomer(cus.passportNumber)}>Check Out</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
