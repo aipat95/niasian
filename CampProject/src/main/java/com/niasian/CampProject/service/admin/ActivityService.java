@@ -1,7 +1,7 @@
-package com.niasian.Admin.service;
+package com.niasian.CampProject.service.admin;
 
-import com.niasian.Admin.entity.Activity;
-import com.niasian.Admin.respository.ActivityRepository;
+import com.niasian.CampProject.entity.admin.Activity;
+import com.niasian.CampProject.repository.admin.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
