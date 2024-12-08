@@ -48,18 +48,18 @@ const CustomerCheckin = () => {
     const handleAddCustomer = async (e) => {
         e.preventDefault();
         const newCustomer = {
-            passportNumber: passportNumber,
-            name: name,
-            checkInDate: checkInDate,
-            checkOutDate: checkOutDate,
-            campsiteFees: campsiteFees,
-            carParkFees: carParkFees,
-            equipmentRented: equipmentRented,
-            additionalServices: additionalServices
+            passportNumber:passportNumber,
+            name:name,
+            checkInDate:checkInDate,
+            checkOutDate:checkOutDate,
+            campsiteFees:campsiteFees,
+            carParkFees:carParkFees,
+            equipmentRented:equipmentRented,
+            additionalServices:additionalServices
         };
         try {
             const data = await customerService.addCustomer(newCustomer);
-            const updateCustomer = [...customer, data]
+            const updateCustomer =  [...customer, data]
             setCustomer(updateCustomer);
             localStorage.setItem("customerData", JSON.stringify(updateCustomer));
             resetForm();
@@ -106,26 +106,18 @@ const CustomerCheckin = () => {
                             onChange={(e) => setName(e.target.value)}
                         />
 
-                        {/*<label className="block text-sm font-semibold text-gray-700">Check In Date</label>*/}
-                        {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
-                        {/*    <DatePicker defaultValue={dayjs(new Date())}*/}
-                        {/*               format="YYYY-MM-DD"*/}
-                        {/*                minDate={dayjs(new Date())}*/}
-                        {/*               value={checkInDate}*/}
-                        {/*                onChange={(e) => console.log(dayjs(new Date(e.target.value).toString().split('T')))}/>*/}
-                        {/*</LocalizationProvider>*/}
                         <label className="block text-sm font-semibold text-gray-700">Check-In Date</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
                             value={checkInDate}
-                            onChange={(e) => setCheckInDate(e.target.value)} />
+                            onChange={(e) => setCheckInDate(e.target.value)}/>
 
 
                         <label className="block text-sm font-semibold text-gray-700">Check-Out Date</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
                             value={checkOutDate}
-                            onChange={(e) => setCheckOutDate(e.target.value)} />
+                            onChange={(e) => setCheckOutDate(e.target.value)}/>
 
 
                         <div>
@@ -153,20 +145,6 @@ const CustomerCheckin = () => {
                             onChange={(e) => setEquipmentRented(e.target.value)}
                         />
 
-                        {/*<label className="block text-sm font-semibold text-gray-700">Equipment</label>*/}
-                        {/*<TextField*/}
-                        {/*    select*/}
-                        {/*    defaultValue="none"*/}
-                        {/*    variant="filled"*/}
-                        {/*    onChange={(e) => setEquipmentRented(e.target.value)}*/}
-                        {/*>*/}
-                        {/*    {equipments.map((option) => (*/}
-                        {/*        <MenuItem key={option.value} value={option.value}>*/}
-                        {/*            {option.label}*/}
-                        {/*        </MenuItem>*/}
-                        {/*    ))}*/}
-                        {/*</TextField>*/}
-
                         <label className="block text-sm font-semibold text-gray-700">Service</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
@@ -178,8 +156,8 @@ const CustomerCheckin = () => {
                     <div className="p-4"></div>
 
                     <button type="submit"
-                        className="w-full py-2 bg-green-500 text-white font-bold rounded-md"
-                        onClick={handleAddCustomer}>
+                            className="w-full py-2 bg-green-500 text-white font-bold rounded-md"
+                            onClick={handleAddCustomer}>
                         Submit
                     </button>
 
@@ -187,37 +165,37 @@ const CustomerCheckin = () => {
                 </div>
             </div>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 750 }} aria-label="simple table">
+                <Table sx={{minWidth: 750}} aria-label="simple table">
                     <TableHead className="name-bar">
                         <TableRow>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Birth Date</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Phone</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Position</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Salary</TableCell>
-                            <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Actions</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Email</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Name</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Birth Date</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Phone</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Position</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Salary</TableCell>
+                            <TableCell align="center" sx={{color: "black", fontWeight: "bold"}}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody className="back-row">
                         {customer.map((cus) => (
                             <TableRow key={cus.passportNumber}>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.passportNumber}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.passportNumber}</TableCell>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.name}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.name}</TableCell>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.checkInDate}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.checkInDate}</TableCell>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.checkOutDate}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.checkOutDate}</TableCell>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.carParkFees}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.carParkFees}</TableCell>
                                 <TableCell align="center" sx={{
                                     color: "black",
                                     fontSize: "1rem"
                                 }}>{cus.additionalServices}</TableCell>
                                 <TableCell align="center"
-                                    sx={{ color: "black", fontSize: "1rem" }}>{cus.equipmentRented}</TableCell>
+                                           sx={{color: "black", fontSize: "1rem"}}>{cus.equipmentRented}</TableCell>
                                 <TableCell>
                                 </TableCell>
                             </TableRow>

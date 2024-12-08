@@ -1,16 +1,16 @@
-package com.niasian.CampProject.config.Reception;
+package com.niasian.Reception.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration("receptionAppConfig")
+@Configuration
 public class AppConfig {
+
     @Bean
-    public RestTemplate rstTemplate()
-    {
-        
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
 
 }
