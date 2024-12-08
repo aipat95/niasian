@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-import customerService from "../../redux/customerApi.js";
+import customerService from "../../../../api/CustomerAPI.js";
 
 
 const CheckOutList = () => {

@@ -10,7 +10,7 @@ public class AdminController {
 
     @Autowired
     private LogoutIntegrationService logoutIntegrationService;
-
+ 
 
     @PostMapping("/logout")
     public String logout(@RequestParam String email) {

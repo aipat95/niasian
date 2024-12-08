@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdPeople } from "react-icons/md";
-import Logo from "../../components/image/juniper-park.png"
+import Logo from "../Component/image/juniper park.png"
 
 const DashboardLayout = () => {
     const navigate = useNavigate()
@@ -11,7 +11,7 @@ const DashboardLayout = () => {
 
 
     return (
-        <section className="flex md:bg-gray-100 min-h-screen overflow-hidden">
+        <section className="flex md:bg-gray-100 max-h-screen overflow-hidden">
             <aside className="hidden sm:flex sm:flex-col min-w-40">
                 <img src={Logo} alt="Logo" className='inline-flex items-center justify-center w-40 h-40' />
                 <div className="flex-grow flex flex-col justify-between text-gray-500 ">

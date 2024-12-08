@@ -9,6 +9,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/activities")
+@CrossOrigin(origins = "http://localhost:5173")
+
 public class ActivityController {
     @Autowired
     private ActivityService activityService;

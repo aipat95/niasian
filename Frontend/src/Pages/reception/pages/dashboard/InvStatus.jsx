@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead, Button, Input } from "@mui/material";
-import InventoryService from "../../redux/InvApi.js";
+import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead } from "@mui/material";
+import InventoryService from "../../../../api/InvApi.js";
 
 export default function Inventory() {
     const [users, setUsers] = useState([]);
@@ -27,35 +27,35 @@ export default function Inventory() {
     }, []);
 
     // Handle adding a new product
-    const handleAddProduct = async (event) => {
-        event.preventDefault();
-        const newProduct = {
-            itemName: name,
-            type: type,
-            price: price,
-            quantity: quan,
-            used: used,
-            amount: price * quan,
-        };
+    // const handleAddProduct = async (event) => {
+    //     event.preventDefault();
+    //     const newProduct = {
+    //         itemName: name,
+    //         type: type,
+    //         price: price,
+    //         quantity: quan,
+    //         used: used,
+    //         amount: price * quan,
+    //     };
 
-        try {
-            const addedProduct = await InventoryService.addInventory(newProduct);
-            const updatedUsers = [...users, addedProduct];
-            setUsers(updatedUsers);
-            localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
-            resetForm();
-        } catch (error) {
-            console.error("Error adding product:", error);
-            const updatedUsers = [...users, newProduct];
-            setUsers(updatedUsers);
-            localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
-        }
-    };
+    //     try {
+    //         const addedProduct = await InventoryService.addInventory(newProduct);
+    //         const updatedUsers = [...users, addedProduct];
+    //         setUsers(updatedUsers);
+    //         localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
+    //         resetForm();
+    //     } catch (error) {
+    //         console.error("Error adding product:", error);
+    //         const updatedUsers = [...users, newProduct];
+    //         setUsers(updatedUsers);
+    //         localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
+    //     }
+    // };
 
 
     return (
-        <div className="inv-container">
-            <div className="inventory">
+        <div className="inv-container1">
+            <div className="inventory1">
                 {/* Inventory table */}
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 750 }} aria-label="simple table">

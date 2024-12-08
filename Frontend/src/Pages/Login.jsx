@@ -15,7 +15,7 @@ export default function Login() {
         try {
           const res = await UserLogin(data);
           if (res.role == "ADMIN") {
-            navigator("/admin/");
+            navigator("/admin/dashboard");
           } else if (res.role === "RECEPTION") {
             navigator("/dashboard");
           }

@@ -40,11 +40,37 @@ export const UserLogin = async (data) => {
 //logout call
 export const LogoutUser = async () => {
     try {
-        const res = await fetch("http://localhost:8081/logout?email", {
+        const res = await fetch("http://localhost:8081/admin/logout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
          }
+        });
+        if (!res.ok) {
+            throw new Error(`Fail ${res.status}`);
+        }
+        const contType = res.headers.get("content-type");
+        let resData;
+        if (contType && contType.includes("application/json")) {
+            resData = await res.json();
+        } else {
+            resData = await res.text();
+        }
+        console.log("Logout successful", resData);
+        alert("Logout successful!")
+
+    } catch (error) {
+        alert(error);
+    }
+}
+//reception
+export const Logout = async () => {
+    try {
+        const res = await fetch("http://localhost:8081/reception/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
         });
         if (!res.ok) {
             throw new Error(`Fail ${res.status}`);

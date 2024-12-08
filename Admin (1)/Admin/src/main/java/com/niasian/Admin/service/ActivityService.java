@@ -4,7 +4,7 @@ import com.niasian.Admin.entity.Activity;
 import com.niasian.Admin.respository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-;
+
 
 import java.util.List;
 @Service

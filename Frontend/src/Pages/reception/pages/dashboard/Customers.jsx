@@ -28,9 +28,9 @@ const CustomerCheckin = () => {
     }, []);
       
     return (
-        <div className="emp-container">
+        <div className="cus-container">
             <h2 className="text-4xl font-semibold mb-2">Customer List</h2>
-            <div className="emp py-6">
+            <div className="cus py-6">
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 750 }} aria-label="simple table">
                         <TableHead className="name-bar">

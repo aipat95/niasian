@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reception/checkin")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CheckinController {
 
     @Autowired

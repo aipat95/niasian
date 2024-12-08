@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/activities";
+const API_URL = "http://localhost:8080/admin/activities";
 
-// Get all activities
+// Get all activities 
 const getActivities = async () => {
     try {
         const response = await axios.get(API_URL);
@@ -27,6 +27,7 @@ const addActivity = async (activityData) => {
 const updateActivity = async (id, activityData) => {
     try {
         const response = await axios.put(`${API_URL}/${id}`, activityData);
+        return response.data;
     } catch (error) {
         console.log(error);
     }

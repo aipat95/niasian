@@ -23,7 +23,6 @@ public class userService {
 
     public String loginUser(loginRequest loginrequest) {
         Optional<User> userOptional = userrepo.findByEmail(loginrequest.getEmail());
-
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (user.getPassword().equals(loginrequest.getPassword())) {
@@ -31,20 +30,17 @@ public class userService {
                     user.setIsLoggedIn(true);
                     userrepo.save(user);
                     return "ADMIN";
-
-
                 }
                 if (user.getUserRole().equals(UserRole.RECEPTION)) {
                     user.setIsLoggedIn(true);
                     userrepo.save(user);
-                    return "RECEPTION"; 
+                    return "RECEPTION";
                 }
             } else {
-                return "Incorrect password";
+                return "Wrong password";
             }
         }
-
-        return "User not found";
+        return "Login Failed";
     }
 
 

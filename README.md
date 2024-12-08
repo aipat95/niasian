@@ -16,8 +16,8 @@ Here’s an overview of the main directories and files, along with their purpose
 ## Directories
 - CampProject: Contains core project files for campsite management logic.
 - frontend: contain two different main page
-    admin: Backend files for administrative operations, including data storage and management.
-    reception: Frontend files for handling reception interactions, including UI components and client-side logic.
+   - admin: Backend files for administrative operations, including data storage and management.
+   - reception: Frontend files for handling reception interactions, including UI components and client-side logic.
 - camplogin: Handles authentication and login features for both admin and reception.
 ---
 ## Frontend Overview
@@ -62,6 +62,7 @@ Before running the project, ensure the following are installed:
    ```
 3. Install required dependencies:
    ```bash
+   cd Frontend
    npm install
    ```
 4. Set up the database:
@@ -69,7 +70,7 @@ Before running the project, ensure the following are installed:
    - Import the provided SQL schema (if available in the `/admin` folder).
 5. Start the application:
    ```bash
-   npm start
+   npm run dev
    ```
 ---
 ## Running the Application
@@ -77,7 +78,7 @@ Before running the project, ensure the following are installed:
 1. **Backend**: Ensure the MySQL database is running, and the backend service is properly connected.
 2. **Frontend**: Open your browser and navigate to:
    ```
-   http://localhost:3000
+   http://localhost:5173
    ```
 ---
 ## Contribution Guidelines

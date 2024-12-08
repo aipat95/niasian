@@ -7,7 +7,7 @@
     height: 580px;
     width: 400px;
     border-radius: 2rem;
-    background-color: wheat;
+    background-color: rgb(245, 222, 179);
     margin-top: 2rem;
     margin-bottom: 2rem;
     font-size: 1rem;
@@ -177,6 +177,7 @@
 
 }
 /* employee page */
+
 .emp-container{
     height: 100vh;
     margin-left: 150px;
@@ -184,12 +185,12 @@
     margin-right: 50px;
     border-radius: 1rem;
     overflow: hidden;
-    width: 100%;
-    .emp{
-        margin: 2rem;
+    width: 80vw;
+    .emp {
+        margin: 3rem;
         padding: 2rem;
-    }
-    
+        }
+   
 }
 /* service page */
 .activity-container{
@@ -201,10 +202,19 @@
     overflow: auto;
     width: 100%;
     .activity {
-            margin: 2rem;
-            padding: 2rem;
+        margin: 2rem;
+        padding: 2rem;
     
         }
+}
+/* Customer page */
+.cus-container{
+    height: 200vh;
+    width: 1500px;
+    align-items: center;
+    .cus{
+        padding: 1rem;
+    }
 }
 /* add new button in employee */
 .add-btn{
@@ -218,11 +228,11 @@ h1{
 }
 /* Table head */
 .name-bar{
-    background-color: rgb(252, 181, 89);   
+    background-color: #e0e0e0;   
 }
 /* Table body row  */
 .back-row{
-    background-color: #54d9f0;
+    background-color: #f9f9f9;
     
 }
 /* Dashboard page */
