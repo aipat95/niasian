@@ -1,16 +1,9 @@
 import { useState, useEffect } from "react";
-
-import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead, Button, Input } from "@mui/material";
+import { Table, TableContainer, TableCell, TableBody, TableRow, Paper, TableHead } from "@mui/material";
 import InventoryService from "../../redux/InvApi.js";
 
 export default function Inventory() {
     const [users, setUsers] = useState([]);
-    const [name, setName] = useState("");
-    const [type, setType] = useState("");
-    const [price, setPrice] = useState(0);
-    const [quan, setQuant] = useState(0);
-    const [used, setUsed] = useState(0);
-    const [showForm, setShowForm] = useState(false);//toggle button
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -31,32 +24,6 @@ export default function Inventory() {
         };
         fetchInventory();
     }, []);
-
-    // Handle adding a new product
-    const handleAddProduct = async (event) => {
-        event.preventDefault();
-        const newProduct = {
-            itemName: name,
-            type: type,
-            price: price,
-            quantity: quan,
-            used: used,
-            amount: price * quan,
-        };
-
-        try {
-            const addedProduct = await InventoryService.addInventory(newProduct);
-            const updatedUsers = [...users, addedProduct];
-            setUsers(updatedUsers);
-            localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
-            resetForm();
-        } catch (error) {
-            console.error("Error adding product:", error);
-            const updatedUsers = [...users, newProduct];
-            setUsers(updatedUsers);
-            localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
-        }
-    };
 
 
     return (

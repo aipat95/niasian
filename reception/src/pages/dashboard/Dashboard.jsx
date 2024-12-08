@@ -1,32 +1,32 @@
 import {Link} from "react-router-dom";
 import InvStatus from "./InvStatus.jsx";
-import customerService from "../../redux/customerApi.js";
 import {TableRow} from "@mui/material";
 import CheckOutList from "./checkOutList.jsx";
 import React, {useEffect, useState} from "react";
+import InventoryService from "../../redux/InvApi.js";
 
 
 const Dashboard =() => {
-    const [customer, setCustomer] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        const loadCustomer = async () => {
+        const fetchInventory = async () => {
             try {
-                const data = await customerService.getCustomers();
-                setCustomer(data);
-                localStorage.setItem("customerData", JSON.stringify(data));
+                const data = await InventoryService.getInventory();
+                setUsers(data);
+                localStorage.setItem("inventoryData", JSON.stringify(data));
             } catch (error) {
-                console.log(error);
-                const cachedData = localStorage.getItem("customerData");
+                console.error("Error fetching inventory:", error);
+                const cachedData = localStorage.getItem("inventoryData");
                 if (cachedData) {
-                    setCustomer(JSON.parse(cachedData));
+                    setUsers(JSON.parse(cachedData));
                 } else {
-                    setCustomer([]);
-                    console.log(error);
+                    setUsers([]);
+                    console.error("No data found");
                 }
             }
         };
-        loadCustomer();
+        fetchInventory();
     }, []);
 
 
@@ -55,11 +55,11 @@ const Dashboard =() => {
                         <span className="block text-gray-500">S-size tents</span>
                         <span className="block text-2xl font-bold">0/30</span>
                         <span className="block text-l ">
-                           {customer.filter((cus) => {
-                               return cus.checkOutStatus === false
+                           {users.filter((row, index) => {
+                               return row.type === 's-size-tent'
                            }).map((cus) => (
-                               <TableRow key={cus.passportNumber}>
-                                   {cus.name}
+                               <TableRow key={index}>
+                                   {row.quantity}
                                </TableRow>
                            ))}
                         </span>
