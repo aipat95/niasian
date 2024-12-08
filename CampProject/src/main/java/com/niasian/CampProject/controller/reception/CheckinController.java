@@ -19,7 +19,7 @@ public class CheckinController {
     @PostMapping
     public ResponseEntity<String> checkinCustomer(@RequestBody Checkin checkin) {
         Checkin savedCheckin = checkinService.checkinCustomer(checkin);
-        return ResponseEntity.ok(savedCheckin.getName());
+        return ResponseEntity.ok("Checkin successful for"+savedCheckin.getName());
     }
 
     @GetMapping
