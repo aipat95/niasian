@@ -26,32 +26,6 @@ export default function Inventory() {
         fetchInventory();
     }, []);
 
-    // Handle adding a new product
-    // const handleAddProduct = async (event) => {
-    //     event.preventDefault();
-    //     const newProduct = {
-    //         itemName: name,
-    //         type: type,
-    //         price: price,
-    //         quantity: quan,
-    //         used: used,
-    //         amount: price * quan,
-    //     };
-
-    //     try {
-    //         const addedProduct = await InventoryService.addInventory(newProduct);
-    //         const updatedUsers = [...users, addedProduct];
-    //         setUsers(updatedUsers);
-    //         localStorage.setItem("inventorData", JSON.stringify(updatedUsers));
-    //         resetForm();
-    //     } catch (error) {
-    //         console.error("Error adding product:", error);
-    //         const updatedUsers = [...users, newProduct];
-    //         setUsers(updatedUsers);
-    //         localStorage.setItem("inventoryData", JSON.stringify(updatedUsers));
-    //     }
-    // };
-
 
     return (
         <div className="inv-container1">
