@@ -12,14 +12,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
 
         registry.addMapping("/admin/**")
-                .allowedOrigins("http://localhost:3001") // Admin frontend URL
+                .allowedOrigins("http://localhost:5173") // Admin frontend URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Content-Type")
                 .allowCredentials(true);
 
 
         registry.addMapping("/reception/**")
-                .allowedOrigins("http://localhost:3001") // Reception frontend URL
+                .allowedOrigins("http://localhost:5173") // Reception frontend URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Content-Type")
                 .allowCredentials(true);
