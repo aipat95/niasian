@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/admin/activities")
 @CrossOrigin(origins = "http://localhost:5173")
 
+
 public class ActivityController {
     @Autowired
     private ActivityService activityService;

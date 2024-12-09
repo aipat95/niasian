@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import customerService from "../../redux/customerApi.js";
 
 
 const CustomerCheckin = () => {
     const [customer, setCustomer] = useState([]);
-    const [passportNumber, setPassportNumber] = useState();
-    const [name, setName] = useState("");
-    const [checkInDate, setCheckInDate] = useState();
-    const [checkOutDate, setCheckOutDate] = useState();
-    const [campsiteFees, setCampsiteFees] = useState();
-    const [carParkFees, setCarParkFees] = useState();
-    const [equipmentRented, setEquipmentRented] = useState();
-    const [additionalServices, setAdditionalServices] = useState();
-    const [showForm, setShowForm] = useState(false); //toggle add Tent
+
 
     // Fetch all employees when the component mounts
     useEffect(() => {
@@ -35,61 +27,6 @@ const CustomerCheckin = () => {
         };
         loadCustomer();
     }, []);
-
-    // Handle adding a new customers
-    const handleAddCustomer = async (e) => {
-        e.preventDefault();
-        const newCustomer = {
-            passportNumber,
-            name,
-            checkInDate,
-            checkOutDate,
-            campsiteFees,
-            carParkFees,
-            equipmentRented,
-            additionalServices
-        };
-        try {
-            const data = await customerService.addCustomer(newCustomer);
-            const updateCustomer =  [...customer, data]
-            setCustomer(updateCustomer);
-            localStorage.setItem("customerData", JSON.stringify(updateCustomer));
-            resetForm();
-        } catch (error) {
-            console.log(error);
-            const data = [...customer, newCustomer];
-            setCustomer(data);
-            localStorage.setItem("customerData", JSON.stringify(data));
-            resetForm();
-        }
-    }
-
-    // Handle deleting an customers    // const handleDeleteEmployee = async(email) => {
-    //     try {
-    //         await employeeService.deleteEmployee(email);
-    //         const updateEmployee = employees.filter((emp) => emp.email !== email);
-    //         setEmployees(updateEmployee);
-    //         localStorage.setItem("employeeData", JSON.stringify(updateEmployee));
-    //     } catch (error) {
-    //         console.error(error);
-    //         const localActivity = employees.filter((employee) => employee.email != email);
-    //         setEmployees(localActivity);
-    //         localStorage.setItem("employeeData", JSON.stringify(localActivity));
-    //     }
-    //
-    // };
-
-    // Reset form
-    const resetForm = () => {
-        setPassportNumber("");
-        setName("");
-        setCheckInDate();
-        setCheckOutDate();
-        setCampsiteFees();
-        setCarParkFees();
-        setEquipmentRented();
-        setAdditionalServices();
-    };
 
     return (
         <div className="emp-container">
