@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-    TextField,
     Table,
     TableBody,
     TableCell,
@@ -8,10 +7,9 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Input, MenuItem,
+    Input
 } from "@mui/material";
 import customerService from "../../../redux/customerApi.js";
-import dayjs from "dayjs";
 
 
 
@@ -115,14 +113,7 @@ const CustomerCheckin = () => {
                             onChange={(e) => setName(e.target.value)}
                         />
 
-                        {/*<label className="block text-sm font-semibold text-gray-700">Check In Date</label>*/}
-                        {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
-                        {/*    <DatePicker defaultValue={dayjs(new Date())}*/}
-                        {/*               format="YYYY-MM-DD"*/}
-                        {/*                minDate={dayjs(new Date())}*/}
-                        {/*               value={checkInDate}*/}
-                        {/*                onChange={(e) => console.log(dayjs(new Date(e.target.value).toString().split('T')))}/>*/}
-                        {/*</LocalizationProvider>*/}
+
                         <label className="block text-sm font-semibold text-gray-700">Check-In Date</label>
                         <Input
                             className=" p-2 border w-full rounded-md focus:outline-none focus:ring focus:border-blue-300"
