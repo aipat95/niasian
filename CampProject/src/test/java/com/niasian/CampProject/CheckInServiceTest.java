@@ -29,13 +29,13 @@ public class CheckInServiceTest {
         checkin.setName("Jane Smith");
         checkin.setCheckInDate("2024-12-08");
         checkin.setCampsiteFees(150.0);
-        checkin.setCheckinStatus(true);
+        checkin.setCheckoutStatus(true);
 
         Checkin savedCheckIn = checkinRepository.save(checkin);
 
         assertNotNull(savedCheckIn);
         assertEquals("Jane Smith", savedCheckIn.getName());
-        assertTrue(savedCheckIn.getCheckinStatus());
+        assertTrue(savedCheckIn.getCheckoutStatus());
     }
 
     @Test
