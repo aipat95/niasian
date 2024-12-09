@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import InvStatus from "./InvStatus.jsx";
 import customerService from "../../../../api/CustomerAPI.js";
-import { TableRow } from "@mui/material";
-import CheckOutList from "./checkOutList.jsx";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+// import CheckOutList from "./checkOutList.jsx";
+
 import  { useEffect, useState } from "react";
 
 
@@ -28,11 +29,12 @@ const Dashboard = () => {
         };
         loadCustomer();
     }, []);
-
+  
 
 
     return (
         <>
+            
             <div className="flex flex-col space-y-1 md:space-y-0 md:flex-row justify-between">
                 <div className="mr-6">
                     <h1 className="text-4xl font-semibold mb-2">Overview</h1>
@@ -53,7 +55,8 @@ const Dashboard = () => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">S-size tents</span>
-                        <span className="block text-2xl font-bold">0/30</span>
+                        {/* mock data */}
+                        <span className="block text-2xl font-bold">20/30</span>
                         <span className="block text-l ">
                             {customer.filter((cus) => {
                                 return cus.checkOutStatus === false && cus.additionalServices === 'hike'
@@ -68,7 +71,7 @@ const Dashboard = () => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">M-size tents</span>
-                        <span className="block text-2xl font-bold">0/30</span>
+                        <span className="block text-2xl font-bold">30/30</span>
                         {/*{data?.totalSales}*/}
                         <span className="block text-l ">20$/day</span>
                     </div>
@@ -76,15 +79,15 @@ const Dashboard = () => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">XL-size tents</span>
-                        <span className="inline-block text-2xl font-bold">0/20</span>
+                        <span className="inline-block text-2xl font-bold">15/20</span>
                         <span className="block text-l ">20$/day</span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">Family-size tents</span>
-                        <span className="block text-2xl font-bold">0/20</span>
-                        <span className="block text-l">20$/day</span>
+                        <span className="block text-2xl font-bold">10/20</span>
+                        <span className="block text-l">40$/day</span>
                     </div>
                 </div>
             </section>
@@ -96,12 +99,23 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="row-span-3 bg-white shadow rounded-lg">
-                    <div className="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                <div className="flex-col md:col-span-3 md:row-span-3 row-span-3 bg-white rounded-lg">
+                    <div className="flex items-center bg-white rounded-lgjustify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span>Today Check out</span>
                     </div>
-                    <div>
-                        <CheckOutList />
+                    <div className="flex flex-col w-full p-6">
+                        <TableContainer component={Paper} className="max-w-full">
+                            <Table aria-label="simple table">
+                                <TableBody >
+                                    {customer.map((cus) => (
+                                        <TableRow key={cus.passportNumber}>
+                                            <TableCell align="left"
+                                                sx={{ color: "black", fontSize: "1rem" }}>{cus.name}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
 
                 </div>

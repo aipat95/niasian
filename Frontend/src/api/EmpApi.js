@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080//admin/employees';
+const API_URL = 'http://localhost:8080/admin/employees';
 //get all employee
 const getEmployees = async () => {
     try {

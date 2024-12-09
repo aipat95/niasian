@@ -33,8 +33,8 @@ const mainRoute = createBrowserRouter([
             <DashboardLayout />,
         children: [
             { path: "", element: <Dashboard /> },
-            { path: "check-in", element: <CheckIn /> },
-            { path: "check-out", element: <CheckOut /> },
+            { path: "test", element: <CheckIn /> },
+            { path: "checkout", element: <CheckOut /> },
             { path: "inventory", element: <Inventory />},
             { path: "customers", element: <Customers /> },
         ]

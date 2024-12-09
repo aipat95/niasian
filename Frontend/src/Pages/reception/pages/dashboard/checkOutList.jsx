@@ -30,20 +30,14 @@ const CheckOutList = () => {
 
     return (
         <div className="emp-container">
-            <div className="emp">
-                <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
-                        <TableHead className="name-bar">
-
-                        </TableHead>
-                        <TableBody className="back-row">
-                            {customer.filter((cus) => {
-                                return cus.checkOutStatus === false && cus.checkOutDate === '2024-12-7'
-                            }).map((cus) => (
+            <div className="pot">
+                <TableContainer component={Paper} className="max-w-full">
+                    <Table aria-label="simple table">            
+                        <TableBody >
+                            {customer.map((cus) => (
                                 <TableRow key={cus.passportNumber}>
                                     <TableCell align="left"
-                                        sx={{ color: "black", fontSize: "1rem" }}>{cus.name}</TableCell>
-
+                                        sx={{ color: "black", fontSize: "1rem", flex: "start" }}>{cus.name}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

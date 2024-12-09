@@ -162,7 +162,7 @@ export default function Inventory() {
                 <TableRow key={index}>
                   <TableCell component="th" scope="row" align="center" sx={{ color: "black", fontSize: "1rem" }}>{row.itemName}</TableCell>
                   <TableCell align="center" sx={{ color: "black" }}>{row.type}</TableCell>
-                  <TableCell align="center" sx={{ color: "black" }}>{row.price}</TableCell>
+                  <TableCell align="center" sx={{ color: "black" }}>${row.price}</TableCell>
                   <TableCell align="center" sx={{ color: "black" }}>{row.quantity}</TableCell>
                   <TableCell align="center" sx={{ color: "black" }}>{row.used}</TableCell>
                   <TableCell align="center" sx={{ color: "black" }} style={{ color: row.quantity - row.used <= 0 ? 'red' : 'green' }}>

@@ -127,7 +127,7 @@ const Service = () => {
                 {activities.map((activity) => (
                   <TableRow key={activity.type}>
                     <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{activity.type}</TableCell>
-                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{activity.price}</TableCell>
+                    <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>${activity.price}</TableCell>
                     <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{activity.guideName}</TableCell>
                     <TableCell>
                       <Button

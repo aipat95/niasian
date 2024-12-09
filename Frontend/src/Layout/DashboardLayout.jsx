@@ -11,13 +11,13 @@ const DashboardLayout = () => {
 
 
     return (
-        <section className="flex md:bg-gray-100 max-h-screen overflow-hidden">
+        <section className="flex w-1000 md:bg-gray-100  overflow-y-scroll">
             <aside className="hidden sm:flex sm:flex-col min-w-40">
                 <img src={Logo} alt="Logo" className='inline-flex items-center justify-center w-40 h-40' />
                 <div className="flex-grow flex flex-col justify-between text-gray-500 ">
                     <nav className="flex flex-col mx-4  my-6 space-y-4">
                         <Link to="/dashboard"
-                            className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+                            className="flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
                             <RiDashboardFill className="h-6 w-6" />
                             <span className="">Dashboard</span>
                         </Link>

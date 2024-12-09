@@ -85,8 +85,8 @@ const CustomerCheckin = () => {
 
 
     return (
-        <div className="mb-4">
-            <div className="max-w-lg mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
+        <div className=" emp-container min-h-screen w-full">
+            <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
                 <div className="form-box">
 
@@ -164,7 +164,7 @@ const CustomerCheckin = () => {
 
                 </div>
             </div>
-            <TableContainer component={Paper}>
+            {/* <TableContainer component={Paper}>
                 <Table sx={{minWidth: 750}} aria-label="simple table">
                     <TableHead className="name-bar">
                         <TableRow>
@@ -202,7 +202,7 @@ const CustomerCheckin = () => {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer> */}
         </div>
     );
 };

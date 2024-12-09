@@ -5,7 +5,7 @@ import customerService from "../../../../api/CustomerAPI";
 
 const CheckOut = () => {
     const [customer, setCustomer] = useState([]);
-    const [checkOutStatus, setCheckOutStatus] = useState(false); //toggle add Tent
+    // const [checkOutStatus, setCheckOutStatus] = useState(false); //toggle add Tent
 
     // Fetch all employees when the component mounts
     useEffect(() => {
@@ -40,30 +40,15 @@ const CheckOut = () => {
 
     const handleUpdateCustomer = async (passportNumber) => {
         try {
-            await customerService.updateCustomer(passportNumber);
-            const updateCustomer = customer.filter((cus) => cus.passportNumber !== passportNumber);
-            setCheckOutStatus(true);
+            await customerService.updateCustomer(passportNumber, {checkOutStatus:true});
+            const updateCustomer = customer.map((cus) => cus.passportNumber === passportNumber ? { ...cus, checkOutStatus: true }
+                : cus);           
+            setCustomer(updateCustomer);
             localStorage.setItem("customerData", JSON.stringify(updateCustomer));
         } catch (error) {
-            console.error("Error deleting product:", error);
-            // const updatedUsers = users.filter((user) => user.id !== id);
-            // setUsers(updatedUsers);
+            console.error("Error deleting product:", error);            
         }
     };
-
-
-
-    // Reset form
-    // const resetForm = () => {
-    //     setPassportNumber("");
-    //     setName("");
-    //     setCheckInDate();
-    //     setCheckOutDate();
-    //     setCampsiteFees();
-    //     setCarParkFees();
-    //     setEquipmentRented();
-    //     setAdditionalServices();
-    // };
 
     return (
         <div className="emp-container">
@@ -81,13 +66,11 @@ const CheckOut = () => {
                                     Date</TableCell>
                                 <TableCell align="center"
                                     sx={{ color: "black", fontWeight: "bold" }}>additionalServices</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}></TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontWeight: "bold" }}>Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="back-row">
-                            {customer.filter((cus) => {
-                                return cus.checkOutStatus === false
-                            }).map((cus) => (
+                            {customer.map((cus) => (
                                 <TableRow key={cus.passportNumber}>
                                     <TableCell align="center"
                                         sx={{ color: "black", fontSize: "1rem" }}>{cus.passportNumber}</TableCell>
@@ -98,7 +81,7 @@ const CheckOut = () => {
                                     <TableCell align="center"
                                         sx={{ color: "black", fontSize: "1rem" }}>{cus.additionalServices}</TableCell>
                                     <TableCell align="center" sx={{ color: "black" }}>
-                                        <Button onClick={() => handleUpdateCustomer(checkOutStatus)}>{cus.checkOutStatus}Check Out</Button>
+                                        <Button onClick={() => handleUpdateCustomer(cus.passportNumber)}>{cus.checkOutStatus}Check Out</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

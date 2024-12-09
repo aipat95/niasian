@@ -172,7 +172,7 @@ const Employee = () => {
                                 <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.birthDate}</TableCell>
                                 <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.phone}</TableCell>
                                 <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.position}</TableCell>
-                                <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>{employee.salary}</TableCell>
+                                <TableCell align="center" sx={{ color: "black", fontSize: "1rem" }}>${employee.salary}</TableCell>
                                 <TableCell>
                                     <Button
                                         variant="outlined"

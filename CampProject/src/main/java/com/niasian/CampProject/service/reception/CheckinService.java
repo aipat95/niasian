@@ -22,14 +22,25 @@ public class CheckinService {
         return checkinRepository.findAll();
     }
 
+    // public Checkin updateCheckin(String passportNumber, Checkin updatedCheckin) {
+    //     return checkinRepository.findById(passportNumber).map(existingCheckin -> {
+    //         existingCheckin.setName(updatedCheckin.getName());
+    //         existingCheckin.setCheckInDate(updatedCheckin.getCheckInDate());
+    //         existingCheckin.setAdditionalServices(updatedCheckin.getAdditionalServices());
+    //         existingCheckin.setCheckOutDate(updatedCheckin.getCheckOutDate());
+    //         existingCheckin.setEquipmentRented(updatedCheckin.getEquipmentRented());
+    //         return checkinRepository.save(existingCheckin);
+    //     }).orElseThrow(() -> new RuntimeException("Check-in not found with ID: " + passportNumber));
+    // }
     public Checkin updateCheckin(String passportNumber, Checkin updatedCheckin) {
-        return checkinRepository.findById(passportNumber).map(existingCheckin -> {
-            existingCheckin.setName(updatedCheckin.getName());
-            existingCheckin.setCheckInDate(updatedCheckin.getCheckInDate());
-            existingCheckin.setAdditionalServices(updatedCheckin.getAdditionalServices());
-            existingCheckin.setCheckOutDate(updatedCheckin.getCheckOutDate());
-            existingCheckin.setEquipmentRented(updatedCheckin.getEquipmentRented());
-            return checkinRepository.save(existingCheckin);
-        }).orElseThrow(() -> new RuntimeException("Check-in not found with ID: " + passportNumber));
+        // Fetch the existing check-in record using passportNumber
+        Checkin checkin = checkinRepository.findByPassportNumber(passportNumber);
+        if (checkin != null) {
+            // Update the checkinStatus to false to indicate check-out
+            checkin.setCheckoutStatus(false); // Mark the customer as checked out
+            checkinRepository.save(checkin);
+        }
+        return checkin;
     }
+    
 }

@@ -14,12 +14,7 @@ body {
     background-color: antiquewhite;
 
 }
-.app-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+
 /* from reception */
 .btn-primary {
     @apply bg-primary px-12 py-2 rounded-md text-base font-secondary font-bold hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer
@@ -27,5 +22,12 @@ body {
 
 .html {
     scroll-behavior: smooth;
+}
+
+@media screen and (min-width: 600px){
+    *{
+        margin: 0;
+        padding:0;
+    }
 }
 

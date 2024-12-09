@@ -28,7 +28,7 @@ const CustomerCheckin = () => {
     }, []);
       
     return (
-        <div className="cus-container">
+        <div className="emp h-screen">
             <h2 className="text-4xl font-semibold mb-2">Customer List</h2>
             <div className="cus py-6">
                 <TableContainer component={Paper}>
@@ -74,8 +74,7 @@ const CustomerCheckin = () => {
                                         color: "black",
                                         fontSize: "1rem"
                                     }}>{cus.equipmentRented}</TableCell>
-                                    <TableCell>
-                                    </TableCell>
+                                    <TableCell>{cus.checkoutStatus}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
