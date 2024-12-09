@@ -2,14 +2,34 @@ import { Link } from "react-router-dom";
 import InvStatus from "./InvStatus.jsx";
 import customerService from "../../../../api/CustomerAPI.js";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-// import CheckOutList from "./checkOutList.jsx";
+import CheckoutList from "./checkOutList.jsx";
 
 import  { useEffect, useState } from "react";
 
 
 const Dashboard = () => {
     const [customer, setCustomer] = useState([]);
+    const [users, setUsers] = useState([]);
 
+    useEffect(() => {
+        const fetchInventory = async () => {
+            try {
+                const data = await InventoryService.getInventory();
+                setUsers(data);
+                localStorage.setItem("inventoryData", JSON.stringify(data));
+            } catch (error) {
+                console.error("Error fetching inventory:", error);
+                const cachedData = localStorage.getItem("inventoryData");
+                if (cachedData) {
+                    setUsers(JSON.parse(cachedData));
+                } else {
+                    setUsers([]);
+                    console.error("No data found");
+                }
+            }
+        };
+        fetchInventory();
+    }, []);
     useEffect(() => {
         const loadCustomer = async () => {
             try {
@@ -29,8 +49,6 @@ const Dashboard = () => {
         };
         loadCustomer();
     }, []);
-  
-
 
     return (
         <>
@@ -55,14 +73,21 @@ const Dashboard = () => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">S-size tents</span>
-                        {/* mock data */}
-                        <span className="block text-2xl font-bold">20/30</span>
+                        <span className="block text-2xl font-bold">
+                            {users.filter((row, index) => {
+                                return row.itemName === 'S-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.used}/{row.quantity}
+                                </TableRow>
+                            ))}
+                        </span>
                         <span className="block text-l ">
-                            {customer.filter((cus) => {
-                                return cus.checkOutStatus === false && cus.additionalServices === 'hike'
-                            }).map((cus) => (
-                                <TableRow key={cus.passportNumber}>
-                                    {cus.name}
+                            {users.filter((row,index) => {
+                                return row.itemName === 'S-size'
+                            }).map((row,index) => (
+                                <TableRow key={index}>
+                                    {row.price} $/day
                                 </TableRow>
                             ))}
                         </span>
@@ -71,23 +96,70 @@ const Dashboard = () => {
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">M-size tents</span>
-                        <span className="block text-2xl font-bold">30/30</span>
-                        {/*{data?.totalSales}*/}
-                        <span className="block text-l ">20$/day</span>
+                        <span className="block text-2xl font-bold">
+                            {users.filter((row, index) => {
+                                return row.itemName === 'M-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.used}/{row.quantity}
+                                </TableRow>
+                            ))}
+                        </span>
+                        <span className="block text-l ">
+                            {users.filter((row, index) => {
+                                return row.itemName === 'M-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.price} $/day
+                                </TableRow>
+                            ))}
+                        </span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">XL-size tents</span>
-                        <span className="inline-block text-2xl font-bold">15/20</span>
-                        <span className="block text-l ">20$/day</span>
+                        <span className="block text-2xl font-bold">
+                            {users.filter((row, index) => {
+                                return row.itemName === 'XL-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.used}/{row.quantity}
+                                </TableRow>
+                            ))}
+                        </span>
+                        <span className="block text-l ">
+                            {users.filter((row, index) => {
+                                return row.itemName === 'M-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.price} $/day
+                                </TableRow>
+                            ))}
+                        </span>
                     </div>
                 </div>
                 <div className="flex items-center p-8 bg-white shadow rounded-lg">
                     <div>
                         <span className="block text-gray-500">Family-size tents</span>
-                        <span className="block text-2xl font-bold">10/20</span>
-                        <span className="block text-l">40$/day</span>
+                        <span className="block text-2xl font-bold">
+                            {users.filter((row) => {
+                                return row.itemName === 'Family-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.used}/{row.quantity}
+                                </TableRow>
+                            ))}
+                        </span>
+                        <span className="block text-l ">
+                            {users.filter((row) => {
+                                return row.itemName === 'Family-size'
+                            }).map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.price} $/day
+                                </TableRow>
+                            ))}
+                        </span>
                     </div>
                 </div>
             </section>
@@ -116,6 +188,7 @@ const Dashboard = () => {
                                 </TableBody>
                             </Table>
                         </TableContainer>
+                        {/* <CheckoutList/> */}
                     </div>
 
                 </div>

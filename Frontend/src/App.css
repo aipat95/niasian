@@ -12,8 +12,13 @@ body {
     line-height: 1.5;
     min-height: 100vh;
     background-color: antiquewhite;
-
 }
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* from reception */
 .btn-primary {

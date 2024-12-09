@@ -11,7 +11,7 @@ const DashboardLayout = () => {
 
 
     return (
-        <section className="flex w-1000 md:bg-gray-100  overflow-y-scroll">
+        <section className=" dash-container flex max-w-full md:bg-gray-100  overflow-y-scroll">
             <aside className="hidden sm:flex sm:flex-col min-w-40">
                 <img src={Logo} alt="Logo" className='inline-flex items-center justify-center w-40 h-40' />
                 <div className="flex-grow flex flex-col justify-between text-gray-500 ">
