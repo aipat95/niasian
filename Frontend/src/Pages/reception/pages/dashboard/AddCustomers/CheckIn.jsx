@@ -85,7 +85,7 @@ const CustomerCheckin = () => {
 
 
     return (
-        <div className=" emp-container min-h-screen w-full">
+        <div className="max-h-screen w-full">
             <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Check In</h2>
                 <div className="form-box">
