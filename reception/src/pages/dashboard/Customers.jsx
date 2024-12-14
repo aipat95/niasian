@@ -66,7 +66,7 @@ const CustomerCheckin = () => {
                                             fontSize: "1rem"
                                         }}>{cus.checkOutDate}</TableCell>
                                         <TableCell align="center"
-                                                   sx={{color: "black", fontSize: "1rem"}}>{cus.carParkFees}</TableCell>
+                                                   sx={{color: "black", fontSize: "1rem"}}>{cus.campsiteFees}</TableCell>
                                         <TableCell align="center" sx={{
                                             color: "black",
                                             fontSize: "1rem"
