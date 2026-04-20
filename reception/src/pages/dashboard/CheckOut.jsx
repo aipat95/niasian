@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import customerService from "../../redux/customerApi.js";
-import {useParams} from "react-router-dom";
-import axios from "axios";
+
 
 
 
@@ -45,8 +44,6 @@ const CheckOut = () => {
             // setUsers(updatedUsers);
         }
     };
-
-
 
     // Reset form
     // const resetForm = () => {

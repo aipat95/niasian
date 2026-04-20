@@ -1,9 +1,6 @@
 
 import './App.css'
 import {Outlet} from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
-import Home from "./pages/home/Home.jsx";
-import Inventory from "./pages/home/Inventory.jsx";
 import DashboardLayout from "./pages/dashboard/DashboardLayout.jsx";
 
 function App() {
